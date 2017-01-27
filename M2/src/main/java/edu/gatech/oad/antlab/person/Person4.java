@@ -33,10 +33,10 @@ public class Person4 {
         String ans = "";
         int character;
         char alph;
-        for (int i == 0; i < input.length(); i++) {
+        for (int i = 0; i < input.length(); i++) {
             character = ((int) input.charAt(i)) + 1;
             alph = (char) character;
-            ans += alph
+            ans += alph;
         }
     return ans;
     }
