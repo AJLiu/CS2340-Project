@@ -19,10 +19,3 @@ jar {
 //    destinationDir = file(".")
 //    archiveName = 'ssingh357.jar'
 }
-
-
-repositories {
-    mavenCentral()
-}
-
-
