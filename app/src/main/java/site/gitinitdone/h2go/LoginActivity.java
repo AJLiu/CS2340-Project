@@ -3,6 +3,7 @@ package site.gitinitdone.h2go;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       }
     });
 
+
     Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
     mEmailSignInButton.setOnClickListener(new OnClickListener() {
       @Override
@@ -93,6 +95,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     mLoginFormView = findViewById(R.id.login_form);
     mProgressView = findViewById(R.id.login_progress);
   }
+    public void nextAct(View v){
+        Intent i = new Intent(this, AppScreen.class);
+        startActivity(i);
+    }
 
   private void populateAutoComplete() {
     if (!mayRequestContacts()) {
@@ -346,5 +352,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       showProgress(false);
     }
   }
+
 }
 

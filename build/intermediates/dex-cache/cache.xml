@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.1_7090ace18946c4ef26ee8b95deecd9969103bbaa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.1_049906b62cbd89e9b261006b5f176d6f39bce463/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4b6b617b1f71d3bff88841b548173939b2c9ae0f">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0a03bdda6771c5a96deb29f542decd872b518a58/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.1_2fde7f87e07185bcfc857f609d612518107e41ba/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.1_bf8a501cd0239d0624d8b5bf65cab17aa862f465/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.1_b564194940fe601b5307722af0da0ca19a20aa20/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.1_2e2e6d6455613d102c3261f58014894f55f6bb5a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.1_2da570d1b5a0c93d0043d3b586e9e21d3d20871b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.1_cb694d15e2091d1abdced04dc0326f3992514956/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.1_6bfe55eac0b62daf4769653ff655d128be9dc03a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8ccbb00b8b094130ff6869f1699c9009c6e95150">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6f91d83e65120778275c9b7d1ab9eb81c27657ad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.1_eabfb01f7dc24de59b3edbad06b99beb52b3edad/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.1_0e47ef8e8f6aa940fee25f56a973721f20814cbf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.1_91dacccee5f1f10d34daeb89d97a025247a9cfc8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.1_cd8b832047855d92529853098607f165a73a6f41/classes.dex" />
+    </item>
+
+</items>

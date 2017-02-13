@@ -1,0 +1,7 @@
+#Fri Feb 10 17:29:27 EST 2017
+base.0=/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6f91d83e65120778275c9b7d1ab9eb81c27657ad
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0a03bdda6771c5a96deb29f542decd872b518a58/classes.dex
+base.1=/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0a03bdda6771c5a96deb29f542decd872b518a58
+file.0=/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6f91d83e65120778275c9b7d1ab9eb81c27657ad/classes.dex
