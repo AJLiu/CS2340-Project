@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
-        "source": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_template_icon_group.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_action_tombstone.xml"
     },
     {
-        "merged": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
-        "source": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_action_tombstone.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_action.xml"
     },
     {
-        "merged": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
-        "source": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_action.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_template_custom_big.xml"
     },
     {
-        "merged": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
-        "source": "/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_template_custom_big.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout-v21/notification_template_icon_group.xml"
     }
 ]

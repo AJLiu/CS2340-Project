@@ -5,33 +5,58 @@
     density="420dpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="26298281090960"
-    token="-5374002227030829642"
-    verifier="FULL_BUILD_REQUESTED" >
+    timestamp="455215832815371"
+    token="4992880757096831485"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="15214" />
+        duration="705" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1127" />
+        duration="348" />
     <task
         name="verifier"
-        duration="64" />
+        duration="130" />
 
     <artifact
-        location="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="26298281090960"
+        timestamp="452760970027683"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/avantijoshi/Desktop/AppProject/CS2340-Project/app/build/outputs/apk/app-debug.apk"
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="455215832815371"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_7/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

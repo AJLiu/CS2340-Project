@@ -29,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
    * TODO: remove after connecting to a real authentication system.
    */
   private static final String[] DUMMY_CREDENTIALS = new String[] {
-      "foo@example.com:hello", "bar@example.com:world"
+      "foo@example.com:hello", "bar@example.com:world", "admin@h2go.com:password"
   };
   /**
    * Keep track of the login task to ensure we can cancel it if requested.
@@ -97,6 +98,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
   }
     public void nextAct(View v){
         Intent i = new Intent(this, AppScreen.class);
+        AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.email);
+        String theEmail = editText.getText().toString();
+        i.putExtra("UserEmail", theEmail);
         startActivity(i);
     }
 
@@ -193,6 +197,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       showProgress(true);
       mAuthTask = new UserLoginTask(email, password);
       mAuthTask.execute((Void) null);
+      if (mAuthTask.authenticateLogin()) {
+        nextAct(this.findViewById(android.R.id.content));
+      }
     }
   }
 
@@ -308,6 +315,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     UserLoginTask(String email, String password) {
       mEmail = email;
       mPassword = password;
+    }
+
+      /**
+       * Authenticates the login against hard-coded values for M4
+       * @return whether the login matches the current records.
+       */
+    public boolean authenticateLogin() {
+      boolean emailMatch = false;
+      for (String credential : DUMMY_CREDENTIALS) {
+        String[] pieces = credential.split(":");
+        if (pieces[0].equals(mEmail)) {
+          // Account exists, return true if the password matches.
+          emailMatch = true;
+          if (pieces[1].equals(mPassword)) {
+            Toast.makeText(getApplicationContext(), "Account info matches...", Toast.LENGTH_SHORT).show();
+            return true;
+          } else {
+            Toast.makeText(getApplicationContext(), "Password does not match our records.", Toast.LENGTH_SHORT).show();
+            return false;
+          }
+        }
+      }
+      if (!emailMatch) {
+        Toast.makeText(getApplicationContext(), "Your email did not match our records.", Toast.LENGTH_LONG).show();
+      }
+      return false;
     }
 
     @Override
