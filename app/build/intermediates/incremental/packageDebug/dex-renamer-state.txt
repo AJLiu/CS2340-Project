@@ -1,7 +1,7 @@
-#Tue Feb 14 15:15:55 EST 2017
-base.0=/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_94fe7171c24a5206d39648362825e9344844df55
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5ef18e74123ec12262c76d528cf9c41aa3c541bb/classes.dex
-base.1=/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5ef18e74123ec12262c76d528cf9c41aa3c541bb
-file.0=/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_94fe7171c24a5206d39648362825e9344844df55/classes.dex
+#Sun Feb 19 23:36:21 EST 2017
+base.0=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_42fda582f09f678b53d6e0ea5f3be7b375e9faed
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_d020ff439356a5a83e2759d57d4d3ec5f4f3c6df\\classes.dex
+base.1=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_d020ff439356a5a83e2759d57d4d3ec5f4f3c6df
+file.0=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_42fda582f09f678b53d6e0ea5f3be7b375e9faed\\classes.dex
