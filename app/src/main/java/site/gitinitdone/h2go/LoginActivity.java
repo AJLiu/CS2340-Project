@@ -31,8 +31,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -197,20 +211,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       showProgress(true);
       mAuthTask = new UserLoginTask(email, password);
       mAuthTask.execute((Void) null);
-      if (mAuthTask.authenticateLogin()) {
-        nextAct(this.findViewById(android.R.id.content));
-      }
+      //if (mAuthTask.authenticateLogin()) {
+      //  nextAct(this.findViewById(android.R.id.content));
+      //}
     }
   }
 
   private boolean isEmailValid(String email) {
     //TODO: Replace this with your own logic
-    return email.contains("@");
+    return email.length() > 0;
+    //return email.contains("@");
   }
 
   private boolean isPasswordValid(String password) {
     //TODO: Replace this with your own logic
-    return password.length() > 4;
+    return password.length() > 0;
+    //return password.length() > 4;
   }
 
   /**
@@ -317,53 +333,107 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       mPassword = password;
     }
 
-      /**
-       * Authenticates the login against hard-coded values for M4
-       * @return whether the login matches the current records.
-       */
-    public boolean authenticateLogin() {
-      boolean emailMatch = false;
-      for (String credential : DUMMY_CREDENTIALS) {
-        String[] pieces = credential.split(":");
-        if (pieces[0].equals(mEmail)) {
-          // Account exists, return true if the password matches.
-          emailMatch = true;
-          if (pieces[1].equals(mPassword)) {
-            Toast.makeText(getApplicationContext(), "Account info matches...", Toast.LENGTH_SHORT).show();
-            return true;
-          } else {
-            Toast.makeText(getApplicationContext(), "Password does not match our records.", Toast.LENGTH_SHORT).show();
-            return false;
-          }
-        }
-      }
-      if (!emailMatch) {
-        Toast.makeText(getApplicationContext(), "Your email did not match our records.", Toast.LENGTH_LONG).show();
-      }
-      return false;
-    }
-
     @Override
     protected Boolean doInBackground(Void... params) {
       // TODO: attempt authentication against a network service.
 
+      System.out.println("--------1--------");
+      URL url = null;
       try {
-        // Simulate network access.
-        Thread.sleep(2000);
-      } catch (InterruptedException e) {
-        return false;
+        url = new URL("http://www.gitinitdone.site/api/users/login");
+      } catch (MalformedURLException e) {
+        System.out.println("--- Error Here 1 ---");
+        e.printStackTrace();
       }
+      URLConnection con = null;
+      try {
+        con = url.openConnection();
+      } catch (IOException e) {
+        System.out.println("--- Error Here 2 ---");
+        e.printStackTrace();
+      }
+      HttpURLConnection http = (HttpURLConnection) con;
+      try {
+        http.setRequestMethod("POST"); // PUT is another valid option
+        System.out.println("--- Reached Here 3 ---");
 
-      for (String credential : DUMMY_CREDENTIALS) {
-        String[] pieces = credential.split(":");
-        if (pieces[0].equals(mEmail)) {
-          // Account exists, return true if the password matches.
-          return pieces[1].equals(mPassword);
+      } catch (ProtocolException e) {
+        e.printStackTrace();
+      }
+      http.setDoOutput(true);
+
+      System.out.println("End of Part 1");
+
+      Map<String, String> arguments = new HashMap<>();
+      arguments.put("username", mEmail);
+      arguments.put("password", mPassword);
+      String result = "";
+      for (Map.Entry<String, String> entry : arguments.entrySet())
+        try {
+          result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                  + URLEncoder.encode(entry.getValue(), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+          System.out.println("--- Error Here 4 ---");
+          e.printStackTrace();
         }
+      result = result.substring(1);
+      byte[] out = result.getBytes(StandardCharsets.UTF_8);
+      int length = out.length;
+
+      System.out.println("End of Part 2");
+
+      http.setFixedLengthStreamingMode(length);
+      http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+      try {
+        http.connect();
+      } catch (IOException e) {
+        System.out.println("--- Error Here 5 ---");
+        e.printStackTrace();
+      }
+      try {
+        try (OutputStream os = http.getOutputStream()) {
+          os.write(out);
+        }
+      } catch (IOException e) {
+        System.out.println("--- Error Here 6 ---");
+        e.printStackTrace();
       }
 
-      // TODO: register the new account here.
-      return true;
+      System.out.println("End of Part 3");
+
+      // Do something with http.getInputStream()
+
+      BufferedInputStream bis = null;
+
+      try {
+        if (http.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
+          bis = new BufferedInputStream(http.getInputStream());
+        } else {
+          bis = new BufferedInputStream(http.getErrorStream());
+        }
+      } catch (IOException e) {
+        System.out.println("--- Error Here 7 ---");
+        e.printStackTrace();
+      }
+
+      byte[] contents = new byte[1024];
+
+      int bytesRead = 0;
+      String response = "";
+      try {
+        while((bytesRead = bis.read(contents)) != -1) {
+          response += new String(contents, 0, bytesRead);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      System.out.println("--------2--------");
+      System.out.println(response);
+      System.out.println("--------3--------");
+
+      System.out.println(!response.equals("Unauthorized"));
+      return (!response.equals("Unauthorized"));
     }
 
     @Override
@@ -373,6 +443,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
       if (success) {
         finish();
+        nextAct(findViewById(android.R.id.content));
       } else {
         mPasswordView.setError(getString(R.string.error_incorrect_password));
         mPasswordView.requestFocus();
