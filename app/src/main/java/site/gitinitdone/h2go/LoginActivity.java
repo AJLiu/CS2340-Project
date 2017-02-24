@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -59,6 +60,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
    * Id to identity READ_CONTACTS permission request.
    */
   private static final int REQUEST_READ_CONTACTS = 0;
+
+  static final String COOKIES_HEADER = "Set-Cookie";
+  static java.net.CookieManager msCookieManager = new java.net.CookieManager();
+
+
 
   /**
    * A dummy authentication store containing known user names and passwords.
@@ -115,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.email);
         String theEmail = editText.getText().toString();
         i.putExtra("UserEmail", theEmail);
+        //i.putExtra("Cookies", msCookieManager);
         startActivity(i);
     }
 
@@ -408,6 +415,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       try {
         if (http.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
           bis = new BufferedInputStream(http.getInputStream());
+          Map<String, List<String>> headerFields = http.getHeaderFields();
+          List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+
+          if (cookiesHeader != null) {
+            for (String cookie : cookiesHeader) {
+              msCookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+            }
+          }
         } else {
           bis = new BufferedInputStream(http.getErrorStream());
         }

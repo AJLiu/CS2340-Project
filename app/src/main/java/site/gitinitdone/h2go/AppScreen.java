@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class AppScreen extends AppCompatActivity {
 
     private String myEmail;
     private AppScreen.UserLoginTask mAuthTask = null;
+    private java.net.CookieManager cookieManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class AppScreen extends AppCompatActivity {
 
         Intent i = getIntent();
         myEmail = i.getExtras().getString("UserEmail");
+        cookieManager = LoginActivity.msCookieManager;
         TextView userLoggedIn = (TextView) findViewById(R.id.userEmail);
         userLoggedIn.setText("You are logged in as: " + myEmail);
 
@@ -90,6 +93,9 @@ public class AppScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
             HttpURLConnection http = (HttpURLConnection) con;
+            http.setRequestProperty("Cookie",
+                    TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
+
             try {
                 http.setRequestMethod("GET"); // PUT is another valid option
             } catch (ProtocolException e) {
@@ -100,7 +106,6 @@ public class AppScreen extends AppCompatActivity {
             //http.setDoOutput(true);
 
             System.out.println("End of Part 1");
-
 
             System.out.println("End of Part 2");
 

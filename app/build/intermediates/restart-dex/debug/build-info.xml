@@ -5,40 +5,32 @@
     density="420dpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="142441495839447"
+    timestamp="145035647063338"
     token="4992880757096831485"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="259" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="41" />
+        duration="0" />
     <task
         name="verifier"
-        duration="17" />
-
-    <artifact
-        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
-        type="DEX" />
+        duration="0" />
 
     <build
-        timestamp="139557693905441"
-        verifier="MANIFEST_FILE_CHANGE" >
+        timestamp="144682623389785"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="142441495839447"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
-            type="DEX" />
-    </build>
+        timestamp="145035647063338"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
