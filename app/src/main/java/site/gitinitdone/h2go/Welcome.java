@@ -16,4 +16,8 @@ public class Welcome extends AppCompatActivity {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
+    public void switchRegister(View v) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
+    }
 }

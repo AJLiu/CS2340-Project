@@ -28,7 +28,8 @@
         android:layout_alignTop="@+id/button"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="60dp"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:onClick="switchRegister" />
 
 
 </RelativeLayout>
