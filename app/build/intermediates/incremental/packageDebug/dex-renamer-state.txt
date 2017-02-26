@@ -1,7 +1,7 @@
-#Sun Feb 19 23:36:21 EST 2017
-base.0=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_42fda582f09f678b53d6e0ea5f3be7b375e9faed
+#Sun Feb 26 08:55:20 EST 2017
+base.0=/Users/shreyamagesh/Desktop/2340/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_bff69351f7399ffee50375b18921f030e67fa710
 renamed.1=classes2.dex
 renamed.0=classes.dex
-file.1=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_d020ff439356a5a83e2759d57d4d3ec5f4f3c6df\\classes.dex
-base.1=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_d020ff439356a5a83e2759d57d4d3ec5f4f3c6df
-file.0=C\:\\Users\\Shourya\\Desktop\\Studies\\CS 2340\\CS2340-Project\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_42fda582f09f678b53d6e0ea5f3be7b375e9faed\\classes.dex
+file.1=/Users/shreyamagesh/Desktop/2340/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b5dbb1e9686439539076e7a03b19291f7771957d/classes.dex
+base.1=/Users/shreyamagesh/Desktop/2340/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b5dbb1e9686439539076e7a03b19291f7771957d
+file.0=/Users/shreyamagesh/Desktop/2340/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_bff69351f7399ffee50375b18921f030e67fa710/classes.dex
