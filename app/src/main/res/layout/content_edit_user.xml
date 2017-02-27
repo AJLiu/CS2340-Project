@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="site.gitinitdone.h2go.EditUserActivity"
+    tools:showIn="@layout/activity_edit_user">
+
+    <!---
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="31dp"
+        android:id="@+id/firstNameField"
+        android:layout_marginStart="52dp"
+        android:hint="First Name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+        -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="52dp"
+        android:text="Edit User Profile:"
+        android:textSize="12pt"
+        android:id="@+id/formTitleEdit"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/formTitleEdit"
+        android:layout_alignStart="@id/formTitleEdit"
+        android:layout_alignEnd="@id/formTitleEdit"
+        android:layout_marginTop="15dp"
+        android:text="Title:"
+        android:textSize="8pt"
+        android:id="@+id/labelTitleSpinnerEdit"
+        />
+
+    <!-- title -->
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelTitleSpinnerEdit"
+        android:ems="10"
+        android:layout_alignStart="@id/labelTitleSpinnerEdit"
+        android:layout_alignEnd="@id/labelTitleSpinnerEdit"
+        android:id="@+id/titleSpinnerEdit" />
+
+
+    <!---first name-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="1dp"
+        android:id="@+id/firstNameFieldEdit"
+        android:hint="First Name"
+        android:layout_below="@id/titleSpinnerEdit"
+        android:layout_alignStart="@id/titleSpinnerEdit"/>
+
+
+    <!---last name-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Last Name"
+        android:ems="10"
+        android:layout_below="@id/firstNameFieldEdit"
+        android:layout_alignEnd="@id/firstNameFieldEdit"
+        android:id="@+id/lastNameFieldEdit" />
+
+    <!--- email -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailFieldEdit"
+        android:hint="Email"
+        android:layout_below="@id/lastNameFieldEdit"
+        android:layout_alignStart="@id/lastNameFieldEdit" />
+
+
+    <!---address line-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:id="@+id/addressLineFieldEdit"
+        android:hint="Address Line 1"
+        android:layout_below="@id/emailFieldEdit"
+        android:layout_alignStart="@id/emailFieldEdit" />
+
+    <!---city-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="City"
+        android:ems="10"
+        android:layout_below="@id/addressLineFieldEdit"
+        android:layout_alignStart="@id/addressLineFieldEdit"
+        android:id="@+id/cityFieldEdit" />
+
+    <!---state, zip-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="State, Zip"
+        android:ems="10"
+        android:layout_below="@id/cityFieldEdit"
+        android:layout_alignEnd="@id/cityFieldEdit"
+        android:id="@+id/stateZipFieldEdit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/stateZipFieldEdit"
+        android:layout_alignStart="@id/stateZipFieldEdit"
+        android:text="These cannot be changed by you:"
+        android:textSize="8pt"
+        android:id="@+id/formPermanentFields"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/formPermanentFields"
+        android:layout_alignStart="@id/formPermanentFields"
+        android:text="Username:"
+        android:textSize="7pt"
+        android:id="@+id/formUsernameFieldEdit"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/formUsernameFieldEdit"
+        android:layout_alignStart="@id/formUsernameFieldEdit"
+        android:text="User Account Type:"
+        android:textSize="7pt"
+        android:id="@+id/formUserTypeFieldEdit"
+        />
+
+
+    <!-- cancel button -->
+    <Button
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/cancelButtonEdit"
+        android:layout_alignParentBottom="true"
+        android:onClick="cancelEdits"/>
+
+
+
+    <!-- submit button -->
+    <Button
+        android:text="Submit Changes"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/submitButtonEdit"
+        android:layout_above="@id/cancelButtonEdit"
+        android:onClick="submitEdits"/>
+
+
+</RelativeLayout>

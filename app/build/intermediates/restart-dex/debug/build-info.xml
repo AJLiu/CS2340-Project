@@ -5,30 +5,30 @@
     density="420dpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="155271334073223"
+    timestamp="189631693390187"
     token="4992880757096831485"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="BINARY_MANIFEST_FILE_CHANGE" >
 
     <task
         name="javac"
-        duration="537" />
+        duration="514" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="32" />
+        duration="269" />
     <task
         name="verifier"
-        duration="12" />
+        duration="78" />
 
     <artifact
         location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="155271334073223"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="189631693390187"
+        verifier="BINARY_MANIFEST_FILE_CHANGE" >
         <artifact
             location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />

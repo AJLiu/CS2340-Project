@@ -20,20 +20,24 @@
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_popup_menu_header_item_layout.xml"
     },
     {
-        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
-        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_action_menu_item_layout.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_dialog_title_material.xml"
     },
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_select_dialog_material.xml"
     },
     {
-        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
-        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_dialog_title_material.xml"
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_action_menu_item_layout.xml"
     },
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/activity_register.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/activity_register.xml"
     },
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
@@ -92,8 +96,16 @@
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/res/layout/abc_screen_content_include.xml"
     },
     {
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/content_edit_user.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/content_edit_user.xml"
+    },
+    {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/activity_welcome.xml",
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/activity_welcome.xml"
+    },
+    {
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/activity_edit_user.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/activity_edit_user.xml"
     },
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
@@ -154,6 +166,10 @@
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/content_app_screen.xml",
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/content_app_screen.xml"
+    },
+    {
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/content_register.xml",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/layout/content_register.xml"
     },
     {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",

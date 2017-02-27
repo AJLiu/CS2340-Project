@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:2:1-41:12
+ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:2:1-54:12
 	package
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:3:5-36
 		INJECTED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml
@@ -22,7 +22,7 @@ ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidMani
 	android:name
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:16:22-64
 application
-ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:18:5-39:19
+ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:18:5-52:19
 MERGED from [com.android.support:design:25.1.1] /Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:appcompat-v7:25.1.1] /Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:25.1.1] /Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/AndroidManifest.xml:22:5-20
@@ -65,13 +65,29 @@ ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidMani
 	android:name
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:32:13-42
 activity#site.gitinitdone.h2go.AppScreen
-ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:35:9-38:59
+ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:35:9-39:20
 	android:label
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:37:13-62
 	android:theme
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:38:13-56
 	android:name
 		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:36:13-38
+activity#site.gitinitdone.h2go.EditUserActivity
+ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:40:9-44:20
+	android:label
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:42:13-46
+	android:theme
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:43:13-56
+	android:name
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:41:13-45
+activity#site.gitinitdone.h2go.RegisterActivity
+ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:46:9-50:20
+	android:label
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:48:13-46
+	android:theme
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:49:13-56
+	android:name
+		ADDED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml:47:13-45
 uses-sdk
 INJECTED from /Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:25.1.1] /Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/AndroidManifest.xml:21:5-23:62

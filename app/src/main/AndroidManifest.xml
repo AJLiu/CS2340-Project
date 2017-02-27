@@ -35,7 +35,20 @@
         <activity
             android:name=".AppScreen"
             android:label="@string/title_activity_app_screen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".EditUserActivity"
+            android:label="Edit User Profile"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Register New User"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/mipmap-hdpi/appicon.png",
+        "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/mipmap-hdpi/appicon.png"
+    },
+    {
         "merged": "/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
         "source": "/Users/surajmasand/cs2340repo/CS2340-Project/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     }

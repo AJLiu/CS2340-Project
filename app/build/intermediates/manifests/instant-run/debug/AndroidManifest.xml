@@ -41,7 +41,18 @@
         <activity
             android:name="site.gitinitdone.h2go.AppScreen"
             android:label="@string/title_activity_app_screen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="site.gitinitdone.h2go.EditUserActivity"
+            android:label="Edit User Profile"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="site.gitinitdone.h2go.RegisterActivity"
+            android:label="Register New User"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
