@@ -30,14 +30,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import site.gitinitdone.h2go.controller.EditUserAPI;
+import site.gitinitdone.h2go.controller.GetUserAPI;
+import site.gitinitdone.h2go.controller.LoginUserAPI;
+
 /**
  * This activity allows the user to edit their profile data and submit the changes
  */
 public class EditUserActivity extends AppCompatActivity {
 
-    private GetUserInfoAPI getUserInfo = null;   // the AsyncTask object to get user's current data
-    private UserAccount userAccount = null;      // holds the original user data before any edits
-    private EditUserInfoAPI editUserInfo = null; // the AsyncTask object to submit edits
+    private LocalGetUserAPI getUserInfo = null;  // the AsyncTask object to get user's current data
+    private LocalEditUserAPI editUserInfo = null; // the AsyncTask object to submit edits
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class EditUserActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Get the current data associated with the account of whoever is logged in
-        getUserInfo = new GetUserInfoAPI();
+        getUserInfo = new LocalGetUserAPI();
         getUserInfo.execute((Void) null);
     }
 
@@ -132,7 +135,7 @@ public class EditUserActivity extends AppCompatActivity {
         arguments.put("title", titleText);
 
         // Call the API to make these edits and use this new data for the user account
-        editUserInfo = new EditUserInfoAPI(arguments);
+        editUserInfo = new LocalEditUserAPI(arguments);
         editUserInfo.execute((Void) null);
     }
 
@@ -163,104 +166,7 @@ public class EditUserActivity extends AppCompatActivity {
     /**
      * Represents an asynchronous getUserInfo task used to get the data in the user profile.
      */
-    class GetUserInfoAPI extends AsyncTask<Void, Void, Boolean> {
-
-        private CookieManager cookieManager;
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            cookieManager = LoginActivity.msCookieManager;
-
-            URL url = null;
-            try {
-                url = new URL("http://www.gitinitdone.site/api/users");
-            } catch (MalformedURLException e) {
-                System.out.println("--- Error Here 1 ---");
-                e.printStackTrace();
-            }
-            URLConnection con = null;
-            try {
-                con = url.openConnection();
-            } catch (IOException e) {
-                System.out.println("--- Error Here 2 ---");
-                e.printStackTrace();
-            }
-            HttpURLConnection http = (HttpURLConnection) con;
-            http.setRequestProperty("Cookie",
-                    TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
-
-            try {
-                http.setRequestMethod("GET"); // PUT is another valid option
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                http.connect();
-            } catch (IOException e) {
-                System.out.println("--- Error Here 5 ---");
-                e.printStackTrace();
-            }
-
-            BufferedInputStream bis = null;
-            System.out.println(http.getRequestMethod());
-            try {
-                if (http.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
-                    bis = new BufferedInputStream(http.getInputStream());
-                } else {
-                    bis = new BufferedInputStream(http.getErrorStream());
-                }
-            } catch (IOException e) {
-                System.out.println("--- Error Here 7 ---");
-                e.printStackTrace();
-            }
-
-            byte[] contents = new byte[1024];
-
-            int bytesRead = 0;
-            String response = "";
-            try {
-                while((bytesRead = bis.read(contents)) != -1) {
-                    response += new String(contents, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Response = " + response);
-
-            boolean validData = !response.contains("Must be logged in");
-            if (validData) {
-                JSONObject json = null;
-                UserAccount currentUser = null;
-                try {
-                    json = new JSONObject(response);
-                    String username = json.getString("username");
-                    String firstName = json.getString("firstName");
-                    String lastName = json.getString("lastName");
-                    String address = json.getString("address");
-                    String email = json.getString("email");
-
-                    String titleString = json.getString("title").toUpperCase();
-                    UserAccount.Title title = UserAccount.Title.valueOf(titleString.substring(0, titleString.length() - 1));
-
-                    UserAccount.AccountType type = UserAccount.AccountType.valueOf(json.getString("userType").toUpperCase());
-
-                    currentUser = new UserAccount(username, title, firstName, lastName, address, email, type);
-                    saveAccountInfo(currentUser);
-                    return true;
-
-                } catch (JSONException e) {
-                    System.out.println("Failed converting response to JSON!!!");
-                    e.printStackTrace();
-                }
-
-            } else {
-                System.out.println("Log in cookie did not work. GET request did not work.");
-            }
-            return false;
-        }
+    class LocalGetUserAPI extends GetUserAPI {
 
         @Override
         protected void onPostExecute(final Boolean success) {
@@ -276,10 +182,6 @@ public class EditUserActivity extends AppCompatActivity {
         protected void onCancelled() {
             //mAuthTask = null;
             //showProgress(false);
-        }
-
-        private void saveAccountInfo(UserAccount account) {
-            userAccount = account;
         }
     }
 
@@ -329,112 +231,14 @@ public class EditUserActivity extends AppCompatActivity {
     /**
      * Represents an asynchronous edit user profile task used to edit the user's profile data.
      */
-    class EditUserInfoAPI extends AsyncTask<Void, Void, Boolean> {
-
-        private CookieManager cookieManager;
+    class LocalEditUserAPI extends EditUserAPI {
 
         private Map<String, String> data;
 
-        EditUserInfoAPI(Map<String, String> data) {
-            this.data = data;
-            cookieManager = LoginActivity.msCookieManager;
+        LocalEditUserAPI(Map<String, String> data) {
+            super(data);
         }
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-            URL url = null;
-            try {
-                url = new URL("http://www.gitinitdone.site/api/users/edit");
-            } catch (MalformedURLException e) {
-                System.out.println("--- Error Here 1 ---");
-                e.printStackTrace();
-            }
-            URLConnection con = null;
-            try {
-                con = url.openConnection();
-            } catch (IOException e) {
-                System.out.println("--- Error Here 2 ---");
-                e.printStackTrace();
-            }
-            HttpURLConnection http = (HttpURLConnection) con;
-            try {
-                http.setRequestMethod("POST"); // PUT is another valid option
-
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            }
-
-            if (cookieManager.getCookieStore().getCookies().size() > 0) {
-                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
-                http.setRequestProperty("Cookie",
-                        TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
-            }
-            http.setDoOutput(true);
-
-            String result = "";
-            for (Map.Entry<String, String> entry : data.entrySet())
-                try {
-                    result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                            + URLEncoder.encode(entry.getValue(), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    System.out.println("--- Error Here 4 ---");
-                    e.printStackTrace();
-                }
-            result = result.substring(1);
-            byte[] out = result.getBytes(StandardCharsets.UTF_8);
-            int length = out.length;
-
-            http.setFixedLengthStreamingMode(length);
-            http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            try {
-                http.connect();
-            } catch (IOException e) {
-                System.out.println("--- Error Here 5 ---");
-                e.printStackTrace();
-            }
-            try {
-                try (OutputStream os = http.getOutputStream()) {
-                    os.write(out);
-                }
-            } catch (IOException e) {
-                System.out.println("--- Error Here 6 ---");
-                e.printStackTrace();
-            }
-
-            BufferedInputStream bis = null;
-
-            try {
-                if (http.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
-                    bis = new BufferedInputStream(http.getInputStream());
-                } else {
-                    bis = new BufferedInputStream(http.getErrorStream());
-                }
-            } catch (IOException e) {
-                System.out.println("--- Error Here 7 ---");
-                e.printStackTrace();
-            }
-
-            byte[] contents = new byte[1024];
-
-            int bytesRead = 0;
-            String response = "";
-            try {
-                while ((bytesRead = bis.read(contents)) != -1) {
-                    response += new String(contents, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println("Response = " + response);
-
-            if (response.toLowerCase().contains("unauthorized")) {
-                System.out.println("Error at the end of the editing Do in Background.");
-            }
-
-            return (!response.toLowerCase().contains("unauthorized"));
-        }
 
         @Override
         protected void onPostExecute(final Boolean success) {
