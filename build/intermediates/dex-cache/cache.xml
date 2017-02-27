@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="f01edfb2670b8dfca56581c9717a377e65b71388">
+        sha1="15a5f4d233204483b0cc1b3f083a01b10ce220e3">
         <dex dex="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_94fe7171c24a5206d39648362825e9344844df55/classes.dex" />
     </item>
     <item
@@ -115,7 +115,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="859ebb091befa383d36d86cb49767ab191d51c88">
+        sha1="918989dca3d2dd05b7dfff833666f8879127c9cc">
         <dex dex="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5ef18e74123ec12262c76d528cf9c41aa3c541bb/classes.dex" />
     </item>
     <item

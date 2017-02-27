@@ -30,11 +30,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This activity allows the user to edit their profile data and submit the changes
+ */
 public class EditUserActivity extends AppCompatActivity {
 
-    private GetUserInfoAPI getUserInfo = null;
-    private UserAccount userAccount = null;
-    private EditUserInfoAPI editUserInfo = null;
+    private GetUserInfoAPI getUserInfo = null;   // the AsyncTask object to get user's current data
+    private UserAccount userAccount = null;      // holds the original user data before any edits
+    private EditUserInfoAPI editUserInfo = null; // the AsyncTask object to submit edits
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +46,32 @@ public class EditUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Get the current data associated with the account of whoever is logged in
         getUserInfo = new GetUserInfoAPI();
         getUserInfo.execute((Void) null);
     }
 
+    /**
+     * Switches to the AppScreen activity and discards any changes made in the Edit form
+     *
+     * @param view the view where the button that called this method resides
+     */
     public void cancelEdits(View view) {
         finish();
         Toast.makeText(getApplicationContext(), "Discarded changes.", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Switches to the AppScreen activity after all changes made in the Edit form
+     * are submitted to the online database using the API
+     *
+     * @param view the view where the button that called this method resides
+     */
     public void submitEdits(View view) {
 
         Map<String, String> arguments = new HashMap<>();
 
-        System.out.println("Edit User 1");
-
+        // Validating the First Name
         EditText firstName = (EditText) findViewById(R.id.firstNameFieldEdit);
         String firstNameText = firstName.getText().toString().trim();
         if (firstNameText.length() == 0) {
@@ -65,9 +79,7 @@ public class EditUserActivity extends AppCompatActivity {
             return;
         }
 
-        System.out.println("Edit User 2");
-
-
+        // Validating the Last Name
         EditText lastName = (EditText) findViewById(R.id.lastNameFieldEdit);
         String lastNameText = lastName.getText().toString().trim();
         if (lastNameText.length() == 0) {
@@ -75,8 +87,7 @@ public class EditUserActivity extends AppCompatActivity {
             return;
         }
 
-        System.out.println("Edit User 3");
-
+        // Validating the Email address
         EditText email = (EditText) findViewById(R.id.emailFieldEdit);
         String emailText = email.getText().toString().trim();
         if (!validateEmail(emailText)) {
@@ -84,6 +95,7 @@ public class EditUserActivity extends AppCompatActivity {
             return;
         }
 
+        // Validating the home address
         EditText address = (EditText) findViewById(R.id.addressLineFieldEdit);
         EditText city = (EditText) findViewById(R.id.cityFieldEdit);
         EditText stateZip = (EditText) findViewById(R.id.stateZipFieldEdit);
@@ -92,8 +104,7 @@ public class EditUserActivity extends AppCompatActivity {
         String cityText = city.getText().toString().trim();
         String stateZipText = stateZip.getText().toString().trim();
 
-        System.out.println("Edit User 4");
-
+        // Validating the Address fields
         String addressFullText = addressText + "~" + cityText + "~" + stateZipText;
         if (addressText.length() == 0) {
             showErrorOnField(address,"Address is too short.");
@@ -109,26 +120,28 @@ public class EditUserActivity extends AppCompatActivity {
         }
 
 
-        System.out.println("Edit User 5");
-
+        // Obtains the title from the spinner
         Spinner title = (Spinner) findViewById(R.id.titleSpinnerEdit);
         String titleText = title.getSelectedItem().toString().trim();
 
-        System.out.println("Edit User 6");
-
+        // Puts all the new data into a Map
         arguments.put("firstName", firstNameText);
         arguments.put("lastName", lastNameText);
         arguments.put("email", emailText);
         arguments.put("address", addressFullText);
         arguments.put("title", titleText);
 
-        System.out.println("Edit User 7");
-
+        // Call the API to make these edits and use this new data for the user account
         editUserInfo = new EditUserInfoAPI(arguments);
         editUserInfo.execute((Void) null);
-
     }
 
+    /**
+     * Validates the email to make sure it follows the proper format.
+     *
+     * @param emailText the email that needs to be checked for validity
+     * @return whether or not the email string has a valid format (true if the email is valid)
+     */
     private boolean validateEmail(String emailText) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -136,6 +149,12 @@ public class EditUserActivity extends AppCompatActivity {
         return m.matches();
     }
 
+    /**
+     * Sets the error message for the field on the edit form and focuses that field on the screen
+     *
+     * @param field the field that has the error
+     * @param message the message to show on the field
+     */
     private void showErrorOnField(EditText field, String message) {
         field.setError(message);
         field.requestFocus();

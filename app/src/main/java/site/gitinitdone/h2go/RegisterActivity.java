@@ -1,6 +1,9 @@
 package site.gitinitdone.h2go;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RegisterUserAPI registerUser = null;
     private UserAccount userAccount = null;
+    private View mProgressView;
+    private View mRegisterFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        mRegisterFormView = findViewById(R.id.register_form);
+        mProgressView = findViewById(R.id.content_register_progress);
 
         Spinner title = (Spinner) findViewById(R.id.titleSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserAccount.Title.values());
@@ -161,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerUser = new RegisterUserAPI(arguments);
         registerUser.execute((Void) null);
 
+        showProgress(true);
     }
 
     private boolean validateEmail(String emailText) {
@@ -175,7 +182,41 @@ public class RegisterActivity extends AppCompatActivity {
         field.requestFocus();
     }
 
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    // @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
 
 
     /**
@@ -184,7 +225,7 @@ public class RegisterActivity extends AppCompatActivity {
      */
     class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
 
-//    private boolean actionSuccessful = false;
+    private boolean duplicateUser = false;
 
 //    Boolean success = false;
 //    AccountAPITools.UserLoginTask mAuthTask = new AccountAPITools.UserLoginTask(username, password, success);
@@ -304,9 +345,7 @@ public class RegisterActivity extends AppCompatActivity {
             System.out.println("--------3--------");
 
             System.out.println(response.toLowerCase().contains("user registered"));
-            if (response.toLowerCase().contains("is already registered")) {
-                Toast.makeText(getBaseContext(), "That username is already taken.", Toast.LENGTH_LONG).show();
-            }
+             duplicateUser = response.toLowerCase().contains("is already registered");
 
             return (response.toLowerCase().contains("user registered"));
         }
@@ -314,16 +353,21 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             registerUser = null;
-            //showProgress(false);
+            showProgress(false);
 
             if (success) {
                 System.out.println("Registered TRUE");
                 Toast.makeText(getBaseContext(), "User has been registered. Please log in.", Toast.LENGTH_LONG).show();
                 finish();
-                //nextAct(findViewById(android.R.id.content));
+
             } else {
                 System.out.println("Registered FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during registration.", Toast.LENGTH_LONG).show();
+                if (duplicateUser) {
+                    Toast.makeText(getBaseContext(), "That username is already taken.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "There was an error during registration.", Toast.LENGTH_LONG).show();
+                }
+
                 //mPasswordView.setError(getString(R.string.error_incorrect_password));
                 //mPasswordView.requestFocus();
             }
