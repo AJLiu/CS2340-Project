@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="site.gitinitdone.h2go.RegisterActivity"
+    tools:showIn="@layout/activity_register">
+
+    <!-- username -->
+    <EditText
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/usernameField"
+        android:hint="Username" />
+
+    <!-- password -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="8"
+        android:id="@+id/passwordField"
+        android:hint="Password"
+        android:layout_below="@id/usernameField"
+        android:layout_alignStart="@id/usernameField" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title:"
+        android:textSize="8pt"
+        android:layout_alignStart="@id/passwordField"
+        android:layout_below="@id/passwordField"
+        android:id="@+id/labelTitleSpinner"
+        />
+
+    <!-- title -->
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelTitleSpinner"
+        android:layout_alignStart="@id/passwordField"
+        android:layout_alignEnd="@id/passwordField"
+        android:id="@+id/titleSpinner" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type of User:"
+        android:textSize="8pt"
+        android:layout_alignStart="@id/titleSpinner"
+        android:layout_below="@id/titleSpinner"
+        android:id="@+id/labelUserTypeSpinner"
+        />
+
+    <!-- user type -->
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelUserTypeSpinner"
+        android:layout_alignStart="@id/titleSpinner"
+        android:layout_alignEnd="@id/titleSpinner"
+        android:id="@+id/userTypeSpinner" />
+
+    <!---first name-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="1dp"
+        android:id="@+id/firstNameField"
+        android:hint="First Name"
+        android:layout_below="@id/userTypeSpinner"
+        android:layout_alignStart="@id/userTypeSpinner"/>
+
+
+    <!---last name-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Last Name"
+        android:ems="10"
+        android:layout_below="@id/firstNameField"
+        android:layout_alignEnd="@id/firstNameField"
+        android:id="@+id/lastNameField" />
+
+    <!--- email -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailField"
+        android:hint="Email"
+        android:layout_below="@id/lastNameField"
+        android:layout_alignStart="@id/lastNameField" />
+
+
+    <!---address line-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:id="@+id/addressLineField"
+        android:hint="Address Line 1"
+        android:layout_below="@id/emailField"
+        android:layout_alignStart="@id/emailField" />
+
+    <!---city-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="City"
+        android:ems="10"
+        android:layout_below="@id/addressLineField"
+        android:layout_alignStart="@id/addressLineField"
+        android:id="@+id/cityField" />
+
+    <!---state, zip-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="State, Zip"
+        android:ems="10"
+        android:layout_below="@id/cityField"
+        android:layout_alignEnd="@id/cityField"
+        android:id="@+id/stateZipField" />
+
+
+    <!-- submit button -->
+    <Button
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/submitButton"
+
+        android:layout_alignParentBottom="true"
+        android:onClick="registerNewUser" />
+
+</RelativeLayout>
