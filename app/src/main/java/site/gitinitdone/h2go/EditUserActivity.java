@@ -160,20 +160,18 @@ public class EditUserActivity extends AppCompatActivity {
         field.requestFocus();
     }
 
-    //************************************
-    //************************************
-
+    /**
+     * Represents an asynchronous getUserInfo task used to get the data in the user profile.
+     */
     class GetUserInfoAPI extends AsyncTask<Void, Void, Boolean> {
 
         private CookieManager cookieManager;
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             cookieManager = LoginActivity.msCookieManager;
 
-            System.out.println("--------1--------");
             URL url = null;
             try {
                 url = new URL("http://www.gitinitdone.site/api/users");
@@ -197,13 +195,6 @@ public class EditUserActivity extends AppCompatActivity {
             } catch (ProtocolException e) {
                 e.printStackTrace();
             }
-            System.out.println("--- Reached Here 3 ---");
-
-            //http.setDoOutput(true);
-
-            System.out.println("End of Part 1");
-
-            System.out.println("End of Part 2");
 
             try {
                 http.connect();
@@ -237,9 +228,7 @@ public class EditUserActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            System.out.println("--------2--------");
-            System.out.println(response);
-            System.out.println("--------3--------");
+            System.out.println("Response = " + response);
 
             boolean validData = !response.contains("Must be logged in");
             if (validData) {
@@ -294,6 +283,11 @@ public class EditUserActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method populates the form with the data that is currently stores on the database
+     *
+     * @param accountInfo a UserAccount object that holds the data of the user before editing it
+     */
     private void populateFields(UserAccount accountInfo) {
 
 
@@ -323,18 +317,18 @@ public class EditUserActivity extends AppCompatActivity {
         title.setSelection(accountInfo.getTitle().ordinal());
 
         TextView username = (TextView) findViewById(R.id.formUsernameFieldEdit);
-        username.setText("Username: " + accountInfo.getUsername());
+        String usernameText = "Username: " + accountInfo.getUsername();
+        username.setText(usernameText);
 
         TextView userType = (TextView) findViewById(R.id.formUserTypeFieldEdit);
-        userType.setText("User Account Type: " + accountInfo.getUserType().toString());
+        String userTypeText = "User Account Type: " + accountInfo.getUserType().toString();
+        userType.setText(userTypeText);
     }
 
-    //***************************************************
-    //***************************************************
-    //***************************************************
-    //***************************************************
 
-
+    /**
+     * Represents an asynchronous edit user profile task used to edit the user's profile data.
+     */
     class EditUserInfoAPI extends AsyncTask<Void, Void, Boolean> {
 
         private CookieManager cookieManager;
@@ -348,9 +342,7 @@ public class EditUserActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
-            System.out.println("--------1--------");
             URL url = null;
             try {
                 url = new URL("http://www.gitinitdone.site/api/users/edit");
@@ -368,7 +360,6 @@ public class EditUserActivity extends AppCompatActivity {
             HttpURLConnection http = (HttpURLConnection) con;
             try {
                 http.setRequestMethod("POST"); // PUT is another valid option
-                System.out.println("--- Reached Here 3 ---");
 
             } catch (ProtocolException e) {
                 e.printStackTrace();
@@ -380,9 +371,6 @@ public class EditUserActivity extends AppCompatActivity {
                         TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
             }
             http.setDoOutput(true);
-
-            System.out.println("End of Part 1");
-
 
             String result = "";
             for (Map.Entry<String, String> entry : data.entrySet())
@@ -396,8 +384,6 @@ public class EditUserActivity extends AppCompatActivity {
             result = result.substring(1);
             byte[] out = result.getBytes(StandardCharsets.UTF_8);
             int length = out.length;
-
-            System.out.println("End of Part 2");
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -415,10 +401,6 @@ public class EditUserActivity extends AppCompatActivity {
                 System.out.println("--- Error Here 6 ---");
                 e.printStackTrace();
             }
-
-            System.out.println("End of Part 3");
-
-            // Do something with http.getInputStream()
 
             BufferedInputStream bis = null;
 
@@ -445,11 +427,7 @@ public class EditUserActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            System.out.println("--------2--------");
-            System.out.println(response);
-            System.out.println("--------3--------");
-
-            System.out.println(!response.toLowerCase().contains("unauthorized"));
+            System.out.println("Response = " + response);
 
             if (response.toLowerCase().contains("unauthorized")) {
                 System.out.println("Error at the end of the editing Do in Background.");

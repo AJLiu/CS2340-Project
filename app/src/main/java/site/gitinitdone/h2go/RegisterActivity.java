@@ -30,7 +30,6 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterUserAPI registerUser = null;
-    private UserAccount userAccount = null;
     private View mProgressView;
     private View mRegisterFormView;
 
@@ -56,26 +55,19 @@ public class RegisterActivity extends AppCompatActivity {
         userType.setAdapter(adapter2);
         userType.setSelection(0);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
-
-
-
-
+    /**
+     * Validates the data entered, submits API to create new user, and eventually switches back
+     * to the Welcome activity
+     *
+     * @param view the view where the button that called this method resides
+     */
     public void registerNewUser(View view) {
 
         Map<String, String> arguments = new HashMap<>();
 
-        System.out.println("Register New User 1");
-
+        // Validate the username is not blank
         EditText username = (EditText) findViewById(R.id.usernameField);
         String usernameText = username.getText().toString().trim();
         if (usernameText.length() == 0) {
@@ -84,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // Valide password is not blank
         EditText password = (EditText) findViewById(R.id.passwordField);
         String passwordText = password.getText().toString().trim();
         if (passwordText.length() == 0) {
@@ -91,8 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        System.out.println("Register New User 2");
-
+        // Validate the first name is not blank
         EditText firstName = (EditText) findViewById(R.id.firstNameField);
         String firstNameText = firstName.getText().toString().trim();
         if (firstNameText.length() == 0) {
@@ -100,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // Validate the last name is not blank
         EditText lastName = (EditText) findViewById(R.id.lastNameField);
         String lastNameText = lastName.getText().toString().trim();
         if (lastNameText.length() == 0) {
@@ -107,11 +100,10 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        System.out.println("Register New User 3");
-
+        // Validate the email address has a proper format
         EditText email = (EditText) findViewById(R.id.emailField);
         String emailText = email.getText().toString().trim();
-        if (!validateEmail(emailText)) {
+        if (email.length() == 0 || !validateEmail(emailText)) {
             showErrorOnField(email, "Email is not valid.");
             return;
         }
@@ -124,8 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
         String cityText = city.getText().toString().trim();
         String stateZipText = stateZip.getText().toString().trim();
 
-        System.out.println("Register New User 4");
-
+        // Validate address sections are not blank
         String addressFullText = addressText + "~" + cityText + "~" + stateZipText;
         if (addressText.length() == 0) {
             showErrorOnField(address,"Address is too short.");
@@ -140,18 +131,12 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-
-        System.out.println("Register New User 5");
-
         Spinner title = (Spinner) findViewById(R.id.titleSpinner);
         String titleText = title.getSelectedItem().toString().trim();
-
 
         Spinner userType = (Spinner) findViewById(R.id.userTypeSpinner);
         UserAccount.AccountType userAccountType = (UserAccount.AccountType)(userType.getSelectedItem());
         String userTypeText = userAccountType.toString().trim();
-
-        System.out.println("Register New User 6");
 
         arguments.put("username", usernameText);
         arguments.put("password", passwordText);
@@ -162,14 +147,19 @@ public class RegisterActivity extends AppCompatActivity {
         arguments.put("title", titleText);
         arguments.put("userType", userTypeText);
 
-        System.out.println("Register New User 7");
-
+        // call the API to register a new user using the data / parameters in this Map
         registerUser = new RegisterUserAPI(arguments);
         registerUser.execute((Void) null);
 
         showProgress(true);
     }
 
+    /**
+     * Validates the email to make sure it follows the proper format.
+     *
+     * @param emailText the email that needs to be checked for validity
+     * @return whether or not the email string has a valid format (true if the email is valid)
+     */
     private boolean validateEmail(String emailText) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -177,15 +167,20 @@ public class RegisterActivity extends AppCompatActivity {
         return m.matches();
     }
 
+    /**
+     * Sets the error message for the field on the edit form and focuses that field on the screen
+     *
+     * @param field the field that has the error
+     * @param message the message to show on the field
+     */
     private void showErrorOnField(EditText field, String message) {
         field.setError(message);
         field.requestFocus();
     }
 
     /**
-     * Shows the progress UI and hides the login form.
+     * Shows the progress UI and hides the registration form.
      */
-    // @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
@@ -220,18 +215,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
+     * Represents an asynchronous registration task used to authenticate the user.
      */
     class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
 
     private boolean duplicateUser = false;
-
-//    Boolean success = false;
-//    AccountAPITools.UserLoginTask mAuthTask = new AccountAPITools.UserLoginTask(username, password, success);
-//    mAuthTask.execute((Void) null);
-//
-//    return success;
 
         private Map<String, String> data;
 
@@ -241,9 +229,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            System.out.println("--------1--------");
             URL url = null;
             try {
                 url = new URL("http://www.gitinitdone.site/api/users/register");
@@ -261,14 +246,10 @@ public class RegisterActivity extends AppCompatActivity {
             HttpURLConnection http = (HttpURLConnection) con;
             try {
                 http.setRequestMethod("POST"); // PUT is another valid option
-                System.out.println("--- Reached Here 3 ---");
-
             } catch (ProtocolException e) {
                 e.printStackTrace();
             }
             http.setDoOutput(true);
-
-            System.out.println("End of Part 1");
 
 
             String result = "";
@@ -284,7 +265,6 @@ public class RegisterActivity extends AppCompatActivity {
             byte[] out = result.getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
-            System.out.println("End of Part 2");
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -303,23 +283,12 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            System.out.println("End of Part 3");
-
-            // Do something with http.getInputStream()
 
             BufferedInputStream bis = null;
 
             try {
                 if (http.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
                     bis = new BufferedInputStream(http.getInputStream());
-//                    Map<String, List<String>> headerFields = http.getHeaderFields();
-//                    List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-//
-//                    if (cookiesHeader != null) {
-//                        for (String cookie : cookiesHeader) {
-//                            cookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
-//                        }
-//                    }
                 } else {
                     bis = new BufferedInputStream(http.getErrorStream());
                 }
@@ -340,9 +309,7 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            System.out.println("--------2--------");
-            System.out.println(response);
-            System.out.println("--------3--------");
+            System.out.println("Reponse = " + response);
 
             System.out.println(response.toLowerCase().contains("user registered"));
              duplicateUser = response.toLowerCase().contains("is already registered");
@@ -368,41 +335,14 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "There was an error during registration.", Toast.LENGTH_LONG).show();
                 }
 
-                //mPasswordView.setError(getString(R.string.error_incorrect_password));
-                //mPasswordView.requestFocus();
             }
         }
 
         @Override
         protected void onCancelled() {
             registerUser = null;
-            //showProgress(false);
+            showProgress(false);
         }
-
-
-        /*
-
-        EditText firstName = (EditText) findViewById(R.id.firstNameField);
-        firstName.setText(accountInfo.getFirstName());
-
-        EditText lastName = (EditText) findViewById(R.id.lastNameField);
-        lastName.setText(accountInfo.getLastName());
-
-        EditText email = (EditText) findViewById(R.id.emailField);
-        email.setText(accountInfo.getEmail());
-
-        String[] addressParts = accountInfo.getAddress().split("~");
-        EditText address = (EditText) findViewById(R.id.addressLineField);
-        address.setText(addressParts[0]);
-
-        EditText city = (EditText) findViewById(R.id.cityField);
-        city.setText(addressParts[1]);
-
-        EditText stateZip = (EditText) findViewById(R.id.stateZipField);
-        stateZip.setText(addressParts[2]);
-
-
-         */
 
     }
 
