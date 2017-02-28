@@ -1,5 +1,6 @@
 package site.gitinitdone.h2go.controller;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
@@ -16,6 +17,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import site.gitinitdone.h2go.LoginActivity;
+import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.UserAccount;
 
 /**
@@ -26,6 +28,12 @@ public class GetUserAPI extends AsyncTask<Void, Void, Boolean> {
     private CookieManager cookieManager;
     protected UserAccount userAccount = null;      // holds the original user data before any edits
 
+    private final Context context;
+
+    public GetUserAPI(Context context) {
+        this.context = context;
+    }
+
     @Override
     protected Boolean doInBackground(Void... params) {
 
@@ -33,7 +41,7 @@ public class GetUserAPI extends AsyncTask<Void, Void, Boolean> {
 
         URL url = null;
         try {
-            url = new URL("http://www.gitinitdone.site/api/users");
+            url = new URL(context.getString(R.string.apiHttpPath) + "/api/users");
         } catch (MalformedURLException e) {
             System.out.println("--- Error Here 1 ---");
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package site.gitinitdone.h2go.controller;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.io.BufferedInputStream;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import site.gitinitdone.h2go.LoginActivity;
+import site.gitinitdone.h2go.R;
 
 /**
  * Represents an asynchronous login/registration task used to authenticate
@@ -32,21 +34,22 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
 
     private final String mUsername;
     private final String mPassword;
+    private final Context context;
 
-    public LoginUserAPI(String username, String password) {
+    public LoginUserAPI(String username, String password, Context context) {
         mUsername = username;
         mPassword = password;
+        this.context = context;
     }
 
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        // TODO: attempt authentication against a network service.
 
         System.out.println("--------1--------");
         URL url = null;
         try {
-            url = new URL("http://www.gitinitdone.site/api/users/login");
+            url = new URL(context.getString(R.string.apiHttpPath) + "/api/users/login");
         } catch (MalformedURLException e) {
             System.out.println("--- Error Here 1 ---");
             e.printStackTrace();

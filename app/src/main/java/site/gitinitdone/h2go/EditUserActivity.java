@@ -1,5 +1,6 @@
 package site.gitinitdone.h2go;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -168,6 +169,10 @@ public class EditUserActivity extends AppCompatActivity {
      */
     class LocalGetUserAPI extends GetUserAPI {
 
+        public LocalGetUserAPI() {
+            super(getApplicationContext());
+        }
+
         @Override
         protected void onPostExecute(final Boolean success) {
             //mAuthTask = null;
@@ -236,7 +241,7 @@ public class EditUserActivity extends AppCompatActivity {
         private Map<String, String> data;
 
         LocalEditUserAPI(Map<String, String> data) {
-            super(data);
+            super(data, getApplicationContext());
         }
 
 

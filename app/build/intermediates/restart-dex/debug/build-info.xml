@@ -5,33 +5,40 @@
     density="420dpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="214239072089398"
+    timestamp="252364143403826"
     token="4992880757096831485"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="1880" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="471" />
+        duration="0" />
     <task
         name="verifier"
-        duration="248" />
+        duration="0" />
 
     <artifact
-        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        type="RESOURCES" />
 
     <build
-        timestamp="214239072089398"
+        timestamp="252236277869221"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="252364143403826"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/surajmasand/cs2340repo/CS2340-Project/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
     </build>
 
 </instant-run>

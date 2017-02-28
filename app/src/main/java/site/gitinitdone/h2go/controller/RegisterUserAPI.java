@@ -24,6 +24,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import site.gitinitdone.h2go.R;
+
 
 /**
  * Represents an asynchronous registration task used to authenticate the user.
@@ -31,19 +33,20 @@ import java.util.Map;
 
 public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
 
+    private Map<String, String> data;
+    private final Context context;
     protected boolean duplicateUser = false;
 
-    private Map<String, String> data;
-
-    public RegisterUserAPI(Map<String, String> data) {
+    public RegisterUserAPI(Map<String, String> data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         URL url = null;
         try {
-            url = new URL("http://www.gitinitdone.site/api/users/register");
+            url = new URL(context.getString(R.string.apiHttpPath) + "/api/users/register");
         } catch (MalformedURLException e) {
             System.out.println("--- Error Here 1 ---");
             e.printStackTrace();

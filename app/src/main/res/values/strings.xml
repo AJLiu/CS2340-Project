@@ -15,4 +15,5 @@
     </string>
     <string name="title_activity_app_screen">AppScreen</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="apiHttpPath">http://gitinitdone.site</string>
 </resources>

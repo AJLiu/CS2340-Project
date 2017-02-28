@@ -224,7 +224,7 @@ public class RegisterActivity extends AppCompatActivity {
         private Map<String, String> data;
 
         LocalRegisterAPI(Map<String, String> data) {
-            super(data);
+            super(data, getApplicationContext());
         }
 
 

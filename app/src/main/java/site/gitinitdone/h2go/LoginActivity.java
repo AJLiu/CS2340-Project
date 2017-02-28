@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
         public CookieManager cookieManager = LoginUserAPI.cookieManager;
 
         LocalLoginAPI(String username, String password) {
-            super(username, password);
+            super(username, password, getApplicationContext());
         }
 
         @Override
