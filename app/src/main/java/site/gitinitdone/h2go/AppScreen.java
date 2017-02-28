@@ -3,7 +3,6 @@ package site.gitinitdone.h2go;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +18,12 @@ public class AppScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         Toast.makeText(getApplicationContext(), "You have successfully logged in.", Toast.LENGTH_LONG).show();
 
+        // TODO: Store UserEmail locally instead of using intents
         // Get the username of whoever just logged in and show it in the corner of the screen
         Intent i = getIntent();
         myUsername = i.getExtras().getString("UserEmail");

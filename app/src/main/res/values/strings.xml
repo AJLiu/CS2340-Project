@@ -15,4 +15,8 @@
     </string>
     <string name="title_activity_app_screen">AppScreen</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="edit_screen">Edit User Profile</string>
+    <string name="register_screen">Register New User</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>
