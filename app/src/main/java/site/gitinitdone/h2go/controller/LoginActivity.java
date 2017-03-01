@@ -1,9 +1,8 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,24 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.CookieManager;
-import java.net.HttpCookie;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import site.gitinitdone.h2go.controller.LoginUserAPI;
+import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.controller.AppScreenActivity;
+import site.gitinitdone.h2go.model.LoginUserAPI;
 
 
 /**
@@ -84,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         mProgressView = findViewById(R.id.login_progress);
     }
     public void nextAct(View v){
-        Intent i = new Intent(this, AppScreen.class);
+        Intent i = new Intent(this, AppScreenActivity.class);
         AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.email);
         String theEmail = editText.getText().toString();
         i.putExtra("UserEmail", theEmail);

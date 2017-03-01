@@ -1,8 +1,7 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,21 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import site.gitinitdone.h2go.controller.RegisterUserAPI;
+import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.RegisterUserAPI;
+import site.gitinitdone.h2go.model.UserAccount;
 
 public class RegisterActivity extends AppCompatActivity {
 

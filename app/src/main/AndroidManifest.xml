@@ -21,7 +21,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Welcome">
+        <activity android:name=".controller.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,22 +29,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".controller.LoginActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name=".AppScreen"
+            android:name=".controller.AppScreenActivity"
             android:label="@string/title_activity_app_screen"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".EditUserActivity"
+            android:name=".controller.EditUserActivity"
             android:label="Edit User Profile"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".controller.RegisterActivity"
             android:label="Register New User"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

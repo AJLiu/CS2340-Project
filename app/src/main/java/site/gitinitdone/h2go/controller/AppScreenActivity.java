@@ -1,4 +1,4 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import site.gitinitdone.h2go.R;
+
 /**
  * The main app screen after a user has logged in successfully
  */
-public class AppScreen extends AppCompatActivity {
+public class AppScreenActivity extends AppCompatActivity {
 
     private String myUsername; // the username of whoever has just logged in successfully
 

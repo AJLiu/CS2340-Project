@@ -1,4 +1,4 @@
-package site.gitinitdone.h2go.controller;
+package site.gitinitdone.h2go.model;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,9 +16,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import site.gitinitdone.h2go.LoginActivity;
 import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.UserAccount;
 
 /**
  * Represents an asynchronous getUserInfo task used to get the data in the user profile.

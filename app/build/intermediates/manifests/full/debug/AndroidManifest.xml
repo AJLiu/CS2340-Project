@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="site.gitinitdone.h2go.Welcome" >
+        <activity android:name="site.gitinitdone.h2go.controller.WelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,21 +34,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="site.gitinitdone.h2go.LoginActivity"
+            android:name="site.gitinitdone.h2go.controller.LoginActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="site.gitinitdone.h2go.AppScreen"
+            android:name="site.gitinitdone.h2go.controller.AppScreenActivity"
             android:label="@string/title_activity_app_screen"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name="site.gitinitdone.h2go.EditUserActivity"
+            android:name="site.gitinitdone.h2go.controller.EditUserActivity"
             android:label="Edit User Profile"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name="site.gitinitdone.h2go.RegisterActivity"
+            android:name="site.gitinitdone.h2go.controller.RegisterActivity"
             android:label="Register New User"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

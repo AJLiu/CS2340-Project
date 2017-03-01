@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="site.gitinitdone.h2go.RegisterActivity">
+    tools:context="site.gitinitdone.h2go.controller.RegisterActivity">
 
     <ProgressBar
         android:id="@+id/content_register_progress"

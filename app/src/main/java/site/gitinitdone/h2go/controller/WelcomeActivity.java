@@ -1,14 +1,16 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import site.gitinitdone.h2go.R;
+
 /**
  * The Welcome screen, the first screen that the user sees when the app is launched
  */
-public class Welcome extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

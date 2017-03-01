@@ -1,4 +1,4 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.model;
 
 /**
  * This class will create "UserAccount" objects that holds all the information that belongs to a
