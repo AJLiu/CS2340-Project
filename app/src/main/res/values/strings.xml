@@ -15,12 +15,10 @@
     </string>
     <string name="title_activity_app_screen">AppScreen</string>
     <string name="title_activity_register">RegisterActivity</string>
-<<<<<<< HEAD
     <string name="apiHttpPath">http://gitinitdone.site</string>
-=======
+
     <string name="edit_screen">Edit User Profile</string>
     <string name="register_screen">Register New User</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
->>>>>>> f55a01d62ef5774ffdd62347f2218e53d0fcf45f
 </resources>

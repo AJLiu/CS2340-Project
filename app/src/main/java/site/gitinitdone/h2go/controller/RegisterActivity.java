@@ -12,18 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import site.gitinitdone.h2go.controller.RegisterUserAPI;
 
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD:app/src/main/java/site/gitinitdone/h2go/controller/RegisterActivity.java
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.RegisterUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
 
-=======
->>>>>>> f55a01d62ef5774ffdd62347f2218e53d0fcf45f:app/src/main/java/site/gitinitdone/h2go/RegisterActivity.java
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterUserAPI registerUser = null;

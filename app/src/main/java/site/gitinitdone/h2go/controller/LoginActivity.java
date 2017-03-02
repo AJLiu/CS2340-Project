@@ -19,16 +19,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import site.gitinitdone.h2go.controller.LoginUserAPI;
 
 import java.net.CookieManager;
-<<<<<<< HEAD:app/src/main/java/site/gitinitdone/h2go/controller/LoginActivity.java
 
 import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.controller.AppScreenActivity;
 import site.gitinitdone.h2go.model.LoginUserAPI;
-=======
->>>>>>> f55a01d62ef5774ffdd62347f2218e53d0fcf45f:app/src/main/java/site/gitinitdone/h2go/LoginActivity.java
 
 
 /**
@@ -93,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                //showProgress(false);
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             default:

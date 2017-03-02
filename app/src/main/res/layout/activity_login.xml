@@ -5,16 +5,11 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-<<<<<<< HEAD
               android:paddingBottom="@dimen/activity_vertical_margin"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="site.gitinitdone.h2go.controller.LoginActivity">
-=======
-              tools:context="site.gitinitdone.h2go.LoginActivity">
->>>>>>> f55a01d62ef5774ffdd62347f2218e53d0fcf45f
-
     <!-- Login progress -->
 
     <android.support.design.widget.AppBarLayout

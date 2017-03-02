@@ -9,20 +9,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import site.gitinitdone.h2go.controller.EditUserAPI;
-import site.gitinitdone.h2go.controller.GetUserAPI;
 
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD:app/src/main/java/site/gitinitdone/h2go/controller/EditUserActivity.java
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.GetUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
 
-=======
->>>>>>> f55a01d62ef5774ffdd62347f2218e53d0fcf45f:app/src/main/java/site/gitinitdone/h2go/EditUserActivity.java
 /**
  * This activity allows the user to edit their profile data and submit the changes
  */
