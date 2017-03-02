@@ -13,12 +13,18 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="loggingIn">Logging in…</string>
+    <string name="loggingOut">Logging out…</string>
+
+    <string name="sharedPrefName">MySharedPreferencesName</string>
     <string name="title_activity_app_screen">AppScreen</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="apiHttpPath">http://gitinitdone.site</string>
+    <string name="apiHttpPath">http://www.gitinitdone.site</string>
 
     <string name="edit_screen">Edit User Profile</string>
     <string name="register_screen">Register New User</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="logout">Log Out</string>
 </resources>

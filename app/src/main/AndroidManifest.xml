@@ -36,20 +36,16 @@
         <activity
             android:name=".controller.AppScreenActivity"
             android:label="@string/title_activity_app_screen"
-            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName="site.gitinitdone.h2go.controller.LoginActivity">
         </activity>
         <activity
             android:name=".controller.EditUserActivity"
             android:label="@string/edit_screen"
-
             android:parentActivityName="site.gitinitdone.h2go.controller.AppScreenActivity">
         </activity>
-//android:theme="@style/AppTheme.NoActionBar"
         <activity
             android:name=".controller.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName="site.gitinitdone.h2go.controller.WelcomeActivity">
         </activity>
 

@@ -3,9 +3,11 @@ package site.gitinitdone.h2go.controller;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.CookieManager;
 
@@ -32,6 +35,7 @@ import site.gitinitdone.h2go.model.LoginUserAPI;
 public class LoginActivity extends AppCompatActivity {
 
     private LocalLoginAPI login = null;
+    private SharedPreferences.Editor mySharedPrefEditor;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -43,12 +47,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_login_toolbar);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.username);
         //populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -77,18 +82,23 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void nextAct(View v){
         Intent i = new Intent(this, AppScreenActivity.class);
-        AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.email);
+        AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.username);
         String theEmail = editText.getText().toString();
-        i.putExtra("UserEmail", theEmail);
+
+        mySharedPrefEditor = getSharedPreferences(getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
+        mySharedPrefEditor.putString(getString(R.string.prompt_username), theEmail);
+        mySharedPrefEditor.apply();
+        //i.putExtra("UserEmail", theEmail);
         //i.putExtra("Cookies", msCookieManager);
         startActivity(i);
+        Toast.makeText(getApplicationContext(), "You have successfully logged in.", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //showProgress(false);
+                showProgress(false);
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             default:
@@ -147,6 +157,11 @@ public class LoginActivity extends AppCompatActivity {
             login.execute((Void) null);
 
             showProgress(true);
+            Toolbar myToolbar = (Toolbar) findViewById(R.id.my_login_toolbar);
+            setSupportActionBar(myToolbar);
+            ActionBar ab = getSupportActionBar();
+            ab.hide();
+
 
         }
     }
