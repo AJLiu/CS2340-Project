@@ -27,4 +27,10 @@
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="logout">Log Out</string>
+    <string name="action_settings">settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

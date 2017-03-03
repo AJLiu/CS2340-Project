@@ -167,15 +167,6 @@
         />
 
 
-    <!-- cancel button -->
-    <Button
-        android:text="Cancel"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:id="@+id/cancelButtonEdit"
-        android:layout_alignParentBottom="true"
-        android:onClick="cancelEdits"/>
-
 
 
     <!-- submit button -->
@@ -184,7 +175,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:id="@+id/submitButtonEdit"
-        android:layout_above="@id/cancelButtonEdit"
+        android:layout_alignParentBottom="true"
         android:onClick="submitEdits"/>
 
 

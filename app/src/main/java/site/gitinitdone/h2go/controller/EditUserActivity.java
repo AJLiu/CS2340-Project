@@ -10,14 +10,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.GetUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This activity allows the user to edit their profile data and submit the changes
@@ -39,16 +38,6 @@ public class EditUserActivity extends AppCompatActivity {
         // Get the current data associated with the account of whoever is logged in
         getUserInfo = new LocalGetUserAPI();
         getUserInfo.execute((Void) null);
-    }
-
-    /**
-     * Switches to the AppScreen activity and discards any changes made in the Edit form
-     *
-     * @param view the view where the button that called this method resides
-     */
-    public void cancelEdits(View view) {
-        finish();
-        Toast.makeText(getApplicationContext(), "Discarded changes.", Toast.LENGTH_LONG).show();
     }
 
     /**
