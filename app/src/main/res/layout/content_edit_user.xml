@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="site.gitinitdone.h2go.EditUserActivity"
+    tools:context="site.gitinitdone.h2go.controller.EditUserActivity"
     tools:showIn="@layout/activity_edit_user">
 
     <!---
@@ -167,15 +167,6 @@
         />
 
 
-    <!-- cancel button -->
-    <Button
-        android:text="Cancel"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:id="@+id/cancelButtonEdit"
-        android:layout_alignParentBottom="true"
-        android:onClick="cancelEdits"/>
-
 
 
     <!-- submit button -->
@@ -184,7 +175,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:id="@+id/submitButtonEdit"
-        android:layout_above="@id/cancelButtonEdit"
+        android:layout_alignParentBottom="true"
         android:onClick="submitEdits"/>
 
 

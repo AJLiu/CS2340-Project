@@ -1,19 +1,14 @@
-package site.gitinitdone.h2go.controller;
+package site.gitinitdone.h2go.model;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.text.TextUtils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -21,29 +16,39 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
+import site.gitinitdone.h2go.R;
 
 /**
- * Represents an asynchronous registration task used to authenticate the user.
+ * Represents an asynchronous edit user profile task used to edit the user's profile data.
  */
 
-public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
+public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
 
-    protected boolean duplicateUser = false;
+    private CookieManager cookieManager;
+
+    private final Context context;
+
+    public EditUserAPI(Context context) {
+        this.context = context;
+    }
 
     private Map<String, String> data;
 
-    public RegisterUserAPI(Map<String, String> data) {
+    public EditUserAPI(Map<String, String> data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
+
+        cookieManager = LoginUserAPI.cookieManager;
+
         URL url = null;
         try {
-            url = new URL("http://www.gitinitdone.site/api/users/register");
+            url = new URL(context.getString(R.string.apiHttpPath) + "/api/users/edit");
         } catch (MalformedURLException e) {
             System.out.println("--- Error Here 1 ---");
             e.printStackTrace();
@@ -58,11 +63,17 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
         HttpURLConnection http = (HttpURLConnection) con;
         try {
             http.setRequestMethod("POST"); // PUT is another valid option
+
         } catch (ProtocolException e) {
             e.printStackTrace();
         }
-        http.setDoOutput(true);
 
+        if (cookieManager.getCookieStore().getCookies().size() > 0) {
+            // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+            http.setRequestProperty("Cookie",
+                    TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
+        }
+        http.setDoOutput(true);
 
         String result = "";
         for (Map.Entry<String, String> entry : data.entrySet())
@@ -76,7 +87,6 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
         result = result.substring(1);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);
         int length = out.length;
-
 
         http.setFixedLengthStreamingMode(length);
         http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -94,7 +104,6 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
             System.out.println("--- Error Here 6 ---");
             e.printStackTrace();
         }
-
 
         BufferedInputStream bis = null;
 
@@ -121,12 +130,14 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
             e.printStackTrace();
         }
 
-        System.out.println("Reponse = " + response);
+        System.out.println("Response = " + response);
 
-        System.out.println(response.toLowerCase().contains("user registered"));
-        duplicateUser = response.toLowerCase().contains("is already registered");
+        if (response.toLowerCase().contains("unauthorized")) {
+            System.out.println("Error at the end of the editing Do in Background.");
+        }
 
-        return (response.toLowerCase().contains("user registered"));
+        return (!response.toLowerCase().contains("unauthorized"));
     }
+
 
 }

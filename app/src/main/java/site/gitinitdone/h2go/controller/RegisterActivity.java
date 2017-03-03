@@ -1,4 +1,4 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,10 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import site.gitinitdone.h2go.controller.RegisterUserAPI;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.RegisterUserAPI;
+import site.gitinitdone.h2go.model.UserAccount;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_register_toolbar);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -144,6 +147,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerUser.execute((Void) null);
 
         showProgress(true);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_register_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.hide();
     }
 
     /**
@@ -214,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
         private Map<String, String> data;
 
         LocalRegisterAPI(Map<String, String> data) {
-            super(data);
+            super(data, getApplicationContext());
         }
 
 

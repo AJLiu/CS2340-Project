@@ -1,6 +1,7 @@
-package site.gitinitdone.h2go;
+package site.gitinitdone.h2go.controller;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import site.gitinitdone.h2go.controller.EditUserAPI;
-import site.gitinitdone.h2go.controller.GetUserAPI;
+import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.EditUserAPI;
+import site.gitinitdone.h2go.model.GetUserAPI;
+import site.gitinitdone.h2go.model.UserAccount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,25 +30,14 @@ public class EditUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_edit_user_toolbar);
         setSupportActionBar(myToolbar);
-        // TODO: Uncomment after fixing AppScreen Intent
-//        ActionBar ab = getSupportActionBar();
-//        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         // Get the current data associated with the account of whoever is logged in
         getUserInfo = new LocalGetUserAPI();
         getUserInfo.execute((Void) null);
-    }
-
-    /**
-     * Switches to the AppScreen activity and discards any changes made in the Edit form
-     *
-     * @param view the view where the button that called this method resides
-     */
-    public void cancelEdits(View view) {
-        finish();
-        Toast.makeText(getApplicationContext(), "Discarded changes.", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -152,6 +144,10 @@ public class EditUserActivity extends AppCompatActivity {
      */
     class LocalGetUserAPI extends GetUserAPI {
 
+        public LocalGetUserAPI() {
+            super(getApplicationContext());
+        }
+
         @Override
         protected void onPostExecute(final Boolean success) {
             //mAuthTask = null;
@@ -220,7 +216,7 @@ public class EditUserActivity extends AppCompatActivity {
         private Map<String, String> data;
 
         LocalEditUserAPI(Map<String, String> data) {
-            super(data);
+            super(data, getApplicationContext());
         }
 
 
