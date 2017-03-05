@@ -30,10 +30,6 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
 
     private final Context context;
 
-    public EditUserAPI(Context context) {
-        this.context = context;
-    }
-
     private Map<String, String> data;
 
     public EditUserAPI(Map<String, String> data, Context context) {
