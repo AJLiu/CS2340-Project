@@ -1,5 +1,8 @@
 package site.gitinitdone.h2go.controller;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,8 @@ import site.gitinitdone.h2go.model.UserAccount;
 public class ReportListActivity extends AppCompatActivity {
 
     private LocalGetSourceReportsAPI getSourceReports = null;
+    private View getSourceReportsView;
+    private View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +47,47 @@ public class ReportListActivity extends AppCompatActivity {
         TextView reportDataView = (TextView) findViewById(R.id.reportData);
         reportDataView.setMovementMethod(new ScrollingMovementMethod());
 
+        getSourceReportsView = findViewById(R.id.content_report_list);
+        mProgressView = findViewById(R.id.get_source_report_progress);
+
         getSourceReports = new LocalGetSourceReportsAPI();
         getSourceReports.execute((Void) null);
+
+    }
+
+    /**
+     * Shows the progress UI and hides the source report form.
+     */
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+            getSourceReportsView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 
     /**
@@ -56,8 +101,8 @@ public class ReportListActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            //mAuthTask = null;
-            //showProgress(false);
+            getSourceReports = null;
+            showProgress(false);
 
             if (success) {
                 if (sourceReportList.size() == 0) {
@@ -70,8 +115,8 @@ public class ReportListActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-            //mAuthTask = null;
-            //showProgress(false);
+            getSourceReports = null;
+            showProgress(false);
         }
     }
 
@@ -86,16 +131,16 @@ public class ReportListActivity extends AppCompatActivity {
             String submitter = sr.getReporter();
             String latitude = "";
             if (sr.getLatitude() < 0) {
-                latitude = (sr.getLatitude() * -1) + " West";
+                latitude = (sr.getLatitude() * -1) + " South";
             } else {
-                latitude = sr.getLatitude() + " East";
+                latitude = sr.getLatitude() + " Noth";
             }
 
             String longitude = "";
             if (sr.getLongitude() < 0) {
-                longitude = (sr.getLongitude() * -1) + " South";
+                longitude = (sr.getLongitude() * -1) + " West";
             } else {
-                longitude = sr.getLongitude() + " North";
+                longitude = sr.getLongitude() + " East";
             }
 
             String waterType = sr.getWaterType().toString();

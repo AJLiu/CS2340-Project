@@ -28,6 +28,8 @@ import site.gitinitdone.h2go.model.UserAccount;
 public class SubmitSourceReportActivity extends AppCompatActivity {
 
     private LocalSourceReportAPI submitSourceReportAPI = null;  // the AsyncTask object to submit the source report
+    private View submitSourceForm;
+    private View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +123,9 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         data.put("long", String.valueOf(longitude));
         data.put("waterType", waterType);
         data.put("waterCondition", waterCondition);
+
+        submitSourceForm = findViewById(R.id.content_submit_source_report);
+        mProgressView = findViewById(R.id.submit_source_report_progress);
 
         submitSourceReportAPI = new LocalSourceReportAPI(data);
         submitSourceReportAPI.execute((Void) null);

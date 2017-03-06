@@ -127,18 +127,14 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
                         SourceReport.WaterType waterType = SourceReport.WaterType.valueOf(waterTypeString);
 
                         String waterConditionString = jsonReport.getString("waterCondition");
-                        waterConditionString = waterConditionString.replace("-", "_").toUpperCase();
+                        waterConditionString = waterConditionString.toUpperCase();
                         SourceReport.WaterCondition waterCondition = SourceReport.WaterCondition.valueOf(waterConditionString);
 
                         // All the fields have been collected for a single water report
                         // Now we will create a new SourceReport object and add it to the sourceReportList
                         SourceReport report = new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition);
                         System.out.println(report.getReportNumber());
-                        try {
-                            sourceReportList.add(report);
-                        } catch (NullPointerException e) {
-                            e.printStackTrace();
-                        }
+                        addNewReport(report);
                     }
 
                     return true;
