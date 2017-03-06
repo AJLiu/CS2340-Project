@@ -117,7 +117,8 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
                         int reportNum = jsonReport.getInt("reportNumber");
 
                         // get info about the submitter of the report
-                        String username = jsonSubmitter.getString("username");
+                        String name = jsonSubmitter.optString("firstName", "Test") + " "
+                                        + jsonSubmitter.optString("lastName", "Account");
 
                         // end of submitter info
 
@@ -132,7 +133,7 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
                         // All the fields have been collected for a single water report
                         // Now we will create a new SourceReport object and add it to the sourceReportList
-                        SourceReport report = new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition);
+                        SourceReport report = new SourceReport(latitude, longitude, reportNum, name, timeStamp, waterType, waterCondition);
                         System.out.println(report.getReportNumber());
                         addNewReport(report);
                     }
