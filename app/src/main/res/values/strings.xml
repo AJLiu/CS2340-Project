@@ -31,6 +31,13 @@
     <string name="refresh">Refresh</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="submit_report">Submit a Report</string>
+    <string name="water_locations">Water Locations</string>
+    <string name="history">History</string>
+
+    <string name="submit_source_report">Submit a Water Source Report</string>
+    <string name="submit_purity_report">Submit a Water Purity Report</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

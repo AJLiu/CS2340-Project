@@ -30,10 +30,6 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
 
     private final Context context;
 
-    public EditUserAPI(Context context) {
-        this.context = context;
-    }
-
     private Map<String, String> data;
 
     public EditUserAPI(Map<String, String> data, Context context) {
@@ -85,6 +81,7 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
                 e.printStackTrace();
             }
         result = result.substring(1);
+        System.out.println("My result \n" + result);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);
         int length = out.length;
 

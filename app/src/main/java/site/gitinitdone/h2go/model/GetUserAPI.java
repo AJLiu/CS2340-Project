@@ -24,7 +24,7 @@ import site.gitinitdone.h2go.R;
 public class GetUserAPI extends AsyncTask<Void, Void, Boolean> {
 
     private CookieManager cookieManager;
-    protected UserAccount userAccount = null;      // holds the original user data before any edits
+    protected UserAccount userAccount = null; // holds the original user data before any edits
 
     private final Context context;
 
