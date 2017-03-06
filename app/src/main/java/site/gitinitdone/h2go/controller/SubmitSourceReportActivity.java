@@ -1,15 +1,16 @@
 package site.gitinitdone.h2go.controller;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.AndroidCharacter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
@@ -17,10 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.SourceReport;
 import site.gitinitdone.h2go.model.SubmitSourceReportAPI;
-import site.gitinitdone.h2go.model.UserAccount;
 
 /**
  * This activity allows the user to submit water source reports
@@ -40,18 +39,21 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        // Setup the Spinner to show the Water Types
         Spinner waterTypeSpinner = (Spinner) findViewById(R.id.waterTypeSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, SourceReport.WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterTypeSpinner.setAdapter(adapter);
         waterTypeSpinner.setSelection(0);
 
+        // Setup the Spinner to show the Water Conditions
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, SourceReport.WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterConditionSpinner.setAdapter(adapter2);
         waterConditionSpinner.setSelection(0);
 
+        // formatting the latitude and longitude to show (max) 6 decimal places
         final EditText latitudeField = (EditText) findViewById(R.id.locationLat);
         latitudeField.setText("0.0");
         latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
@@ -77,7 +79,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
     }
 
     public void submitSourceReport(View view) {
-        // validate entries in report
+        // Validating the entries in report
         double latitude;
         double longitude;
         String waterType;
@@ -129,6 +131,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
         submitSourceReportAPI = new LocalSourceReportAPI(data);
         submitSourceReportAPI.execute((Void) null);
+        showProgress(true);
     }
 
     /**
@@ -153,7 +156,42 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
     }
 
     /**
-     * Represents an asynchronous edit user profile task used to edit the user's profile data.
+     * Shows the progress UI and hides the data until it's been populated.
+     */
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
+            submitSourceForm.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    /**
+     * Represents an asynchronous API to submit a source report.
      */
     class LocalSourceReportAPI extends SubmitSourceReportAPI {
 
@@ -165,7 +203,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             submitSourceReportAPI = null;
-            //showProgress(false);
+            showProgress(false);
 
             if (success) {
                 System.out.println("Submitted Source Report TRUE");
@@ -181,7 +219,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         @Override
         protected void onCancelled() {
             submitSourceReportAPI = null;
-            //showProgress(false);
+            showProgress(false);
         }
 
     }

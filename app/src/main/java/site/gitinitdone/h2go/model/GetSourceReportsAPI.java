@@ -18,13 +18,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import javax.xml.transform.Source;
-
 import site.gitinitdone.h2go.R;
 
 
 /**
- * Represents an asynchronous getUserInfo task used to get the data in the user profile.
+ * Represents an asynchronous task to get all the source reports in the backend database.
  */
 public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
@@ -102,6 +100,8 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
             System.out.println("Response = " + response);
 
             boolean validData = !response.contains("Must be logged in");
+
+            // Parsing all the data from the JSON response to save as individual SourceReport objects
             if (validData) {
                 JSONArray jsonArray = null;
                 try {

@@ -4,23 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,9 +17,10 @@ import java.util.Date;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
 import site.gitinitdone.h2go.model.SourceReport;
-import site.gitinitdone.h2go.model.UserAccount;
 
-
+/**
+ * This class is used to show all the reports currently in the system.
+ */
 public class ReportListActivity extends AppCompatActivity {
 
     private LocalGetSourceReportsAPI getSourceReports = null;
@@ -56,7 +46,7 @@ public class ReportListActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows the progress UI and hides the source report form.
+     * Shows the progress UI and hides the data until it's been populated.
      */
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -91,7 +81,8 @@ public class ReportListActivity extends AppCompatActivity {
     }
 
     /**
-     * Represents an asynchronous getUserInfo task used to get the data in the user profile.
+     * Represents an asynchronous getSourceReportsAPI task used to get the source report data
+     * from the backend database.
      */
     class LocalGetSourceReportsAPI extends GetSourceReportsAPI {
 
@@ -120,6 +111,11 @@ public class ReportListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * A helper method used to show the report information on the screen in the Text View
+     * which may later be changed to ta Recycler View or Expandable List View
+     * @param sourceReportArrayList
+     */
     private void populateList(ArrayList<SourceReport> sourceReportArrayList) {
         TextView reportData = (TextView) findViewById(R.id.reportData);
 
@@ -129,6 +125,8 @@ public class ReportListActivity extends AppCompatActivity {
             int reportNum = sr.getReportNumber();
             String date = (new Date(sr.getTimeStamp())).toString();
             String submitter = sr.getReporter();
+
+            // Handles if the direction of latitude is North or South based on negative sign
             String latitude = "";
             if (sr.getLatitude() < 0) {
                 latitude = (sr.getLatitude() * -1) + " South";
@@ -136,6 +134,7 @@ public class ReportListActivity extends AppCompatActivity {
                 latitude = sr.getLatitude() + " Noth";
             }
 
+            // Handles if the direction of longitude is East or West based on negative sign
             String longitude = "";
             if (sr.getLongitude() < 0) {
                 longitude = (sr.getLongitude() * -1) + " West";
@@ -146,7 +145,7 @@ public class ReportListActivity extends AppCompatActivity {
             String waterType = sr.getWaterType().toString();
             String waterCondition = sr.getWaterCondition().toString();
 
-
+            // Aggregates all the relevant fields into a nicely formatted string to show on screen
             allReports += "--- Report #" + reportNum + " ---\n";
             allReports += "Submitted On: " + date + "\n";
             allReports += "Submitted By: " + submitter + "\n";
@@ -156,10 +155,6 @@ public class ReportListActivity extends AppCompatActivity {
         }
 
         reportData.setText(allReports);
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserAccount.Title.values());
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        title.setAdapter(adapter);
 
     }
 

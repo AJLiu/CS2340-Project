@@ -10,23 +10,20 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import site.gitinitdone.h2go.R;
 
 /**
- * Created by surajmasand on 3/4/17.
+ * Represents and asynchronous task that is used to submit a new source report to the backend database
  */
-
 public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
         private CookieManager cookieManager;
@@ -105,32 +102,6 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
             String result = jsonObjToSend.toString();
             System.out.println("Result string to send \n" + result);
             System.out.println("Reached here 6");
-//            try {
-//                result = URLEncoder.encode(jsonObjToSend.toString(), "UTF-8");
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-
-//            result += "{ \"location\": { \"lat\": " + data.get("lat") + ", \"long\": " + data.get("long") + " },";
-//            result += " \"waterType\": \"" + data.get("waterType") + "\" \"waterCondition\": \"" + data.get("waterCondition") + "\"";
-//            result += " }";
-//
-//            try {
-//                result = URLEncoder.encode(result, "UTF-8");
-//            } catch (UnsupportedEncodingException e) {
-//                System.out.println("--- Error Here 4 ---");
-//                e.printStackTrace();
-//            }
-
-//            for (Map.Entry<String, String> entry : data.entrySet())
-//                try {
-//                    result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-//                            + URLEncoder.encode(entry.getValue(), "UTF-8"));
-//                } catch (UnsupportedEncodingException e) {
-//                    System.out.println("--- Error Here 4 ---");
-//                    e.printStackTrace();
-//                }
-//            result = result.substring(1);
 
 
             byte[] out = result.getBytes(StandardCharsets.UTF_8);
@@ -155,6 +126,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
                 e.printStackTrace();
             }
 
+            // Reading the response after the attempted submission
             BufferedInputStream bis = null;
 
             try {

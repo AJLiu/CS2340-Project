@@ -1,14 +1,7 @@
 package site.gitinitdone.h2go.model;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -21,7 +14,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 
 import site.gitinitdone.h2go.R;
