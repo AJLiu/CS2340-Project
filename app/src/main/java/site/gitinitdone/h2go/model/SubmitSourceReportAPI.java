@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -44,7 +47,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
             URL url = null;
             try {
-                url = new URL(context.getString(R.string.apiHttpPath) + "/api/users/edit");
+                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/source/submit");
             } catch (MalformedURLException e) {
                 System.out.println("--- Error Here 1 ---");
                 e.printStackTrace();
@@ -59,7 +62,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
             HttpURLConnection http = (HttpURLConnection) con;
             try {
                 http.setRequestMethod("POST"); // PUT is another valid option
-
+                System.out.println("Reached here 1");
             } catch (ProtocolException e) {
                 e.printStackTrace();
             }
@@ -70,19 +73,54 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
                         TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
             }
             http.setDoOutput(true);
-
-            String result = "";
-
-            result += "{ \n \"location\": { \"lat\": " + data.get("lat") + ", \n \"long\": " + data.get("long") + "\n },";
-            result += "\n \"waterType\": \"" + data.get("waterType") + "\" \n \"waterCondition\": \"" + data.get("waterCondition") + "\"";
-            result += "\n }";
-
+            System.out.println("Reached here 2");
+            JSONObject jsonObjToSend = new JSONObject();
+            JSONObject location = new JSONObject();
             try {
-                result = URLEncoder.encode(result, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                System.out.println("--- Error Here 4 ---");
+                location.put("lat", Double.parseDouble(data.get("lat")));
+                location.put("long", Double.parseDouble(data.get("long")));
+                System.out.println("Reached here 3");
+            } catch (JSONException e) {
+                System.out.println("Error creating location sub-JSON");
                 e.printStackTrace();
             }
+
+            try {
+                jsonObjToSend.put("location", location);
+                System.out.println("Reached here 4");
+            } catch (JSONException e) {
+                System.out.println("Error inserting location sub-JSON into main JSON");
+                e.printStackTrace();
+            }
+
+            try {
+                jsonObjToSend.put("waterType", data.get("waterType"));
+                jsonObjToSend.put("waterCondition", data.get("waterCondition"));
+                System.out.println("Reached here 5");
+            } catch (JSONException e) {
+                System.out.println("Error inserting water type and condition into main JSON");
+                e.printStackTrace();
+            }
+
+            String result = jsonObjToSend.toString();
+            System.out.println("Result string to send \n" + result);
+            System.out.println("Reached here 6");
+//            try {
+//                result = URLEncoder.encode(jsonObjToSend.toString(), "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+
+//            result += "{ \"location\": { \"lat\": " + data.get("lat") + ", \"long\": " + data.get("long") + " },";
+//            result += " \"waterType\": \"" + data.get("waterType") + "\" \"waterCondition\": \"" + data.get("waterCondition") + "\"";
+//            result += " }";
+//
+//            try {
+//                result = URLEncoder.encode(result, "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                System.out.println("--- Error Here 4 ---");
+//                e.printStackTrace();
+//            }
 
 //            for (Map.Entry<String, String> entry : data.entrySet())
 //                try {
@@ -100,7 +138,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            //http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            System.out.println("Reached here 7");
             try {
                 http.connect();
             } catch (IOException e) {
@@ -110,6 +148,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
             try {
                 try (OutputStream os = http.getOutputStream()) {
                     os.write(out);
+                    System.out.println("Reached here 8");
                 }
             } catch (IOException e) {
                 System.out.println("--- Error Here 6 ---");
@@ -123,6 +162,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
                     bis = new BufferedInputStream(http.getInputStream());
                 } else {
                     bis = new BufferedInputStream(http.getErrorStream());
+                    System.out.println("Reached here 9");
                 }
             } catch (IOException e) {
                 System.out.println("--- Error Here 7 ---");

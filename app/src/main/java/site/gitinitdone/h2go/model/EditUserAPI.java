@@ -81,6 +81,7 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
                 e.printStackTrace();
             }
         result = result.substring(1);
+        System.out.println("My result \n" + result);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);
         int length = out.length;
 

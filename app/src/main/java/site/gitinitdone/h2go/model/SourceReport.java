@@ -42,12 +42,12 @@ public class SourceReport {
     private double latitude;
     private double longitude;
     private int reportNumber;
-    private UserAccount reporter;
+    private String reporter;
     private long timeStamp;
     private WaterType waterType;
     private WaterCondition waterCondition;
 
-    public SourceReport(double lat, double lon, int reportNum, UserAccount submitter,
+    public SourceReport(double lat, double lon, int reportNum, String submitter,
                         long time, WaterType type, WaterCondition condition) {
         latitude = lat;
         longitude = lon;
@@ -77,7 +77,7 @@ public class SourceReport {
         return reportNumber;
     }
 
-    public UserAccount getReporter() {
+    public String getReporter() {
         return reporter;
     }
 

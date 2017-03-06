@@ -114,21 +114,16 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent i = new Intent(this, AppScreenActivity.class); // default value as a backup
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_submit_report) {
+            i = new Intent(this, ChooseReportSubmitActivity.class);
+        } else if (id == R.id.nav_water_locations) {
+           // i = new Intent(this, );
+        } else if (id == R.id.nav_history) {
+           // i = new Intent(this, );
         }
-
+        startActivity(i);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

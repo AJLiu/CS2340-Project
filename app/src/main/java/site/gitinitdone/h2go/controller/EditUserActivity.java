@@ -172,7 +172,6 @@ public class EditUserActivity extends AppCompatActivity {
      */
     private void populateFields(UserAccount accountInfo) {
 
-
         EditText firstName = (EditText) findViewById(R.id.firstNameFieldEdit);
         firstName.setText(accountInfo.getFirstName());
 
@@ -212,8 +211,6 @@ public class EditUserActivity extends AppCompatActivity {
      * Represents an asynchronous edit user profile task used to edit the user's profile data.
      */
     class LocalEditUserAPI extends EditUserAPI {
-
-        private Map<String, String> data;
 
         LocalEditUserAPI(Map<String, String> data) {
             super(data, getApplicationContext());

@@ -101,7 +101,6 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
             boolean validData = !response.contains("Must be logged in");
             if (validData) {
                 JSONArray jsonArray = null;
-                UserAccount submitter = null;
                 try {
                     jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -116,17 +115,7 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
                         // get info about the submitter of the report
                         String username = jsonSubmitter.getString("username");
-                        String firstName = jsonSubmitter.getString("firstName");
-                        String lastName = jsonSubmitter.getString("lastName");
-                        String address = jsonSubmitter.getString("address");
-                        String email = jsonSubmitter.getString("email");
 
-                        String titleString = jsonSubmitter.getString("title").toUpperCase();
-                        UserAccount.Title title = UserAccount.Title.valueOf(titleString.substring(0, titleString.length() - 1));
-
-                        UserAccount.AccountType type = UserAccount.AccountType.valueOf(jsonSubmitter.getString("userType").toUpperCase());
-
-                        submitter = new UserAccount(username, title, firstName, lastName, address, email, type);
                         // end of submitter info
 
                         long timeStamp = jsonReport.getLong("timestamp");
@@ -140,7 +129,7 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
                         // All the fields have been collected for a single water report
                         // Now we will create a new SourceReport object and add it to the sourceReportList
-                        addNewReport(new SourceReport(latitude, longitude, reportNum, submitter, timeStamp, waterType, waterCondition));
+                        addNewReport(new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition));
                     }
 
                     return true;
