@@ -10,13 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.GetUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This activity allows the user to edit their profile data and submit the changes

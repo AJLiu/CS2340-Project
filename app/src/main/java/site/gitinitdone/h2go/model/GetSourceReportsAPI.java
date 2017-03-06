@@ -22,7 +22,7 @@ import site.gitinitdone.h2go.R;
 
 
 /**
- * Represents an asynchronous getUserInfo task used to get the data in the user profile.
+ * Represents an asynchronous task to get all the source reports in the backend database.
  */
 public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
@@ -39,10 +39,11 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void... params) {
 
             cookieManager = LoginUserAPI.cookieManager;
+            sourceReportList = new ArrayList<SourceReport>();
 
             URL url = null;
             try {
-                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/sources");
+                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/source");
             } catch (MalformedURLException e) {
                 System.out.println("--- Error Here 1 ---");
                 e.printStackTrace();
@@ -99,6 +100,8 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
             System.out.println("Response = " + response);
 
             boolean validData = !response.contains("Must be logged in");
+
+            // Parsing all the data from the JSON response to save as individual SourceReport objects
             if (validData) {
                 JSONArray jsonArray = null;
                 try {
@@ -124,12 +127,14 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
                         SourceReport.WaterType waterType = SourceReport.WaterType.valueOf(waterTypeString);
 
                         String waterConditionString = jsonReport.getString("waterCondition");
-                        waterConditionString = waterConditionString.replace("-", "_").toUpperCase();
+                        waterConditionString = waterConditionString.toUpperCase();
                         SourceReport.WaterCondition waterCondition = SourceReport.WaterCondition.valueOf(waterConditionString);
 
                         // All the fields have been collected for a single water report
                         // Now we will create a new SourceReport object and add it to the sourceReportList
-                        addNewReport(new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition));
+                        SourceReport report = new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition);
+                        System.out.println(report.getReportNumber());
+                        addNewReport(report);
                     }
 
                     return true;
