@@ -122,6 +122,8 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
            // i = new Intent(this, );
         } else if (id == R.id.nav_history) {
            // i = new Intent(this, );
+        } else if (id == R.id.nav_report_list) {
+            i = new Intent(this, ReportListActivity.class);
         }
         startActivity(i);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -18,6 +18,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import javax.xml.transform.Source;
+
 import site.gitinitdone.h2go.R;
 
 
@@ -39,10 +41,11 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void... params) {
 
             cookieManager = LoginUserAPI.cookieManager;
+            sourceReportList = new ArrayList<SourceReport>();
 
             URL url = null;
             try {
-                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/sources");
+                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/source");
             } catch (MalformedURLException e) {
                 System.out.println("--- Error Here 1 ---");
                 e.printStackTrace();
@@ -129,7 +132,13 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
                         // All the fields have been collected for a single water report
                         // Now we will create a new SourceReport object and add it to the sourceReportList
-                        addNewReport(new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition));
+                        SourceReport report = new SourceReport(latitude, longitude, reportNum, username, timeStamp, waterType, waterCondition);
+                        System.out.println(report.getReportNumber());
+                        try {
+                            sourceReportList.add(report);
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     return true;

@@ -31,36 +31,37 @@
             android:name=".controller.LoginActivity"
             android:label="@string/login"
             android:parentActivityName=".controller.WelcomeActivity">
-
         </activity>
         <activity
             android:name=".controller.AppScreenActivity"
             android:label="@string/app_name"
             android:parentActivityName=".controller.LoginActivity">
-
         </activity>
         <activity
             android:name=".controller.EditUserActivity"
             android:label="@string/edit_screen"
             android:parentActivityName=".controller.AppScreenActivity">
-
         </activity>
         <activity
             android:name=".controller.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".controller.WelcomeActivity">
-
         </activity>
         <activity
             android:name=".controller.ChooseReportSubmitActivity"
             android:label="@string/submit_report"
-            android:parentActivityName=".controller.AppScreenActivity" >
+            android:parentActivityName=".controller.AppScreenActivity">
         </activity>
         <activity
             android:name=".controller.SubmitSourceReportActivity"
             android:label="@string/submit_report"
             android:parentActivityName=".controller.ChooseReportSubmitActivity">
-
+        </activity>
+        <activity
+            android:name=".controller.ReportListActivity"
+            android:label="@string/title_activity_report_list"
+            android:parentActivityName=".controller.AppScreenActivity"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
