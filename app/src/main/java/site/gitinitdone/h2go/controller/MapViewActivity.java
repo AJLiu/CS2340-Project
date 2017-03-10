@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import site.gitinitdone.h2go.model.SourceReport;
 
 import static site.gitinitdone.h2go.R.id.map;
 
-public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private LocalGetSourceReportsAPI getSourceReports;
@@ -54,7 +55,9 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap; //map instance
-
+        mMap.setMaxZoomPreference(14);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
         System.out.println("Map Ready is Done.");
 
         getSourceReports = new LocalGetSourceReportsAPI();
@@ -77,6 +80,12 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
 //        }
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        SourceReport sr = ListOfReports.get((int) marker.getTag());
+        return false;
+    }
+
     class LocalGetSourceReportsAPI extends GetSourceReportsAPI {
 
         public LocalGetSourceReportsAPI() {
@@ -96,7 +105,10 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                     //get the array list with the source reports, get the latitude and longitude to put onto the map
                     for (int i = 0; i < ListOfReports.size(); i++) {
                         LatLng currentLocation = new LatLng(ListOfReports.get(i).getLatitude(), ListOfReports.get(i).getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(currentLocation));
+                        //MarkerOptions marker = new MarkerOptions().position(currentLocation).title("Report #" + ListOfReports.get(i).getReportNumber());
+
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Report #" + ListOfReports.get(i).getReportNumber()));
+                        marker.setTag(i);
                     }
                 }
             }
