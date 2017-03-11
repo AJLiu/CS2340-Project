@@ -101,6 +101,8 @@ public class ReportListActivity extends AppCompatActivity {
                 } else {
                     populateList(sourceReportList);
                 }
+            } else {
+                Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -131,7 +133,7 @@ public class ReportListActivity extends AppCompatActivity {
             if (sr.getLatitude() < 0) {
                 latitude = (sr.getLatitude() * -1) + " South";
             } else {
-                latitude = sr.getLatitude() + " Noth";
+                latitude = sr.getLatitude() + " North";
             }
 
             // Handles if the direction of longitude is East or West based on negative sign

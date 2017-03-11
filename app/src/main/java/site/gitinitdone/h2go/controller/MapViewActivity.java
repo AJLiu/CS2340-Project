@@ -1,9 +1,11 @@
 package site.gitinitdone.h2go.controller;
 
+import android.content.DialogInterface;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import site.gitinitdone.h2go.R;
@@ -58,6 +61,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.setMaxZoomPreference(14);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
+        mMap.setOnMarkerClickListener(this);
         System.out.println("Map Ready is Done.");
 
         getSourceReports = new LocalGetSourceReportsAPI();
@@ -82,8 +86,57 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+        System.out.println("Reached Marker On Click method.");
         SourceReport sr = ListOfReports.get((int) marker.getTag());
-        return false;
+
+        int reportNum = sr.getReportNumber();
+        String date = (new Date(sr.getTimeStamp())).toString();
+        String submitter = sr.getReporter();
+
+        // Handles if the direction of latitude is North or South based on negative sign
+        String latitude = "";
+        if (sr.getLatitude() < 0) {
+            latitude = (sr.getLatitude() * -1) + " South";
+        } else {
+            latitude = sr.getLatitude() + " North";
+        }
+
+        // Handles if the direction of longitude is East or West based on negative sign
+        String longitude = "";
+        if (sr.getLongitude() < 0) {
+            longitude = (sr.getLongitude() * -1) + " West";
+        } else {
+            longitude = sr.getLongitude() + " East";
+        }
+
+        String waterType = sr.getWaterType().toString();
+        String waterCondition = sr.getWaterCondition().toString();
+
+        // Aggregates all the relevant fields into a nicely formatted string to show on screen
+        String reportTitle = "Report #" + reportNum;
+        String submitDate = "Submitted On: " + date + "\n";
+        String reporter = "Submitted By: " + submitter + "\n";
+        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+        String waterTypeString = "Water Type: " + waterType + "\n";
+        String waterConditionString = "Water Condition: " + waterCondition;
+
+        System.out.println("Reached before alert dialog construction.");
+
+        new AlertDialog.Builder(this)
+                .setTitle(reportTitle)
+                .setMessage(submitDate + reporter + location + waterTypeString + waterConditionString)
+                .setIcon(R.mipmap.appicon)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+        System.out.println("Reached before alert dialog construction.");
+
+        return true;
     }
 
     class LocalGetSourceReportsAPI extends GetSourceReportsAPI {
@@ -111,6 +164,8 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                         marker.setTag(i);
                     }
                 }
+            } else {
+                Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
             }
         }
 
