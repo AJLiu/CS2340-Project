@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -88,53 +89,68 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
     public boolean onMarkerClick(Marker marker) {
 
         System.out.println("Reached Marker On Click method.");
-        SourceReport sr = ListOfReports.get((int) marker.getTag());
 
-        int reportNum = sr.getReportNumber();
-        String date = (new Date(sr.getTimeStamp())).toString();
-        String submitter = sr.getReporter();
+        final SourceReport sr = ListOfReports.get((int) marker.getTag());
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
-        // Handles if the direction of latitude is North or South based on negative sign
-        String latitude = "";
-        if (sr.getLatitude() < 0) {
-            latitude = (sr.getLatitude() * -1) + " South";
-        } else {
-            latitude = sr.getLatitude() + " North";
-        }
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()), 500, new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                //Here you can take the snapshot or whatever you want
 
-        // Handles if the direction of longitude is East or West based on negative sign
-        String longitude = "";
-        if (sr.getLongitude() < 0) {
-            longitude = (sr.getLongitude() * -1) + " West";
-        } else {
-            longitude = sr.getLongitude() + " East";
-        }
 
-        String waterType = sr.getWaterType().toString();
-        String waterCondition = sr.getWaterCondition().toString();
+                int reportNum = sr.getReportNumber();
+                String date = (new Date(sr.getTimeStamp())).toString();
+                String submitter = sr.getReporter();
 
-        // Aggregates all the relevant fields into a nicely formatted string to show on screen
-        String reportTitle = "Report #" + reportNum;
-        String submitDate = "Submitted On: " + date + "\n";
-        String reporter = "Submitted By: " + submitter + "\n";
-        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
-        String waterTypeString = "Water Type: " + waterType + "\n";
-        String waterConditionString = "Water Condition: " + waterCondition;
+                // Handles if the direction of latitude is North or South based on negative sign
+                String latitude = "";
+                if (sr.getLatitude() < 0) {
+                    latitude = (sr.getLatitude() * -1) + " South";
+                } else {
+                    latitude = sr.getLatitude() + " North";
+                }
 
-        System.out.println("Reached before alert dialog construction.");
+                // Handles if the direction of longitude is East or West based on negative sign
+                String longitude = "";
+                if (sr.getLongitude() < 0) {
+                    longitude = (sr.getLongitude() * -1) + " West";
+                } else {
+                    longitude = sr.getLongitude() + " East";
+                }
 
-        new AlertDialog.Builder(this)
-                .setTitle(reportTitle)
-                .setMessage(submitDate + reporter + location + waterTypeString + waterConditionString)
-                .setIcon(R.mipmap.appicon)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-        System.out.println("Reached before alert dialog construction.");
+                String waterType = sr.getWaterType().toString();
+                String waterCondition = sr.getWaterCondition().toString();
+
+                // Aggregates all the relevant fields into a nicely formatted string to show on screen
+                String reportTitle = "Report #" + reportNum;
+                String submitDate = "Submitted On: " + date + "\n";
+                String reporter = "Submitted By: " + submitter + "\n";
+                String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+                String waterTypeString = "Water Type: " + waterType + "\n";
+                String waterConditionString = "Water Condition: " + waterCondition;
+
+                System.out.println("Reached before alert dialog construction.");
+
+                dialog.setTitle(reportTitle)
+                        .setMessage(submitDate + reporter + location + waterTypeString + waterConditionString)
+                        .setIcon(R.mipmap.appicon)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+                System.out.println("Reached after alert dialog construction.");
+            }
+
+            @Override
+            public void onCancel() {
+                // do nothing for now
+            }
+        });
 
         return true;
     }
