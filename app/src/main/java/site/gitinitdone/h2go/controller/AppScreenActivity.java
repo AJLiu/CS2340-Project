@@ -120,7 +120,6 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
             i = new Intent(this, ChooseReportSubmitActivity.class);
         } else if (id == R.id.nav_water_locations) {
             i = new Intent(this, MapViewActivity.class);
-            // We'll add to this in future milestones
         } else if (id == R.id.nav_history) {
            // i = new Intent(this, );
             // We'll add to this in future milestones

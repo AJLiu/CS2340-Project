@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
+import site.gitinitdone.h2go.model.PurityReport;
 import site.gitinitdone.h2go.model.SourceReport;
 
 /**
@@ -24,7 +26,8 @@ import site.gitinitdone.h2go.model.SourceReport;
 public class ReportListActivity extends AppCompatActivity {
 
     private LocalGetSourceReportsAPI getSourceReports = null;
-    private View getSourceReportsView;
+    private LocalGetPurityReportsAPI getPurityReports = null;
+    private View getReportsView;
     private View mProgressView;
 
     @Override
@@ -37,11 +40,13 @@ public class ReportListActivity extends AppCompatActivity {
         TextView reportDataView = (TextView) findViewById(R.id.reportData);
         reportDataView.setMovementMethod(new ScrollingMovementMethod());
 
-        getSourceReportsView = findViewById(R.id.content_report_list);
+        getReportsView = findViewById(R.id.content_report_list);
         mProgressView = findViewById(R.id.get_source_report_progress);
 
         getSourceReports = new LocalGetSourceReportsAPI();
         getSourceReports.execute((Void) null);
+
+        getPurityReports = new LocalGetPurityReportsAPI();
 
     }
 
@@ -55,12 +60,12 @@ public class ReportListActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
-            getSourceReportsView.animate().setDuration(shortAnimTime).alpha(
+            getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+            getReportsView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -76,7 +81,7 @@ public class ReportListActivity extends AppCompatActivity {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            getSourceReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+            getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -97,12 +102,49 @@ public class ReportListActivity extends AppCompatActivity {
 
             if (success) {
                 if (sourceReportList.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
                 } else {
-                    populateList(sourceReportList);
+                    TextView reportData = (TextView) findViewById(R.id.reportData);
+                    reportData.setText(populateSourceList(sourceReportList));
+                    getPurityReports.execute((Void) null);
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            getSourceReports = null;
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Represents an asynchronous getSourceReportsAPI task used to get the source report data
+     * from the backend database.
+     */
+    class LocalGetPurityReportsAPI extends GetPurityReportsAPI {
+
+        public LocalGetPurityReportsAPI() {
+            super(getApplicationContext());
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            getPurityReports = null;
+            showProgress(false);
+
+            if (success) {
+                if (purityReportList.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                } else {
+                    TextView reportData = (TextView) findViewById(R.id.reportData);
+                    reportData.setText(reportData.getText() + populatePurityList(purityReportList));
+
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -118,8 +160,7 @@ public class ReportListActivity extends AppCompatActivity {
      * which may later be changed to ta Recycler View or Expandable List View
      * @param sourceReportArrayList
      */
-    private void populateList(ArrayList<SourceReport> sourceReportArrayList) {
-        TextView reportData = (TextView) findViewById(R.id.reportData);
+    private String populateSourceList(List<SourceReport> sourceReportArrayList) {
 
         String allReports = "";
 
@@ -148,7 +189,7 @@ public class ReportListActivity extends AppCompatActivity {
             String waterCondition = sr.getWaterCondition().toString();
 
             // Aggregates all the relevant fields into a nicely formatted string to show on screen
-            allReports += "--- Report #" + reportNum + " ---\n";
+            allReports += "--- Source Report #" + reportNum + " ---\n";
             allReports += "Submitted On: " + date + "\n";
             allReports += "Submitted By: " + submitter + "\n";
             allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
@@ -156,8 +197,49 @@ public class ReportListActivity extends AppCompatActivity {
             allReports += "Water Condition: " + waterCondition + "\n \n";
         }
 
-        reportData.setText(allReports);
+        return allReports;
 
+    }
+
+    private String populatePurityList(List<PurityReport> purityReportsList) {
+        String allReports = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+
+        for (PurityReport pr : purityReportsList) {
+            int reportNum = pr.getReportNumber();
+            String date = (new Date(pr.getTimeStamp())).toString();
+            String submitter = pr.getReporter();
+
+            // Handles if the direction of latitude is North or South based on negative sign
+            String latitude = "";
+            if (pr.getLatitude() < 0) {
+                latitude = (pr.getLatitude() * -1) + " South";
+            } else {
+                latitude = pr.getLatitude() + " North";
+            }
+
+            // Handles if the direction of longitude is East or West based on negative sign
+            String longitude = "";
+            if (pr.getLongitude() < 0) {
+                longitude = (pr.getLongitude() * -1) + " West";
+            } else {
+                longitude = pr.getLongitude() + " East";
+            }
+
+            int virusPPM = pr.getVirusPPM();
+            int contaminantPPM = pr.getContaminantPPM();
+
+            String waterCondition = pr.getWaterCondition().toString();
+            // Aggregates all the relevant fields into a nicely formatted string to show on screen
+            allReports += "--- Purity Report #" + reportNum + " ---\n";
+            allReports += "Submitted On: " + date + "\n";
+            allReports += "Submitted By: " + submitter + "\n";
+            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+            allReports += "Water Condition: " + waterCondition + "\n";
+            allReports += "Virus PPM: " + virusPPM + "\n";
+            allReports += "Contaminant PPM: " + contaminantPPM + "\n \n";
+        }
+
+        return allReports;
     }
 
 

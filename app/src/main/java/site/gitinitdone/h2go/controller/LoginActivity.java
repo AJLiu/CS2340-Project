@@ -82,13 +82,12 @@ public class LoginActivity extends AppCompatActivity {
     public void nextAct(View v){
         Intent i = new Intent(this, AppScreenActivity.class);
         AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.username);
-        String theEmail = editText.getText().toString();
+        String theUsername = editText.getText().toString();
 
         mySharedPrefEditor = getSharedPreferences(getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
-        mySharedPrefEditor.putString(getString(R.string.prompt_username), theEmail);
+        mySharedPrefEditor.putString(getString(R.string.prompt_username), theUsername);
         mySharedPrefEditor.apply();
-        //i.putExtra("UserEmail", theEmail);
-        //i.putExtra("Cookies", msCookieManager);
+
         startActivity(i);
         Toast.makeText(getApplicationContext(), "You have successfully logged in.", Toast.LENGTH_LONG).show();
     }

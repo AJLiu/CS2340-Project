@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List of all Source Reports"
+        android:text="List of all Reports"
         android:textSize="10pt"
         android:id="@+id/titleSourceReportList"/>
 
