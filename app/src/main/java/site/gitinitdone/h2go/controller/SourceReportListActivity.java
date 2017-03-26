@@ -23,21 +23,20 @@ import site.gitinitdone.h2go.model.SourceReport;
 /**
  * This class is used to show all the reports currently in the system.
  */
-public class ReportListActivity extends AppCompatActivity {
+public class SourceReportListActivity extends AppCompatActivity {
 
     private LocalGetSourceReportsAPI getSourceReports = null;
-    private LocalGetPurityReportsAPI getPurityReports = null;
     private View getReportsView;
     private View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_report_list_toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_source_report_list);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.my_report_list_toolbar);
+//        setSupportActionBar(toolbar);
 
-        TextView reportDataView = (TextView) findViewById(R.id.reportData);
+        TextView reportDataView = (TextView) findViewById(R.id.sourceReportData);
         reportDataView.setMovementMethod(new ScrollingMovementMethod());
 
         getReportsView = findViewById(R.id.content_report_list);
@@ -46,7 +45,7 @@ public class ReportListActivity extends AppCompatActivity {
         getSourceReports = new LocalGetSourceReportsAPI();
         getSourceReports.execute((Void) null);
 
-        getPurityReports = new LocalGetPurityReportsAPI();
+
 
     }
 
@@ -104,9 +103,8 @@ public class ReportListActivity extends AppCompatActivity {
                 if (sourceReportList.size() == 0) {
                     Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
                 } else {
-                    TextView reportData = (TextView) findViewById(R.id.reportData);
+                    TextView reportData = (TextView) findViewById(R.id.sourceReportData);
                     reportData.setText(populateSourceList(sourceReportList));
-                    getPurityReports.execute((Void) null);
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
@@ -120,40 +118,7 @@ public class ReportListActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Represents an asynchronous getSourceReportsAPI task used to get the source report data
-     * from the backend database.
-     */
-    class LocalGetPurityReportsAPI extends GetPurityReportsAPI {
 
-        public LocalGetPurityReportsAPI() {
-            super(getApplicationContext());
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            getPurityReports = null;
-            showProgress(false);
-
-            if (success) {
-                if (purityReportList.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
-                } else {
-                    TextView reportData = (TextView) findViewById(R.id.reportData);
-                    reportData.setText(reportData.getText() + populatePurityList(purityReportList));
-
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            getSourceReports = null;
-            showProgress(false);
-        }
-    }
 
     /**
      * A helper method used to show the report information on the screen in the Text View
@@ -199,47 +164,6 @@ public class ReportListActivity extends AppCompatActivity {
 
         return allReports;
 
-    }
-
-    private String populatePurityList(List<PurityReport> purityReportsList) {
-        String allReports = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-
-        for (PurityReport pr : purityReportsList) {
-            int reportNum = pr.getReportNumber();
-            String date = (new Date(pr.getTimeStamp())).toString();
-            String submitter = pr.getReporter();
-
-            // Handles if the direction of latitude is North or South based on negative sign
-            String latitude = "";
-            if (pr.getLatitude() < 0) {
-                latitude = (pr.getLatitude() * -1) + " South";
-            } else {
-                latitude = pr.getLatitude() + " North";
-            }
-
-            // Handles if the direction of longitude is East or West based on negative sign
-            String longitude = "";
-            if (pr.getLongitude() < 0) {
-                longitude = (pr.getLongitude() * -1) + " West";
-            } else {
-                longitude = pr.getLongitude() + " East";
-            }
-
-            int virusPPM = pr.getVirusPPM();
-            int contaminantPPM = pr.getContaminantPPM();
-
-            String waterCondition = pr.getWaterCondition().toString();
-            // Aggregates all the relevant fields into a nicely formatted string to show on screen
-            allReports += "--- Purity Report #" + reportNum + " ---\n";
-            allReports += "Submitted On: " + date + "\n";
-            allReports += "Submitted By: " + submitter + "\n";
-            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
-            allReports += "Water Condition: " + waterCondition + "\n";
-            allReports += "Virus PPM: " + virusPPM + "\n";
-            allReports += "Contaminant PPM: " + contaminantPPM + "\n \n";
-        }
-
-        return allReports;
     }
 
 

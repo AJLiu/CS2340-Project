@@ -15,9 +15,14 @@
                 android:icon="@drawable/ic_water_history"
                 android:title="History"/>
         <item
-                android:id="@+id/nav_report_list"
+                android:id="@+id/nav_source_report_list"
                 android:icon="@drawable/ic_menu_list"
-                android:title="List of All Reports" />
+                android:title="List of Source Reports" />
+
+        <item
+            android:id="@+id/nav_purity_report_list"
+            android:icon="@drawable/ic_menu_list"
+            android:title="List of Purity Reports" />
 
         </group>
     <!--

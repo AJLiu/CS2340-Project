@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.GetUserAPI;
 
 /**
  * The main app screen after a user has logged in successfully
@@ -123,12 +124,49 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
         } else if (id == R.id.nav_history) {
            // i = new Intent(this, );
             // We'll add to this in future milestones
-        } else if (id == R.id.nav_report_list) {
-            i = new Intent(this, ReportListActivity.class);
+        } else if (id == R.id.nav_source_report_list) {
+            i = new Intent(this, SourceReportListActivity.class);
+        } else if (id == R.id.nav_purity_report_list) {
+            LocalGetUserAPI getUserAPI = new LocalGetUserAPI();
+            getUserAPI.execute((Void) null);
         }
         startActivity(i);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    /**
+     * Represents an asynchronous getUserInfo task used to get the data in the user profile.
+     */
+    class LocalGetUserAPI extends GetUserAPI {
+
+        public LocalGetUserAPI() {
+            super(getApplicationContext());
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            //mAuthTask = null;
+            //showProgress(false);
+
+            if (success) {
+                String userType = userAccount.getUserType().toString();
+                if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User") || userType.equalsIgnoreCase("Worker")) {
+                    Toast.makeText(getBaseContext(), "General users and workers cannot view purity reports.", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent i = new Intent(getBaseContext(), PurityReportListActivity.class);
+                    startActivity(i);
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            //mAuthTask = null;
+            //showProgress(false);
+        }
+    }
+
 }

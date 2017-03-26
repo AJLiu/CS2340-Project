@@ -67,15 +67,20 @@
             android:value="AIzaSyC4GVt022b4ONsjfXePbeeJ5buePbiM7IE" />
 
         <activity
-            android:name=".controller.ReportListActivity"
-            android:label="@string/title_activity_report_list"
+            android:name=".controller.SourceReportListActivity"
+            android:label="@string/title_activity_source_report_list"
             android:parentActivityName=".controller.AppScreenActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.SubmitPurityReportActivity"
             android:label="@string/title_activity_submit_purity_report"
             android:parentActivityName=".controller.AppScreenActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.PurityReportListActivity"
+            android:label="PurityReportListActivity"
+            android:parentActivityName=".controller.AppScreenActivity"
+            />
     </application>
 
 </manifest>
