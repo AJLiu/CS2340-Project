@@ -169,10 +169,10 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
                 } else if (preferredAction.equalsIgnoreCase("history_graph")) {
                     String userType = userAccount.getUserType().toString();
                     if (userType.equalsIgnoreCase("Manager")) {
-
-                    } else {
                         Intent i = new Intent(getBaseContext(), HistoryGraphActivity.class);
                         startActivity(i);
+                    } else {
+                        Toast.makeText(getBaseContext(), "Only managers can view history graphs", Toast.LENGTH_LONG).show();
                     }
                 }
             }
