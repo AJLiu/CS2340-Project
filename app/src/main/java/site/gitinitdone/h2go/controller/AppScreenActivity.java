@@ -168,7 +168,7 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
                     }
                 } else if (preferredAction.equalsIgnoreCase("history_graph")) {
                     String userType = userAccount.getUserType().toString();
-                    if (userType.equalsIgnoreCase("Manger")) {
+                    if (userType.equalsIgnoreCase("Manager")) {
 
                     } else {
                         Intent i = new Intent(getBaseContext(), HistoryGraphActivity.class);
