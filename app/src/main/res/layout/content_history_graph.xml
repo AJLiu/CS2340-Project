@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,66 +8,141 @@
     tools:context="site.gitinitdone.h2go.controller.HistoryGraphActivity"
     tools:showIn="@layout/activity_history_graph">
 
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Virus"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="239dp" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contaminant"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="280dp" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/historyGraphViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="@color/cast_expanded_controller_background_color"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="28dp"
+        android:textSize="10pt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="27dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         tools:text="View History Graphs" />
 
+
+    <!-- Location -->
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/cast_expanded_controller_background_color"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="81dp"
-        tools:text="Location:" />
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_alignEnd="@id/historyGraphViewTitle"
+        android:layout_below="@id/historyGraphViewTitle"
+        android:layout_marginTop="15dp"
+        android:text="Location (Positive/Negative):"
+        android:textStyle="bold"
+        android:textSize="8pt"
+        android:id="@+id/locationTitle"
+        />
+
+    <!-- Latitude -->
 
     <TextView
-        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/cast_expanded_controller_background_color"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="157dp"
-        tools:text="Year" />
+        android:layout_alignStart="@id/locationTitle"
+        android:layout_alignEnd="@id/locationTitle"
+        android:layout_below="@id/locationTitle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:text="Latitude (North/South):"
+        android:textSize="7pt"
+        android:id="@+id/latitudeTitle"
+        />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="106dp"
-        android:layout_height="25dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="108dp" />
-
-    <TextView
-        android:id="@+id/textView6"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="182dp" />
-</android.support.constraint.ConstraintLayout>
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/locationLat"
+        android:layout_below="@id/latitudeTitle"
+        android:layout_alignStart="@id/latitudeTitle"
+        android:layout_alignEnd="@id/latitudeTitle"/>
+
+    <!-- Longitude -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/locationLat"
+        android:layout_alignEnd="@id/locationLat"
+        android:layout_below="@id/locationLat"
+        android:layout_marginTop="15dp"
+        android:text="Longitude (East/West):"
+        android:textSize="7pt"
+        android:id="@+id/longitudeTitle"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/locationLong"
+        android:layout_below="@id/longitudeTitle"
+        android:layout_alignStart="@id/longitudeTitle"
+        android:layout_alignEnd="@id/longitudeTitle"/>
+
+
+    <TextView
+        android:id="@+id/historyGraphViewYearEntered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Year"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_below="@id/locationLong"
+        android:layout_alignStart="@id/locationTitle"
+        android:layout_alignEnd="@id/locationTitle"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="2dp"
+        android:textSize="8pt" />
+
+    <TextView
+        android:id="@+id/historyGraphDataType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/historyGraphViewYearEntered"
+        android:layout_alignStart="@id/historyGraphViewYearEntered"
+        android:layout_alignEnd="@id/historyGraphViewYearEntered"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="2dp"
+        android:textSize="7pt"
+        android:text="Data Type to Plot" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/locationTitle"
+        android:layout_below="@id/locationLong"
+        android:layout_marginTop="42dp"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/historyGraphViewVirus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Virus"
+            android:layout_below="@id/historyGraphDataType"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:textSize="6pt" />
+
+
+        <RadioButton
+            android:id="@+id/historyGraphViewContaminant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contaminant"
+            android:layout_below="@id/historyGraphDataType"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:textSize="6pt"/>
+
+    </RadioGroup>
+
+
+</RelativeLayout>
