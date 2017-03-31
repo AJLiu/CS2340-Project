@@ -84,13 +84,6 @@
             android:label="PurityReportListActivity"
             android:parentActivityName=".controller.AppScreenActivity"
             />
-=======
-            android:name=".controller.ReportListActivity"
-            android:label="@string/title_activity_report_list"
-            android:parentActivityName=".controller.AppScreenActivity"
-            android:theme="@style/AppTheme" />
-
->>>>>>> Stashed changes
     </application>
 
 </manifest>

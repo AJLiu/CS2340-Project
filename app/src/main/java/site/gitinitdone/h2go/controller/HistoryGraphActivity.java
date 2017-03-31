@@ -10,6 +10,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.HistoricalReportCalc;
+
+import static site.gitinitdone.h2go.model.HistoricalReportCalc.getAverageData;
 
 public class HistoryGraphActivity extends AppCompatActivity {
 
@@ -24,6 +27,11 @@ public class HistoryGraphActivity extends AppCompatActivity {
         virusType.setSelected(true);
 
         // set default of lat and long to 0.0000
+    }
+
+    public static void finishedDataCalc() {
+        double[] averageData = HistoricalReportCalc.getAverageData();
+        //show graph using the data
     }
 
 }
