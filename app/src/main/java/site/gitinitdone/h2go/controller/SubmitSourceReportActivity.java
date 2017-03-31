@@ -147,11 +147,17 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
     private String formatLongitude(String oldText) {
         DecimalFormat formatLong = new DecimalFormat("##0.000000");
+        if (oldText.trim().isEmpty()) {
+            oldText = "0";
+        }
         return formatLong.format(Double.parseDouble(oldText.trim()));
     }
 
     private String formatLatitude(String oldText) {
         DecimalFormat formatLat = new DecimalFormat("#0.000000");
+        if (oldText.trim().isEmpty()) {
+            oldText = "0";
+        }
         return formatLat.format(Double.parseDouble(oldText.trim()));
     }
 

@@ -69,7 +69,27 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
             }
         });
 
+        final EditText virusField = (EditText) findViewById(R.id.virusPPMNumber);
+        virusField.setText("0");
+        virusField.setText(formatPPM(virusField.getText().toString()));
 
+        virusField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                virusField.setText(formatPPM(virusField.getText().toString()));
+            }
+        });
+
+        final EditText contaminantField = (EditText) findViewById(R.id.contaminantPPMNumber);
+        contaminantField.setText("0");
+        contaminantField.setText(formatPPM(contaminantField.getText().toString()));
+
+        contaminantField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                contaminantField.setText(formatPPM(contaminantField.getText().toString()));
+            }
+        });
     }
 
     public void submitPurityReport(View view) {
@@ -82,6 +102,11 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
         EditText latitudeField = (EditText) findViewById(R.id.locationLat);
         EditText longitudeField = (EditText) findViewById(R.id.locationLong);
+        EditText virusField = (EditText) findViewById(R.id.virusPPMNumber);
+        EditText contaminantField = (EditText) findViewById(R.id.contaminantPPMNumber);
+        virusField.setText(formatPPM(virusField.getText().toString()));
+        contaminantField.setText(formatPPM(contaminantField.getText().toString()));
+
         try {
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
@@ -146,12 +171,26 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
     private String formatLongitude(String oldText) {
         DecimalFormat formatLong = new DecimalFormat("##0.000000");
+        if (oldText.trim().isEmpty()) {
+            oldText = "0";
+        }
         return formatLong.format(Double.parseDouble(oldText.trim()));
     }
 
     private String formatLatitude(String oldText) {
         DecimalFormat formatLat = new DecimalFormat("#0.000000");
+        if (oldText.trim().isEmpty()) {
+            oldText = "0";
+        }
         return formatLat.format(Double.parseDouble(oldText.trim()));
+    }
+
+    private String formatPPM(String oldText) {
+        DecimalFormat formatPPMNumber = new DecimalFormat("#0");
+        if (oldText.trim().isEmpty()) {
+            oldText = "0";
+        }
+        return formatPPMNumber.format(Double.parseDouble(oldText.trim()));
     }
 
     /**
