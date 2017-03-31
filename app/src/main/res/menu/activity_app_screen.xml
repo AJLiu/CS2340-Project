@@ -24,6 +24,11 @@
             android:icon="@drawable/ic_menu_list"
             android:title="List of Purity Reports" />
 
+        <item
+            android:id="@+id/history_graph"
+            android:icon="@drawable/ic_menu_list"
+            android:title="Graph" />
+
         </group>
     <!--
         <item

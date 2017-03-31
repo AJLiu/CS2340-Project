@@ -67,7 +67,6 @@
             android:value="AIzaSyC4GVt022b4ONsjfXePbeeJ5buePbiM7IE" />
 
         <activity
-<<<<<<< Updated upstream
             android:name=".controller.SourceReportListActivity"
             android:label="@string/title_activity_source_report_list"
             android:parentActivityName=".controller.AppScreenActivity"
@@ -90,8 +89,7 @@
         <activity
             android:name=".controller.HistoryGraphActivity"
             android:label="@string/title_activity_history_graph"
-            android:theme="@style/AppTheme"></activity>
->>>>>>> Stashed changes
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

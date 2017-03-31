@@ -42,9 +42,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_source_report_list">SourceReportListActivity</string>
     <string name="title_activity_map_view">Map</string>
-<<<<<<< Updated upstream
     <string name="title_activity_submit_purity_report">SubmitPurityReportActivity</string>
 =======
     <string name="title_activity_history_graph">HistoryGraphActivity</string>
->>>>>>> Stashed changes
 </resources>
