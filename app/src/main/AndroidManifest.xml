@@ -84,6 +84,12 @@
             android:label="PurityReportListActivity"
             android:parentActivityName=".controller.AppScreenActivity"
             />
+
+        <activity
+            android:name=".controller.PlottedGraphActivity"
+            android:label="PlottedGraphActivity"
+            android:parentActivityName=".controller.AppScreenActivity"
+            />
     </application>
 
 </manifest>

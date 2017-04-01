@@ -1,5 +1,6 @@
 package site.gitinitdone.h2go.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import static site.gitinitdone.h2go.model.HistoricalReportCalc.getAverageData;
 public class HistoryGraphActivity extends AppCompatActivity {
 
     private View histGraphForm;
+    private HistoricalReportCalc reportCalc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
         EditText longitudeField = (EditText) findViewById(R.id.locationLong);
         EditText yearField = (EditText) findViewById(R.id.historyGraphViewYearEntered);
         int currYear = Calendar.getInstance().get(Calendar.YEAR);
+        RadioButton virusType = (RadioButton) findViewById(R.id.historyGraphViewVirus);
+        RadioButton contamType = (RadioButton) findViewById(R.id.historyGraphViewContaminant);
 
         try {
             if (latitudeField.getText().toString().isEmpty()) {
@@ -149,7 +153,17 @@ public class HistoryGraphActivity extends AppCompatActivity {
         }
 
 
-        histGraphForm = findViewById(R.id.content_history_graph);
+//        histGraphForm = findViewById(R.id.content_history_graph);
+        String ppm;
+        if (virusType.isChecked()) {
+            ppm = "Virus";
+        } else {
+            ppm = "Contaminant";
+        }
+        reportCalc = new HistoricalReportCalc(latitude, longitude, year, ppm, getApplicationContext());
+
+        Intent i = new Intent(this, PlottedGraphActivity.class);
+        startActivity(i);
     }
 
     /**
