@@ -2,29 +2,24 @@ package site.gitinitdone.h2go.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
-
-import static site.gitinitdone.h2go.model.HistoricalReportCalc.getAverageData;
 
 public class HistoryGraphActivity extends AppCompatActivity {
 
-    private View histGraphForm;
     private HistoricalReportCalc reportCalc;
+    LocalGetPurityReportsAPI localPurityReportsAPI = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +72,6 @@ public class HistoryGraphActivity extends AppCompatActivity {
             oldText = "0";
         }
         return formatLat.format(Double.parseDouble(oldText.trim()));
-    }
-
-    public static void finishedDataCalc() {
-        double[] averageData = HistoricalReportCalc.getAverageData();
-        //show graph using the data
     }
 
     public void histGraphFilter(View view) {
@@ -160,10 +150,10 @@ public class HistoryGraphActivity extends AppCompatActivity {
         } else {
             ppm = "Contaminant";
         }
-        reportCalc = new HistoricalReportCalc(latitude, longitude, year, ppm, getApplicationContext());
+        reportCalc = new HistoricalReportCalc(latitude, longitude, year, ppm);
 
-        Intent i = new Intent(this, PlottedGraphActivity.class);
-        startActivity(i);
+        localPurityReportsAPI = new LocalGetPurityReportsAPI();
+        localPurityReportsAPI.execute((Void) null);
     }
 
     /**
@@ -175,6 +165,44 @@ public class HistoryGraphActivity extends AppCompatActivity {
     private void showErrorOnField(EditText field, String message) {
         field.setError(message);
         field.requestFocus();
+    }
+
+    private void startGraphActivity(double[] data, String ppmType) {
+        Intent i = new Intent(this, PlottedGraphActivity.class);
+        i.putExtra("data", data);
+        i.putExtra("ppm", ppmType);
+        startActivity(i);
+    }
+
+
+    class LocalGetPurityReportsAPI extends GetPurityReportsAPI {
+
+        public LocalGetPurityReportsAPI() {
+            super(getApplicationContext());
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            localPurityReportsAPI = null;
+
+
+            if (success) {
+                if (purityReportList.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                } else {
+                    double[] averageMonthData = reportCalc.getAverages(reportCalc.filter(purityReportList));
+                    startGraphActivity(averageMonthData, reportCalc.getFilters()[3]);
+
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            localPurityReportsAPI = null;
+        }
     }
 
 }

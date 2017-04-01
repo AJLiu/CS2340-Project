@@ -17,6 +17,7 @@ import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;
+    private String ppmType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +26,21 @@ public class PlottedGraphActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        data = getIntent().getDoubleArrayExtra("data");
+        ppmType = getIntent().getStringExtra("ppm");
+
+        DataPoint[] dataPoints = new DataPoint[12];
+
+        for (int i = 0; i < 12; i++) {
+            dataPoints[i] = new DataPoint((i + 1), data[i]);
+        }
+
         GraphView graph = (GraphView) findViewById(R.id.graph);
-        initGraph(graph);
+        initGraph(graph, dataPoints);
     }
 
-    public void initGraph(GraphView graph) {
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(1, 7),
-                new DataPoint(2, 5),
-                new DataPoint(3, 3),
-                new DataPoint(4, 4),
-                new DataPoint(5, 8),
-                new DataPoint(6, 12),
-                new DataPoint(7, 13),
-                new DataPoint(8, 7),
-                new DataPoint(9, 3),
-                new DataPoint(10, 7),
-                new DataPoint(11, 7),
-                new DataPoint(12, 9)
-        });
+    public void initGraph(GraphView graph, DataPoint[] dataPoints) {
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
         graph.addSeries(series);
 
         // set manual x bounds to have nice steps
@@ -53,7 +50,7 @@ public class PlottedGraphActivity extends AppCompatActivity {
 
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Month");
-        gridLabel.setVerticalAxisTitle("PPM");
+        gridLabel.setVerticalAxisTitle(ppmType + " PPM");
 
         // use static labels for horizontal and vertical labels
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
