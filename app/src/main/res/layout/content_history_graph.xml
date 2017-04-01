@@ -12,15 +12,15 @@
         android:id="@+id/historyGraphViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textSize="10pt"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:layout_marginStart="27dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        tools:text="View History Graphs" />
+        android:paddingStart="45dp"
+        android:paddingEnd="50dp"
+        android:text="View History Graphs" />
+
 
 
     <!-- Location -->
@@ -43,7 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/locationTitle"
-        android:layout_alignEnd="@id/locationTitle"
         android:layout_below="@id/locationTitle"
         android:layout_marginTop="15dp"
         android:layout_marginStart="25dp"
@@ -59,8 +58,7 @@
         android:ems="10"
         android:id="@+id/locationLat"
         android:layout_below="@id/latitudeTitle"
-        android:layout_alignStart="@id/latitudeTitle"
-        android:layout_alignEnd="@id/latitudeTitle"/>
+        android:layout_alignStart="@id/latitudeTitle" />
 
     <!-- Longitude -->
 
@@ -68,7 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@id/locationLat"
-        android:layout_alignEnd="@id/locationLat"
         android:layout_below="@id/locationLat"
         android:layout_marginTop="15dp"
         android:text="Longitude (East/West):"
@@ -83,42 +80,27 @@
         android:ems="10"
         android:id="@+id/locationLong"
         android:layout_below="@id/longitudeTitle"
-        android:layout_alignStart="@id/longitudeTitle"
-        android:layout_alignEnd="@id/longitudeTitle"/>
+        android:layout_alignStart="@id/longitudeTitle" />
 
-
-    <TextView
-        android:id="@+id/historyGraphViewYearEntered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Year"
-        android:inputType="number"
-        android:ems="10"
-        android:layout_below="@id/locationLong"
-        android:layout_alignStart="@id/locationTitle"
-        android:layout_alignEnd="@id/locationTitle"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="2dp"
-        android:textSize="8pt" />
 
     <TextView
         android:id="@+id/historyGraphDataType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/historyGraphViewYearEntered"
-        android:layout_alignStart="@id/historyGraphViewYearEntered"
-        android:layout_alignEnd="@id/historyGraphViewYearEntered"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/locationLong"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="2dp"
-        android:textSize="7pt"
-        android:text="Data Type to Plot" />
+        android:textSize="8pt"
+        android:text="Data Type to Plot:"
+        android:textStyle="bold"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/locationTitle"
-        android:layout_below="@id/locationLong"
-        android:layout_marginTop="42dp"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_below="@id/historyGraphDataType"
+        android:layout_marginTop="2dp"
         android:id="@+id/radioGroup">
 
         <RadioButton
@@ -143,6 +125,28 @@
             android:textSize="6pt"/>
 
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/historyGraphViewYearEntered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Year"
+        android:textStyle="bold"
+        android:inputType="number"
+        android:layout_below="@id/radioGroup"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        android:textSize="8pt" />
+
+    <Button
+        android:id="@+id/viewGraphButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:text="View graph" />
 
 
 </RelativeLayout>
