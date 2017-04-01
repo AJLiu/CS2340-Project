@@ -3,12 +3,14 @@ package site.gitinitdone.h2go.controller;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -20,16 +22,14 @@ import static site.gitinitdone.h2go.model.HistoricalReportCalc.getAverageData;
 
 public class HistoryGraphActivity extends AppCompatActivity {
 
+    private View histGraphForm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_graph);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // setting default data type selection to Virus
-        RadioButton virusType = (RadioButton)findViewById(R.id.historyGraphViewVirus);
-        virusType.setSelected(true);
 
         // setting default year value
         final EditText year = (EditText) findViewById(R.id.historyGraphViewYearEntered);
@@ -92,7 +92,12 @@ public class HistoryGraphActivity extends AppCompatActivity {
         EditText longitudeField = (EditText) findViewById(R.id.locationLong);
         EditText yearField = (EditText) findViewById(R.id.historyGraphViewYearEntered);
         int currYear = Calendar.getInstance().get(Calendar.YEAR);
+
         try {
+            if (latitudeField.getText().toString().isEmpty()) {
+                showErrorOnField(latitudeField, "Latitude can't be empty");
+                return;
+            }
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
             if (latitude > 90 || latitude < -90) {
@@ -107,6 +112,10 @@ public class HistoryGraphActivity extends AppCompatActivity {
         }
 
         try {
+            if (longitudeField.getText().toString().isEmpty()) {
+                showErrorOnField(longitudeField, "Longitude can't be empty");
+                return;
+            }
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
             if (longitude > 180 || longitude < -180) {
@@ -120,6 +129,10 @@ public class HistoryGraphActivity extends AppCompatActivity {
         }
 
         try {
+            if (yearField.getText().toString().isEmpty()) {
+                showErrorOnField(yearField, "Year can't be empty");
+                return;
+            }
             year = Integer.parseInt(yearField.getText().toString());
             if (year > currYear) {
                 showErrorOnField(yearField, "Year cannot be greater than " + currYear);
@@ -131,9 +144,12 @@ public class HistoryGraphActivity extends AppCompatActivity {
             }
             // if it reaches here, no errors for year
         } catch (NumberFormatException e) {
-            showErrorOnField(latitudeField, "Year is not a valid number.");
+            showErrorOnField(yearField, "Year is not a valid number.");
             return;
         }
+
+
+        histGraphForm = findViewById(R.id.content_history_graph);
     }
 
     /**

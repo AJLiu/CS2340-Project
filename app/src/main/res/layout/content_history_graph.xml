@@ -93,7 +93,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="2dp"
         android:textSize="8pt"
-        android:text="Data Type to Plot:"
+        android:text="Data Type to Plot (Select one):"
         android:textStyle="bold"/>
 
     <RadioGroup
@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:text="Virus"
             android:layout_below="@id/historyGraphDataType"
+            android:checked="true"
             android:layout_marginTop="5dp"
             android:layout_marginStart="2dp"
             android:textSize="6pt" />
@@ -147,7 +148,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
-        android:text="View graph" />
+        android:text="View graph"
+        android:onClick="histGraphFilter"/>
 
 
 </RelativeLayout>
