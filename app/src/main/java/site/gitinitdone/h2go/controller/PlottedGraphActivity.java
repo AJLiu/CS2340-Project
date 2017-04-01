@@ -7,6 +7,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +42,12 @@ public class PlottedGraphActivity extends AppCompatActivity {
 
     public void initGraph(GraphView graph, DataPoint[] dataPoints) {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+
+        series.setColor(Color.BLUE);
+        series.setDrawDataPoints(true);
+        series.setDataPointsRadius(10);
+        series.setThickness(8);
+
         graph.addSeries(series);
 
         // set manual x bounds to have nice steps
@@ -51,10 +58,11 @@ public class PlottedGraphActivity extends AppCompatActivity {
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Month");
         gridLabel.setVerticalAxisTitle(ppmType + " PPM");
+        gridLabel.setPadding(50);
 
         // use static labels for horizontal and vertical labels
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"});
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"});
         gridLabel.setLabelFormatter(staticLabelsFormatter);
 
 
