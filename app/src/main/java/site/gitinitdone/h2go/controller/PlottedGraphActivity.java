@@ -16,7 +16,7 @@ import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
 
 public class PlottedGraphActivity extends AppCompatActivity {
-    private double[] data = HistoricalReportCalc.getAverageData();
+    private double[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
