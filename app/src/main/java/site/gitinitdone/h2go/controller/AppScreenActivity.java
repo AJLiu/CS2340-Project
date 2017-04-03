@@ -24,6 +24,7 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
 
     private String sharedPrefName;
     private String usernameKey;
+    private String preferredAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,14 +122,16 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
             i = new Intent(this, ChooseReportSubmitActivity.class);
         } else if (id == R.id.nav_water_locations) {
             i = new Intent(this, MapViewActivity.class);
-        } else if (id == R.id.nav_history) {
-           // i = new Intent(this, );
-            // We'll add to this in future milestones
         } else if (id == R.id.nav_source_report_list) {
             i = new Intent(this, SourceReportListActivity.class);
         } else if (id == R.id.nav_purity_report_list) {
+            preferredAction = "purity_report";
             LocalGetUserAPI getUserAPI = new LocalGetUserAPI();
             getUserAPI.execute((Void) null);
+        } else if (id == R.id.history_graph) {
+            preferredAction = "history_graph";
+            LocalGetUserAPI getUserInfo = new LocalGetUserAPI();
+            getUserInfo.execute((Void) null);
         }
         startActivity(i);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,12 +155,22 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
             //showProgress(false);
 
             if (success) {
-                String userType = userAccount.getUserType().toString();
-                if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User") || userType.equalsIgnoreCase("Worker")) {
-                    Toast.makeText(getBaseContext(), "General users and workers cannot view purity reports.", Toast.LENGTH_LONG).show();
-                } else {
-                    Intent i = new Intent(getBaseContext(), PurityReportListActivity.class);
-                    startActivity(i);
+                if (preferredAction.equalsIgnoreCase("purity_report")) {
+                    String userType = userAccount.getUserType().toString();
+                    if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User") || userType.equalsIgnoreCase("Worker")) {
+                        Toast.makeText(getBaseContext(), "General users and workers cannot view purity reports.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent i = new Intent(getBaseContext(), PurityReportListActivity.class);
+                        startActivity(i);
+                    }
+                } else if (preferredAction.equalsIgnoreCase("history_graph")) {
+                    String userType = userAccount.getUserType().toString();
+                    if (userType != null && userType.equalsIgnoreCase("Manager")) {
+                        Intent i = new Intent(getBaseContext(), HistoryGraphActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getBaseContext(), "Only managers can view history graphs", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }

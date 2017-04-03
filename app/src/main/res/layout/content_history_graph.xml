@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_history_graph"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="site.gitinitdone.h2go.controller.PlottedGraphActivity"
+    tools:showIn="@layout/activity_history_graph">
+
+    <TextView
+        android:id="@+id/historyGraphViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12pt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="27dp"
+        android:paddingStart="60dp"
+        android:paddingEnd="50dp"
+        android:text="View History Graphs" />
+
+
+
+    <!-- Location -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_alignEnd="@id/historyGraphViewTitle"
+        android:layout_below="@id/historyGraphViewTitle"
+        android:layout_marginTop="15dp"
+        android:text="Location (Positive/Negative):"
+        android:textStyle="bold"
+        android:textSize="8pt"
+        android:id="@+id/locationTitle"
+        />
+
+    <!-- Latitude -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/locationTitle"
+        android:layout_below="@id/locationTitle"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:text="Latitude (North/South):"
+        android:textSize="7pt"
+        android:id="@+id/latitudeTitle"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/locationLat"
+        android:layout_below="@id/latitudeTitle"
+        android:layout_alignStart="@id/latitudeTitle" />
+
+    <!-- Longitude -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/locationLat"
+        android:layout_below="@id/locationLat"
+        android:layout_marginTop="15dp"
+        android:text="Longitude (East/West):"
+        android:textSize="7pt"
+        android:id="@+id/longitudeTitle"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/locationLong"
+        android:layout_below="@id/longitudeTitle"
+        android:layout_alignStart="@id/longitudeTitle" />
+
+
+    <TextView
+        android:id="@+id/historyGraphDataType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationLong"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        android:textSize="8pt"
+        android:text="Data Type to Plot (Select one):"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_below="@id/historyGraphDataType"
+        android:layout_marginTop="2dp"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/historyGraphViewVirus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Virus"
+            android:layout_below="@id/historyGraphDataType"
+            android:checked="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:textSize="6pt" />
+
+
+        <RadioButton
+            android:id="@+id/historyGraphViewContaminant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contaminant"
+            android:layout_below="@id/historyGraphDataType"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:textSize="6pt"/>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/historyGraphViewYearEntered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Year"
+        android:inputType="number"
+        android:ems="5"
+        android:layout_below="@id/radioGroup"
+        android:layout_alignStart="@id/historyGraphViewTitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        android:textSize="8pt" />
+
+    <Button
+        android:id="@+id/viewGraphButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:text="View graph"
+        android:onClick="histGraphFilter"/>
+
+
+</RelativeLayout>
