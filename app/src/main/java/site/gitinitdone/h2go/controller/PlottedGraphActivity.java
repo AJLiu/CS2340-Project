@@ -15,7 +15,8 @@ import android.support.v7.widget.Toolbar;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
-
+/* This class setsup the graph and plots at the data received from the database.
+*/
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;
     private String ppmType;
@@ -40,6 +41,8 @@ public class PlottedGraphActivity extends AppCompatActivity {
         initGraph(graph, dataPoints);
     }
 
+    /* This method labels the x and y axis, and plots the data points as a line.
+    */
     public void initGraph(GraphView graph, DataPoint[] dataPoints) {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 
@@ -65,10 +68,5 @@ public class PlottedGraphActivity extends AppCompatActivity {
         staticLabelsFormatter.setHorizontalLabels(new String[] {"J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"});
         gridLabel.setLabelFormatter(staticLabelsFormatter);
 
-
-//        System.out.println("Data is @@@@@@@@@@");
-//        for (double d:data) {
-//            System.out.println(d);
-//        }
     }
 }
