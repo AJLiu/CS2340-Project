@@ -15,7 +15,8 @@ import android.support.v7.widget.Toolbar;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
-/* This class setsup the graph and plots at the data received from the database.
+/**
+ *  This class setsup the graph and plots at the data received from the database.
 */
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;

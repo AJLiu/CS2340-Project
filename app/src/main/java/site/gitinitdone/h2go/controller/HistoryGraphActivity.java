@@ -16,7 +16,8 @@ import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
-/* This class creates the screen with the filter fields location, year, and data type to plot the purity graph.
+/**
+ *  This class creates the screen with the filter fields location, year, and data type to plot the purity graph.
 */
 
 public class HistoryGraphActivity extends AppCompatActivity {
