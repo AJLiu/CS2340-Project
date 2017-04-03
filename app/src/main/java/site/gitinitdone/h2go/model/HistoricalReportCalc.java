@@ -20,7 +20,7 @@ import static android.R.attr.filter;
 import static android.R.id.list;
 
 /**
- * Created by shreyamagesh on 3/31/17.
+ * The HistoricalReportCalc class will calculate average virust/contaminant ppm data for each month.
  */
 
 public class HistoricalReportCalc {
@@ -30,6 +30,10 @@ public class HistoricalReportCalc {
     private int year;
     private String ppm;
 
+    /**
+     * A constructor to create a historical report calculation. Takes in
+     * a lattitude, longitute, year, and ppm.
+     */
     public HistoricalReportCalc(double lat, double lon, int yr, String Ppm) {
         latitude = lat;
         longitude = lon;
@@ -37,10 +41,17 @@ public class HistoricalReportCalc {
         ppm = Ppm;
     }
 
+    /**
+     * A method used to get filters passed in by user.
+     */
     public String[] getFilters() {
         return new String[] {"" + latitude, "" + longitude, "" + year, ppm};
     }
 
+    /**
+     * The filter method takes in a list of Purity reports and filters out relevant water reports
+     * by year and location.
+     */
     public List<PurityReport> filter(List<PurityReport> purityReportList) {
         List<PurityReport> filtered = new ArrayList<>();
         for (PurityReport p: purityReportList) {
@@ -53,11 +64,15 @@ public class HistoricalReportCalc {
         return filtered;
     }
 
+    /**
+     * The getAverages method calculates average ppms for each month and returns
+     * and array of doubles with average ppms.
+     */
     public double[] getAverages(List<PurityReport> filtered) {
         List<Integer>[] monthData = (ArrayList<Integer>[]) new ArrayList[12];
 
         for (int j = 0; j < 12; j++) {
-            monthData[j] = new ArrayList<Integer>();
+            monthData[j] = new ArrayList<>();
         }
 
         for (PurityReport p : filtered) {
