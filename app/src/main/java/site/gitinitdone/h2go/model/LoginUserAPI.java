@@ -148,7 +148,7 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
         System.out.println("--------3--------");
 
         System.out.println(response.contains(mUsername));
-        return (response.contains(mUsername));
+        return (response.contains(mUsername) && !response.contains("Unauthorized"));
     }
 }
 
