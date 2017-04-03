@@ -16,6 +16,9 @@ import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
+/* This class creates the screen with the filter fields location, year, and data type to plot the purity graph.
+*/
+
 public class HistoryGraphActivity extends AppCompatActivity {
 
     private HistoricalReportCalc reportCalc;
@@ -58,6 +61,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
     }
 
+    /* Method to format longitude to six decimel places.
+    */
     private String formatLongitude(String oldText) {
         DecimalFormat formatLong = new DecimalFormat("##0.000000");
         if (oldText.trim().isEmpty()) {
@@ -66,6 +71,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
         return formatLong.format(Double.parseDouble(oldText.trim()));
     }
 
+    /* Method to format latitude to six decimel places.
+    */
     private String formatLatitude(String oldText) {
         DecimalFormat formatLat = new DecimalFormat("#0.000000");
         if (oldText.trim().isEmpty()) {
@@ -74,6 +81,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
         return formatLat.format(Double.parseDouble(oldText.trim()));
     }
 
+    /* Method to validate latitude, longitude, year, and data type.
+    */
     public void histGraphFilter(View view) {
         // Validating the entries in report
         double latitude;
@@ -167,6 +176,9 @@ public class HistoryGraphActivity extends AppCompatActivity {
         field.requestFocus();
     }
 
+    /**
+    * Starts the activty for the plotted graph based on the fields entered in the filter screen.
+    */
     private void startGraphActivity(double[] data, String ppmType) {
         Intent i = new Intent(this, PlottedGraphActivity.class);
         i.putExtra("data", data);
@@ -174,6 +186,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /* Class to get the reports from the database using the Model. 
+    */
 
     class LocalGetPurityReportsAPI extends GetPurityReportsAPI {
 
