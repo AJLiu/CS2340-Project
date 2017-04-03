@@ -116,7 +116,7 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Intent i = new Intent(this, AppScreenActivity.class); // default value as a backup
+        Intent i = null; // default value as a backup
 
         if (id == R.id.nav_submit_report) {
             i = new Intent(this, ChooseReportSubmitActivity.class);
@@ -133,7 +133,9 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
             LocalGetUserAPI getUserInfo = new LocalGetUserAPI();
             getUserInfo.execute((Void) null);
         }
-        startActivity(i);
+        if (i != null) {
+            startActivity(i);
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -160,14 +162,14 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
                     if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User") || userType.equalsIgnoreCase("Worker")) {
                         Toast.makeText(getBaseContext(), "General users and workers cannot view purity reports.", Toast.LENGTH_LONG).show();
                     } else {
-                        Intent i = new Intent(getBaseContext(), PurityReportListActivity.class);
-                        startActivity(i);
+                        Intent purityList = new Intent(getBaseContext(), PurityReportListActivity.class);
+                        startActivity(purityList);
                     }
                 } else if (preferredAction.equalsIgnoreCase("history_graph")) {
                     String userType = userAccount.getUserType().toString();
                     if (userType != null && userType.equalsIgnoreCase("Manager")) {
-                        Intent i = new Intent(getBaseContext(), HistoryGraphActivity.class);
-                        startActivity(i);
+                        Intent graph = new Intent(getBaseContext(), HistoryGraphActivity.class);
+                        startActivity(graph);
                     } else {
                         Toast.makeText(getBaseContext(), "Only managers can view history graphs", Toast.LENGTH_LONG).show();
                     }
