@@ -66,7 +66,7 @@ public class HistoricalReportCalc {
 
     /**
      * The getAverages method calculates average ppms for each month and returns
-     * and array of doubles with average ppms.
+     * an array of doubles with average ppms.
      */
     public double[] getAverages(List<PurityReport> filtered) {
         List<Integer>[] monthData = (ArrayList<Integer>[]) new ArrayList[12];
