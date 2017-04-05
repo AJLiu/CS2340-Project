@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
-import java.text.DecimalFormat;
-import java.util.Calendar;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
+
+import java.text.DecimalFormat;
+import java.util.Calendar;
 
 /**
  *  This class creates the screen with the filter fields location, year,
@@ -102,56 +101,56 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
         try {
             if (latitudeField.getText().toString().isEmpty()) {
-                showErrorOnField(latitudeField, "Latitude can't be empty");
+                showErrorOnField(latitudeField, getString(R.string.Latitude_validation));
                 return;
             }
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
             if ((latitude > MAX_LAT) || (latitude < (MAX_LAT * -1))) {
-                showErrorOnField(latitudeField, "Latitude must in between -90 and 90 degrees");
+                showErrorOnField(latitudeField, getString(R.string.Latitude_range_validation));
                 return;
             }
             // if it reaches here, no errors for latitude
 
         } catch (NumberFormatException e) {
-            showErrorOnField(latitudeField, "Latitude is not a valid number.");
+            showErrorOnField(latitudeField, getString(R.string.Latitude_number_validation));
             return;
         }
 
         try {
             if (longitudeField.getText().toString().isEmpty()) {
-                showErrorOnField(longitudeField, "Longitude can't be empty");
+                showErrorOnField(longitudeField, getString(R.string.Longitude_validation));
                 return;
             }
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
             if ((longitude > MAX_LONG) || (longitude < (MAX_LONG * -1))) {
-                showErrorOnField(longitudeField, "Longitude must in between -180 and 180 degrees");
+                showErrorOnField(longitudeField, getString(R.string.Longitude_range_validation));
                 return;
             }
             // if it reaches here, no errors for longitude
         } catch (NumberFormatException e) {
-            showErrorOnField(latitudeField, "Longitude is not a valid number.");
+            showErrorOnField(latitudeField, getString(R.string.Longitude_number_validation));
             return;
         }
 
         try {
             if (yearField.getText().toString().isEmpty()) {
-                showErrorOnField(yearField, "Year can't be empty");
+                showErrorOnField(yearField, getString(R.string.year_validation));
                 return;
             }
             year = Integer.parseInt(yearField.getText().toString());
             if (year > currYear) {
-                showErrorOnField(yearField, "Year cannot be greater than " + currYear);
+                showErrorOnField(yearField, getString(R.string.year_upper_bound) + currYear);
                 return;
             }
             if (year < MIN_YEAR) {
-                showErrorOnField(yearField, "Year cannot be less than " + MIN_YEAR);
+                showErrorOnField(yearField, getString(R.string.year_lower_bound) + MIN_YEAR);
                 return;
             }
             // if it reaches here, no errors for year
         } catch (NumberFormatException e) {
-            showErrorOnField(yearField, "Year is not a valid number.");
+            showErrorOnField(yearField, getString(R.string.year_number_validation));
             return;
         }
 
@@ -206,7 +205,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
             if (success) {
                 if (purityReportList.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                    Toast.makeText(getApplicationContext(), R.string.empty_purity_report_toast,
                             Toast.LENGTH_LONG).show();
                 } else {
                     double[] averageMonthData = reportCalc.getAverages(reportCalc
@@ -215,7 +214,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                Toast.makeText(getApplicationContext(), R.string.empty_purity_report_toast,
                         Toast.LENGTH_LONG).show();
             }
         }

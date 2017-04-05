@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         mySharedPrefEditor.apply();
 
         startActivity(i);
-        Toast.makeText(getApplicationContext(), "You have successfully logged in.",
+        Toast.makeText(getApplicationContext(), R.string.login_success,
                 Toast.LENGTH_LONG).show();
     }
 

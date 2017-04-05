@@ -11,14 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.SourceReport;
+import site.gitinitdone.h2go.model.SubmitSourceReportAPI;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-
-import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.model.SourceReport;
-import site.gitinitdone.h2go.model.SubmitSourceReportAPI;
 
 /**
  * This activity allows the user to submit water source reports
@@ -94,13 +93,13 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
             if ((latitude > MAX_LAT) || (latitude < (-1 * MAX_LAT))) {
-                showErrorOnField(latitudeField, "Latitude must in between -90 and 90 degrees");
+                showErrorOnField(latitudeField, getString(R.string.Latitude_range_validation));
                 return;
             }
             // if it reaches here, no errors for latitude
 
         } catch (NumberFormatException e) {
-            showErrorOnField(latitudeField, "Latitude is not a valid number.");
+            showErrorOnField(latitudeField, getString(R.string.Latitude_number_validation));
             return;
         }
 
@@ -108,12 +107,12 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
             if (longitude > MAX_LONG || longitude < (-1 * MAX_LONG)) {
-                showErrorOnField(longitudeField, "Longitude must in between -180 and 180 degrees");
+                showErrorOnField(longitudeField, getString(R.string.Longitude_range_validation));
                 return;
             }
             // if it reaches here, no errors for longitude
         } catch (NumberFormatException e) {
-            showErrorOnField(latitudeField, "Longitude is not a valid number.");
+            showErrorOnField(latitudeField, getString(R.string.Longitude_number_validation));
             return;
         }
 
@@ -209,12 +208,12 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Submitted Source Report TRUE");
-                Toast.makeText(getBaseContext(), "Source Report has been successfully submitted.",
+                Toast.makeText(getBaseContext(), R.string.soure_report_success,
                         Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 System.out.println("Submitted Source Report FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during submission.",
+                Toast.makeText(getBaseContext(), R.string.source_report_error,
                         Toast.LENGTH_LONG).show();
 
             }

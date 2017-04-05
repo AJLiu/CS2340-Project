@@ -29,13 +29,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="H2gO Actions"
+        android:text="@string/h2go_actions"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What would you like to do?"
+        android:text="@string/what_would_you_like_to_do"
         android:id="@+id/textView"/>
 
 </LinearLayout>

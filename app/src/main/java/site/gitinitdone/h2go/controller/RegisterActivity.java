@@ -11,13 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.RegisterUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -38,15 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
         mProgressView = findViewById(R.id.content_register_progress);
 
         Spinner title = (Spinner) findViewById(R.id.titleSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
-                UserAccount.Title.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+            UserAccount.Title.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         title.setAdapter(adapter);
         title.setSelection(0);
 
         Spinner userType = (Spinner) findViewById(R.id.userTypeSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                UserAccount.AccountType.values());
+            UserAccount.AccountType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter2);
         userType.setSelection(0);
@@ -67,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText username = (EditText) findViewById(R.id.usernameField);
         String usernameText = username.getText().toString().trim();
         if (usernameText.isEmpty()) {
-            showErrorOnField(username, "Username is too short.");
+            showErrorOnField(username, getString(R.string.username_validation));
             username.requestFocus();
             return;
         }
@@ -76,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.passwordField);
         String passwordText = password.getText().toString().trim();
         if (passwordText.isEmpty()) {
-            showErrorOnField(password, "Password is too short.");
+            showErrorOnField(password, getString(R.string.password_validation));
             return;
         }
 
@@ -84,7 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
         EditText firstName = (EditText) findViewById(R.id.firstNameField);
         String firstNameText = firstName.getText().toString().trim();
         if (firstNameText.isEmpty()) {
-            showErrorOnField(firstName, "First name is too short.");
+            showErrorOnField(firstName, getString(R.string.first_name_validation));
+
             return;
         }
 
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText lastName = (EditText) findViewById(R.id.lastNameField);
         String lastNameText = lastName.getText().toString().trim();
         if (lastNameText.isEmpty()) {
-            showErrorOnField(lastName, "Last name is too short.");
+            showErrorOnField(lastName, getString(R.string.last_name_validation));
             return;
         }
 
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.emailField);
         String emailText = email.getText().toString().trim();
         if ((emailText.isEmpty()) || !validateEmail(emailText)) {
-            showErrorOnField(email, "Email is not valid.");
+            showErrorOnField(email, getString(R.string.email_validation));
             return;
         }
 
@@ -115,15 +115,15 @@ public class RegisterActivity extends AppCompatActivity {
         // Validate address sections are not blank
         String addressFullText = addressText + "~" + cityText + "~" + stateZipText;
         if (addressText.isEmpty()) {
-            showErrorOnField(address,"Address is too short.");
+            showErrorOnField(address, getString(R.string.address_validation));
             return;
         }
         if (cityText.isEmpty()) {
-            showErrorOnField(city, "City is too short.");
+            showErrorOnField(city, getString(R.string.city_validation));
             return;
         }
         if (stateZipText.isEmpty()) {
-            showErrorOnField(stateZip, "State / Zip Code is too short.");
+            showErrorOnField(stateZip, getString(R.string.state_validation));
             return;
         }
 
@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Spinner userType = (Spinner) findViewById(R.id.userTypeSpinner);
         UserAccount.AccountType userAccountType = (UserAccount.AccountType)
-                                                    (userType.getSelectedItem());
+            (userType.getSelectedItem());
         String userTypeText = userAccountType.toString().trim();
 
         arguments.put("username", usernameText);
@@ -163,8 +163,8 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private boolean validateEmail(String emailText) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+"
-                + "@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\."
-                + "[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+            + "@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\."
+            + "[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(emailText);
         return m.matches();
@@ -173,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * Sets the error message for the field on the edit form and focuses that field on the screen
      *
-     * @param field the field that has the error
+     * @param field   the field that has the error
      * @param message the message to show on the field
      */
     private void showErrorOnField(EditText field, String message) {
@@ -192,7 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
-                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -201,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         mProgressView.animate().setDuration(shortAnimTime).alpha(
-                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -229,18 +229,18 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Registered TRUE");
-                Toast.makeText(getBaseContext(), "User has been registered. Please log in.",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), R.string.register_success,
+                    Toast.LENGTH_LONG).show();
                 finish();
 
             } else {
                 System.out.println("Registered FALSE");
                 if (duplicateUser) {
-                    Toast.makeText(getBaseContext(), "That username is already taken.",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), R.string.register_duplicate,
+                        Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getBaseContext(), "There was an error during registration.",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), R.string.register_error,
+                        Toast.LENGTH_LONG).show();
                 }
 
             }

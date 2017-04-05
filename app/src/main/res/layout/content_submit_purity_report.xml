@@ -41,7 +41,7 @@
         android:layout_alignEnd="@id/formTitleSubmitPurityReport"
         android:layout_below="@id/formTitleSubmitPurityReport"
         android:layout_marginTop="15dp"
-        android:text="Location (Positive/Negative):"
+        android:text="@string/location_positive_negative"
         android:textStyle="bold"
         android:textSize="9pt"
         android:id="@+id/locationTitle"
@@ -57,7 +57,7 @@
         android:layout_below="@id/locationTitle"
         android:layout_marginTop="15dp"
         android:layout_marginStart="25dp"
-        android:text="Latitude (North/South):"
+        android:text="@string/latitude_north_south"
         android:textSize="8pt"
         android:id="@+id/latitudeTitle"
         />
@@ -81,7 +81,7 @@
         android:layout_alignEnd="@id/locationLat"
         android:layout_below="@id/locationLat"
         android:layout_marginTop="15dp"
-        android:text="Longitude (East/West):"
+        android:text="@string/longitude_east_west"
         android:textSize="8pt"
         android:id="@+id/longitudeTitle"
         />
@@ -104,7 +104,7 @@
         android:layout_alignStart="@id/locationTitle"
         android:layout_alignEnd="@id/locationTitle"
         android:layout_marginTop="15dp"
-        android:text="Water Condition"
+        android:text="@string/water_condition"
         android:textStyle="bold"
         android:textSize="8pt"
         android:id="@+id/labelWaterConditionSpinner"
@@ -128,7 +128,7 @@
         android:layout_alignEnd="@id/labelWaterConditionSpinner"
         android:layout_below="@id/overallConditionSpinner"
         android:layout_marginTop="15dp"
-        android:text="Virus PPM:"
+        android:text="@string/virus_ppm"
         android:textStyle="bold"
         android:textSize="8pt"
         android:id="@+id/labelVirus"
@@ -156,7 +156,7 @@
         android:layout_alignEnd="@id/virusPPMNumber"
         android:layout_below="@id/virusPPMNumber"
         android:layout_marginTop="15dp"
-        android:text="Contaminant PPM:"
+        android:text="@string/contaminant_ppm"
         android:textStyle="bold"
         android:textSize="8pt"
         android:id="@+id/labelContaminant"
@@ -176,7 +176,7 @@
 
     <!-- submit button -->
     <Button
-        android:text="Submit"
+        android:text="@string/submit"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:id="@+id/submitButtonWaterSourceReport"

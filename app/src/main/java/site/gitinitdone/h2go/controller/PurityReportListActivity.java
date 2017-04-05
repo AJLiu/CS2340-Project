@@ -1,17 +1,16 @@
 package site.gitinitdone.h2go.controller;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Date;
-import java.util.List;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.PurityReport;
+
+import java.util.Date;
+import java.util.List;
 
 public class PurityReportListActivity extends AppCompatActivity {
     private LocalGetPurityReportsAPI getPurityReports = null;
@@ -45,14 +44,14 @@ public class PurityReportListActivity extends AppCompatActivity {
 
             if (success) {
                 if (purityReportList.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                    Toast.makeText(getApplicationContext(), R.string.empty_purity_report_toast,
                             Toast.LENGTH_LONG).show();
                 } else {
                     TextView reportData = (TextView) findViewById(R.id.purityReportData);
                     reportData.setText(populatePurityList(purityReportList));
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                Toast.makeText(getApplicationContext(), R.string.empty_purity_report_toast,
                         Toast.LENGTH_LONG).show();
             }
         }

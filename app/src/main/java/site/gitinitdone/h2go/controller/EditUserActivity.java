@@ -10,14 +10,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.GetUserAPI;
 import site.gitinitdone.h2go.model.UserAccount;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This activity allows the user to edit their profile data and submit the changes
@@ -55,7 +54,7 @@ public class EditUserActivity extends AppCompatActivity {
         EditText firstName = (EditText) findViewById(R.id.firstNameFieldEdit);
         String firstNameText = firstName.getText().toString().trim();
         if (firstNameText.isEmpty()) {
-            showErrorOnField(firstName, "First name is too short.");
+            showErrorOnField(firstName, getString(R.string.first_name_validation));
             return;
         }
 
@@ -63,7 +62,7 @@ public class EditUserActivity extends AppCompatActivity {
         EditText lastName = (EditText) findViewById(R.id.lastNameFieldEdit);
         String lastNameText = lastName.getText().toString().trim();
         if (lastNameText.isEmpty()) {
-            showErrorOnField(lastName, "Last name is too short.");
+            showErrorOnField(lastName, getString(R.string.last_name_validation));
             return;
         }
 
@@ -71,7 +70,7 @@ public class EditUserActivity extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.emailFieldEdit);
         String emailText = email.getText().toString().trim();
         if (!validateEmail(emailText)) {
-            showErrorOnField(email, "Email is not valid.");
+            showErrorOnField(email, getString(R.string.email_validation));
             return;
         }
 
@@ -87,15 +86,15 @@ public class EditUserActivity extends AppCompatActivity {
         // Validating the Address fields
         String addressFullText = addressText + "~" + cityText + "~" + stateZipText;
         if (addressText.isEmpty()) {
-            showErrorOnField(address,"Address is too short.");
+            showErrorOnField(address,getString(R.string.address_validation));
             return;
         }
         if (cityText.isEmpty()) {
-            showErrorOnField(city, "City is too short.");
+            showErrorOnField(city, getString(R.string.city_validation));
             return;
         }
         if (stateZipText.isEmpty()) {
-            showErrorOnField(stateZip, "State / Zip Code is too short.");
+            showErrorOnField(stateZip, getString(R.string.state_validation));
             return;
         }
 
@@ -234,12 +233,12 @@ public class EditUserActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Edited Data TRUE");
-                Toast.makeText(getBaseContext(), "User profile has been saved.",
+                Toast.makeText(getBaseContext(), R.string.edit_profile_toast,
                         Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 System.out.println("Edited Data FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during editing.",
+                Toast.makeText(getBaseContext(), R.string.edit_profile_error_toast,
                         Toast.LENGTH_LONG).show();
 
             }
