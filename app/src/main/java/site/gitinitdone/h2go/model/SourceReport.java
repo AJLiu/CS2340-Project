@@ -1,5 +1,7 @@
 package site.gitinitdone.h2go.model;
 
+import java.util.Date;
+
 /**
  * This class will be used to store the Source Reports when getting them back from the database
  * and will store all the data so that the map can find the report info based on their location.
@@ -91,6 +93,43 @@ public class SourceReport {
 
     public WaterCondition getWaterCondition() {
         return waterCondition;
+    }
+
+    public String[] getReportStringFormatted() {
+
+        int reportNum = this.getReportNumber();
+        String date = (new Date(this.getTimeStamp())).toString();
+        String submitter = this.getReporter();
+
+        // Handles if the direction of latitude is North or South based on negative sign
+        String latitude = "";
+        if (this.getLatitude() < 0) {
+            latitude = (this.getLatitude() * -1) + " South";
+        } else {
+            latitude = this.getLatitude() + " North";
+        }
+
+        // Handles if the direction of longitude is East or West based on negative sign
+        String longitude = "";
+        if (this.getLongitude() < 0) {
+            longitude = (this.getLongitude() * -1) + " West";
+        } else {
+            longitude = this.getLongitude() + " East";
+        }
+
+        String waterType = this.getWaterType().toString();
+        String waterCondition = this.getWaterCondition().toString();
+
+        // Aggregates all the relevant fields into a nicely formatted string to show on screen
+        String reportTitle = "Report #" + reportNum;
+        String submitDate = "Submitted On: " + date + "\n";
+        String reporter = "Submitted By: " + submitter + "\n";
+        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+        String waterTypeString = "Water Type: " + waterType + "\n";
+        String waterConditionString = "Water Condition: " + waterCondition;
+
+        String[] reportString = {reportTitle, submitDate + reporter + location + waterTypeString + waterConditionString};
+        return reportString;
     }
 
 }

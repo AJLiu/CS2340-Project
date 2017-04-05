@@ -62,7 +62,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
     }
 
-    /* Method to format longitude to six decimel places.
+    /* Method to format longitude to six decimal places.
     */
     private String formatLongitude(String oldText) {
         DecimalFormat formatLong = new DecimalFormat("##0.000000");
@@ -72,7 +72,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
         return formatLong.format(Double.parseDouble(oldText.trim()));
     }
 
-    /* Method to format latitude to six decimel places.
+    /* Method to format latitude to six decimal places.
     */
     private String formatLatitude(String oldText) {
         DecimalFormat formatLat = new DecimalFormat("#0.000000");
