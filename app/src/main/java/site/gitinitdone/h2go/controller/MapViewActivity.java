@@ -1,14 +1,11 @@
 package site.gitinitdone.h2go.controller;
 
 import android.content.DialogInterface;
-import android.location.Location;
-import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,7 +16,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
@@ -66,7 +62,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
         System.out.println("Map Ready is Done.");
 
         getSourceReports = new LocalGetSourceReportsAPI();
-        getSourceReports.execute((Void) null); //maybe this should be getsourcereports.onPostExecute?
+        getSourceReports.execute((Void) null); //maybe this should be getSourceReports.onPostExecute?
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLng());
 //        while (getSourceReports.getStatus() != AsyncTask.Status.FINISHED) {

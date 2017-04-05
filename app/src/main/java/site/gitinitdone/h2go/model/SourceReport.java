@@ -24,7 +24,7 @@ public class SourceReport {
      * This is used to ensure a valid Water Condition is entered by the user
      */
     public enum WaterCondition {
-        WASTE("Waste"), TREATABLECLEAR("TreatableClear"), TREATABLEMUDDY("TreatableMuddy"),
+        WASTE("Waste"), TREATABLECLEAR("Treatable Clear"), TREATABLEMUDDY("Treatable Muddy"),
         POTABLE("Potable");
 
         String abbrev;

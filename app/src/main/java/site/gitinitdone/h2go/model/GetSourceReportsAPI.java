@@ -39,7 +39,7 @@ public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void... params) {
 
             cookieManager = LoginUserAPI.cookieManager;
-            sourceReportList = new ArrayList<SourceReport>();
+            sourceReportList = new ArrayList<>();
 
             URL url = null;
             try {

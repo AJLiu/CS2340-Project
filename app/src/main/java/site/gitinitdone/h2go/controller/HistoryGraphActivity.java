@@ -95,7 +95,6 @@ public class HistoryGraphActivity extends AppCompatActivity {
         EditText yearField = (EditText) findViewById(R.id.historyGraphViewYearEntered);
         int currYear = Calendar.getInstance().get(Calendar.YEAR);
         RadioButton virusType = (RadioButton) findViewById(R.id.historyGraphViewVirus);
-        RadioButton contamType = (RadioButton) findViewById(R.id.historyGraphViewContaminant);
 
         try {
             if (latitudeField.getText().toString().isEmpty()) {
@@ -178,7 +177,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
     }
 
     /**
-    * Starts the activty for the plotted graph based on the fields entered in the filter screen.
+    * Starts the activity for the plotted graph based on the fields entered in the filter screen.
     */
     private void startGraphActivity(double[] data, String ppmType) {
         Intent i = new Intent(this, PlottedGraphActivity.class);

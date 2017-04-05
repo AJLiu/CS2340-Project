@@ -1,26 +1,12 @@
 package site.gitinitdone.h2go.model;
 
-import android.content.Context;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
-import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.controller.HistoryGraphActivity;
-import site.gitinitdone.h2go.controller.PlottedGraphActivity;
-
-import static android.R.attr.filter;
-import static android.R.id.list;
 
 /**
- * The HistoricalReportCalc class will calculate average virust/contaminant ppm data for each month.
+ * The HistoricalReportCalc class will calculate average virus/contaminant ppm data for each month.
  */
 
 public class HistoricalReportCalc {
@@ -32,7 +18,7 @@ public class HistoricalReportCalc {
 
     /**
      * A constructor to create a historical report calculation. Takes in
-     * a lattitude, longitute, year, and ppm.
+     * a latitude, longitude, year, and ppm.
      */
     public HistoricalReportCalc(double lat, double lon, int yr, String Ppm) {
         latitude = lat;
@@ -65,14 +51,14 @@ public class HistoricalReportCalc {
     }
 
     /**
-     * The getAverages method calculates average ppms for each month and returns
-     * an array of doubles with average ppms.
+     * The getAverages method calculates average ppm for each month and returns
+     * an array of doubles with average ppm.
      */
     public double[] getAverages(List<PurityReport> filtered) {
         List<Integer>[] monthData = (ArrayList<Integer>[]) new ArrayList[12];
 
         for (int j = 0; j < 12; j++) {
-            monthData[j] = new ArrayList<Integer>();
+            monthData[j] = new ArrayList<>();
         }
 
         for (PurityReport p : filtered) {
@@ -101,5 +87,5 @@ public class HistoricalReportCalc {
         return averages;
     }
 
-        //double lat, double long, int year, String ppm, getPurityreport api
+        //double lat, double long, int year, String ppm, getPurityReport api
 }

@@ -38,7 +38,7 @@ public class GetPurityReportsAPI extends AsyncTask<Void, Void, Boolean> {
     protected Boolean doInBackground(Void... params) {
 
         cookieManager = LoginUserAPI.cookieManager;
-        purityReportList = new ArrayList<PurityReport>();
+        purityReportList = new ArrayList<>();
 
         URL url = null;
         try {

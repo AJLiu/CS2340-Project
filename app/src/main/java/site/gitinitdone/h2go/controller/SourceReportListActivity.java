@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
@@ -15,9 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
-import site.gitinitdone.h2go.model.PurityReport;
 import site.gitinitdone.h2go.model.SourceReport;
 
 /**
@@ -123,7 +120,7 @@ public class SourceReportListActivity extends AppCompatActivity {
     /**
      * A helper method used to show the report information on the screen in the Text View
      * which may later be changed to ta Recycler View or Expandable List View
-     * @param sourceReportArrayList
+     * @param sourceReportArrayList list of source reports
      */
     private String populateSourceList(List<SourceReport> sourceReportArrayList) {
 

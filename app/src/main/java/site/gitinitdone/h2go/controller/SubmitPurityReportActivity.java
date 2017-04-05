@@ -137,13 +137,13 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.overallConditionSpinner);
         waterCondition = waterConditionSpinner.getSelectedItem().toString();
 
-        EditText virus = (EditText) findViewById(R.id.virusPPMNumber);
-        virusPPM = virus.getText().toString();
+//        EditText virus = (EditText) findViewById(R.id.virusPPMNumber);
+        virusPPM = virusField.getText().toString();
 
-        EditText contaminant = (EditText) findViewById(R.id.contaminantPPMNumber);
-        contaminantPPM = contaminant.getText().toString();
+//        EditText contaminant = (EditText) findViewById(R.id.contaminantPPMNumber);
+        contaminantPPM = contaminantField.getText().toString();
 
-        Map<String, String> data = new HashMap<String, String>();
+        Map<String, String> data = new HashMap<>();
         data.put("lat", String.valueOf(latitude));
         data.put("long", String.valueOf(longitude));
         data.put("waterCondition", waterCondition);

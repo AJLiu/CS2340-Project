@@ -116,7 +116,7 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
             e.printStackTrace();
         }
 
-        System.out.println("Reponse = " + response);
+        System.out.println("Response = " + response);
 
         System.out.println(response.toLowerCase().contains("user registered"));
         duplicateUser = response.toLowerCase().contains("is already registered");

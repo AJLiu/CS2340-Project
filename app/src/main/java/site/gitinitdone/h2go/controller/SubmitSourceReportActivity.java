@@ -120,7 +120,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
         waterCondition = waterConditionSpinner.getSelectedItem().toString();
 
-        Map<String, String> data = new HashMap<String, String>();
+        Map<String, String> data = new HashMap<>();
         data.put("lat", String.valueOf(latitude));
         data.put("long", String.valueOf(longitude));
         data.put("waterType", waterType);

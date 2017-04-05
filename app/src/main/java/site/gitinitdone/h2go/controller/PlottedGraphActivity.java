@@ -1,7 +1,6 @@
 package site.gitinitdone.h2go.controller;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -13,10 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import site.gitinitdone.h2go.R;
-import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
 /**
- *  This class setsup the graph and plots at the data received from the database.
+ *  This class sets up the graph and plots at the data received from the database.
 */
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;
