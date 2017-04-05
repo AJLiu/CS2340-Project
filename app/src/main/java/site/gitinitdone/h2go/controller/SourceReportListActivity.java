@@ -2,7 +2,6 @@ package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -53,32 +52,25 @@ public class SourceReportListActivity extends AppCompatActivity {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
-            getReportsView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+        getReportsView.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            getReportsView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
     /**
@@ -97,14 +89,16 @@ public class SourceReportListActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                if (sourceReportList.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
+                if (sourceReportList.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No source reports are in the system.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     TextView reportData = (TextView) findViewById(R.id.sourceReportData);
                     reportData.setText(populateSourceList(sourceReportList));
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No source reports are in the system.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No source reports are in the system.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 
@@ -147,14 +141,15 @@ public class SourceReportListActivity extends AppCompatActivity {
                 longitude = sr.getLongitude() + " East";
             }
 
-            String waterType = sr.getWaterType().toString();
-            String waterCondition = sr.getWaterCondition().toString();
+            SourceReport.WaterType waterType = sr.getWaterType();
+            SourceReport.WaterCondition waterCondition = sr.getWaterCondition();
 
             // Aggregates all the relevant fields into a nicely formatted string to show on screen
             allReports += "--- Source Report #" + reportNum + " ---\n";
             allReports += "Submitted On: " + date + "\n";
             allReports += "Submitted By: " + submitter + "\n";
-            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
+                    + longitude + "\n";
             allReports += "Water Type: " + waterType + "\n";
             allReports += "Water Condition: " + waterCondition + "\n \n";
         }

@@ -15,6 +15,7 @@ public class HistoricalReportCalc {
     private double longitude;
     private int year;
     private String ppm;
+    private final static int MONTHS = 12;
 
     /**
      * A constructor to create a historical report calculation. Takes in
@@ -42,8 +43,10 @@ public class HistoricalReportCalc {
         List<PurityReport> filtered = new ArrayList<>();
         for (PurityReport p: purityReportList) {
             String reportYearString = (new Date(p.getTimeStamp())).toString();
-            int reportYear = Integer.parseInt(reportYearString.substring(reportYearString.length() - 4));
-            if (p.getLatitude()==latitude && p.getLongitude()==longitude && reportYear == year) {
+            int reportYear = Integer.parseInt(reportYearString
+                                    .substring(reportYearString.length() - 4));
+            if ((p.getLatitude() == latitude) && (p.getLongitude() == longitude)
+                        && (reportYear == year)) {
                 filtered.add(p);
             }
         }
@@ -55,9 +58,9 @@ public class HistoricalReportCalc {
      * an array of doubles with average ppm.
      */
     public double[] getAverages(List<PurityReport> filtered) {
-        List<Integer>[] monthData = (ArrayList<Integer>[]) new ArrayList[12];
+        List<Integer>[] monthData = (ArrayList<Integer>[]) new ArrayList[MONTHS];
 
-        for (int j = 0; j < 12; j++) {
+        for (int j = 0; j < MONTHS; j++) {
             monthData[j] = new ArrayList<>();
         }
 
@@ -66,16 +69,16 @@ public class HistoricalReportCalc {
             Calendar cal = Calendar.getInstance();
             cal.setTime(reportTime);
             int index = cal.get(Calendar.MONTH);
-            if (ppm.equalsIgnoreCase("Virus")) {
+            if ("Virus".equalsIgnoreCase(ppm)) {
                 monthData[index].add(p.getVirusPPM());
             } else {
                 monthData[index].add(p.getContaminantPPM());
             }
         }
-        double[] averages = new double[12];
-        for (int i = 0; i < 12; i++) {
+        double[] averages = new double[MONTHS];
+        for (int i = 0; i < MONTHS; i++) {
             double sum = 0.0;
-            if (monthData[i].size() != 0) {
+            if (!monthData[i].isEmpty()) {
                 for (Integer ppm : monthData[i]) {
                     sum += ppm;
                 }

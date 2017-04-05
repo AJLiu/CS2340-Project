@@ -2,7 +2,6 @@ package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,9 +25,11 @@ import site.gitinitdone.h2go.model.SubmitSourceReportAPI;
  */
 public class SubmitSourceReportActivity extends AppCompatActivity {
 
-    private LocalSourceReportAPI submitSourceReportAPI = null;  // the AsyncTask object to submit the source report
+    private LocalSourceReportAPI submitSourceReportAPI = null; //AsyncTask to submit a source report
     private View submitSourceForm;
     private View mProgressView;
+    private final static int MAX_LAT = 90;
+    private final static int MAX_LONG = 180;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,16 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
         // Setup the Spinner to show the Water Types
         Spinner waterTypeSpinner = (Spinner) findViewById(R.id.waterTypeSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, SourceReport.WaterType.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                SourceReport.WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterTypeSpinner.setAdapter(adapter);
         waterTypeSpinner.setSelection(0);
 
         // Setup the Spinner to show the Water Conditions
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, SourceReport.WaterCondition.values());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                SourceReport.WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterConditionSpinner.setAdapter(adapter2);
         waterConditionSpinner.setSelection(0);
@@ -90,7 +93,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         try {
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
-            if (latitude > 90 || latitude < -90) {
+            if ((latitude > MAX_LAT) || (latitude < (-1 * MAX_LAT))) {
                 showErrorOnField(latitudeField, "Latitude must in between -90 and 90 degrees");
                 return;
             }
@@ -104,7 +107,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         try {
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
-            if (longitude > 180 || longitude < -180) {
+            if (longitude > MAX_LONG || longitude < (-1 * MAX_LONG)) {
                 showErrorOnField(longitudeField, "Longitude must in between -180 and 180 degrees");
                 return;
             }
@@ -123,8 +126,8 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         Map<String, String> data = new HashMap<>();
         data.put("lat", String.valueOf(latitude));
         data.put("long", String.valueOf(longitude));
-        data.put("waterType", waterType);
-        data.put("waterCondition", waterCondition);
+        data.put("waterType", waterType.replaceAll(" ", ""));
+        data.put("waterCondition", waterCondition.replaceAll(" ", ""));
 
         submitSourceForm = findViewById(R.id.content_submit_source_report);
         mProgressView = findViewById(R.id.submit_source_report_progress);
@@ -168,32 +171,25 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
-            submitSourceForm.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
+        submitSourceForm.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            submitSourceForm.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
     /**
@@ -213,11 +209,13 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Submitted Source Report TRUE");
-                Toast.makeText(getBaseContext(), "Source Report has been successfully submitted.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Source Report has been successfully submitted.",
+                        Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 System.out.println("Submitted Source Report FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during submission.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "There was an error during submission.",
+                        Toast.LENGTH_LONG).show();
 
             }
         }

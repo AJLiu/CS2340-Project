@@ -44,14 +44,16 @@ public class PurityReportListActivity extends AppCompatActivity {
             getPurityReports = null;
 
             if (success) {
-                if (purityReportList.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                if (purityReportList.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     TextView reportData = (TextView) findViewById(R.id.purityReportData);
                     reportData.setText(populatePurityList(purityReportList));
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 
@@ -89,12 +91,13 @@ public class PurityReportListActivity extends AppCompatActivity {
             int virusPPM = pr.getVirusPPM();
             int contaminantPPM = pr.getContaminantPPM();
 
-            String waterCondition = pr.getWaterCondition().toString();
+            PurityReport.OverallCondition waterCondition = pr.getWaterCondition();
             // Aggregates all the relevant fields into a nicely formatted string to show on screen
             allReports += "--- Purity Report #" + reportNum + " ---\n";
             allReports += "Submitted On: " + date + "\n";
             allReports += "Submitted By: " + submitter + "\n";
-            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
+                            + longitude + "\n";
             allReports += "Water Condition: " + waterCondition + "\n";
             allReports += "Virus PPM: " + virusPPM + "\n";
             allReports += "Contaminant PPM: " + contaminantPPM + "\n \n";

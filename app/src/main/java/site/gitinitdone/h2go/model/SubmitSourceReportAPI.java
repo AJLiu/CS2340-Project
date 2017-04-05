@@ -3,6 +3,7 @@ package site.gitinitdone.h2go.model;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,8 @@ import java.util.Map;
 import site.gitinitdone.h2go.R;
 
 /**
- * Represents and asynchronous task that is used to submit a new source report to the backend database
+ * Represents and asynchronous task that is used to submit a new source report
+ * to the backend database
  */
 public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
@@ -44,64 +46,66 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
             URL url = null;
             try {
-                url = new URL(context.getString(R.string.apiHttpPath) + "/api/reports/source/submit");
+                url = new URL(context.getString(R.string.apiHttpPath)
+                                + "/api/reports/source/submit");
             } catch (MalformedURLException e) {
-                System.out.println("--- Error Here 1 ---");
+                Log.e("SubmitSourceReportAPI", "--- Error Here 1 ---");
                 e.printStackTrace();
             }
             URLConnection con = null;
             try {
                 con = url.openConnection();
             } catch (IOException e) {
-                System.out.println("--- Error Here 2 ---");
+                Log.e("SubmitSourceReportAPI", "--- Error Here 2 ---");
                 e.printStackTrace();
             }
             HttpURLConnection http = (HttpURLConnection) con;
             try {
                 http.setRequestMethod("POST"); // PUT is another valid option
-                System.out.println("Reached here 1");
+                Log.d("SubmitSourceReportAPI", "Reached here 1");
             } catch (ProtocolException e) {
                 e.printStackTrace();
             }
 
-            if (cookieManager.getCookieStore().getCookies().size() > 0) {
-                // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+            if (!cookieManager.getCookieStore().getCookies().isEmpty()) {
+                // While joining the Cookies, use ';' as needed.
                 http.setRequestProperty("Cookie",
                         TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
             }
             http.setDoOutput(true);
-            System.out.println("Reached here 2");
+            Log.d("SubmitSourceReportAPI", "Reached here 2");
             JSONObject jsonObjToSend = new JSONObject();
             JSONObject location = new JSONObject();
             try {
                 location.put("lat", Double.parseDouble(data.get("lat")));
                 location.put("long", Double.parseDouble(data.get("long")));
-                System.out.println("Reached here 3");
+                Log.d("SubmitSourceReportAPI", "Reached here 3");
             } catch (JSONException e) {
-                System.out.println("Error creating location sub-JSON");
+                Log.e("SubmitSourceReportAPI", "Error creating location sub-JSON");
                 e.printStackTrace();
             }
 
             try {
                 jsonObjToSend.put("location", location);
-                System.out.println("Reached here 4");
+                Log.d("SubmitSourceReportAPI", "Reached here 4");
             } catch (JSONException e) {
-                System.out.println("Error inserting location sub-JSON into main JSON");
+                Log.e("SubmitSourceReportAPI", "Error inserting location sub-JSON into main JSON");
                 e.printStackTrace();
             }
 
             try {
                 jsonObjToSend.put("waterType", data.get("waterType"));
                 jsonObjToSend.put("waterCondition", data.get("waterCondition"));
-                System.out.println("Reached here 5");
+                Log.d("SubmitSourceReportAPI", "Reached here 5");
             } catch (JSONException e) {
-                System.out.println("Error inserting water type and condition into main JSON");
+                Log.e("SubmitSourceReportAPI",
+                            "Error inserting water type and condition into main JSON");
                 e.printStackTrace();
             }
 
             String result = jsonObjToSend.toString();
             System.out.println("Result string to send \n" + result);
-            System.out.println("Reached here 6");
+            Log.d("SubmitSourceReportAPI", "Reached here 6");
 
 
             byte[] out = result.getBytes(StandardCharsets.UTF_8);
@@ -109,20 +113,20 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            System.out.println("Reached here 7");
+            Log.d("SubmitSourceReportAPI", "Reached here 7");
             try {
                 http.connect();
             } catch (IOException e) {
-                System.out.println("--- Error Here 5 ---");
+                Log.e("SubmitSourceReportAPI", "--- Error Here 5 ---");
                 e.printStackTrace();
             }
             try {
                 try (OutputStream os = http.getOutputStream()) {
                     os.write(out);
-                    System.out.println("Reached here 8");
+                    Log.d("SubmitSourceReportAPI", "Reached here 8");
                 }
             } catch (IOException e) {
-                System.out.println("--- Error Here 6 ---");
+                Log.e("SubmitSourceReportAPI", "--- Error Here 6 ---");
                 e.printStackTrace();
             }
 
@@ -134,10 +138,10 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
                     bis = new BufferedInputStream(http.getInputStream());
                 } else {
                     bis = new BufferedInputStream(http.getErrorStream());
-                    System.out.println("Reached here 9");
+                    Log.d("SubmitSourceReportAPI", "Reached here 9");
                 }
             } catch (IOException e) {
-                System.out.println("--- Error Here 7 ---");
+                Log.e("SubmitSourceReportAPI", "--- Error Here 7 ---");
                 e.printStackTrace();
             }
 
@@ -153,10 +157,11 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
                 e.printStackTrace();
             }
 
-            System.out.println("Response = " + response);
+            Log.d("SubmitSourceReportAPI", "Response = " + response);
 
             if (response.toLowerCase().contains("unauthorized")) {
-                System.out.println("Error at the end of the submitting Do in Background.");
+                Log.e("SubmitSourceReportAPI",
+                            "Error at the end of the submitting Do in Background.");
             }
 
             return (response.toLowerCase().contains("report submitted"));

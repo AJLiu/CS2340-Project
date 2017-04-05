@@ -117,19 +117,20 @@ public class SourceReport {
             longitude = this.getLongitude() + " East";
         }
 
-        String waterType = this.getWaterType().toString();
-        String waterCondition = this.getWaterCondition().toString();
+        WaterType waterType = this.getWaterType();
+        WaterCondition waterCondition = this.getWaterCondition();
 
         // Aggregates all the relevant fields into a nicely formatted string to show on screen
         String reportTitle = "Report #" + reportNum;
         String submitDate = "Submitted On: " + date + "\n";
         String reporter = "Submitted By: " + submitter + "\n";
-        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: " + longitude + "\n";
+        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
+                + longitude + "\n";
         String waterTypeString = "Water Type: " + waterType + "\n";
         String waterConditionString = "Water Condition: " + waterCondition;
 
-        String[] reportString = {reportTitle, submitDate + reporter + location + waterTypeString + waterConditionString};
-        return reportString;
+        return new String[]{reportTitle, submitDate + reporter + location
+                                    + waterTypeString + waterConditionString};
     }
 
 }

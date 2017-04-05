@@ -64,15 +64,15 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
             e.printStackTrace();
         }
 
-        if (cookieManager.getCookieStore().getCookies().size() > 0) {
-            // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+        if (!cookieManager.getCookieStore().getCookies().isEmpty()) {
+            // While joining the Cookies, use ; as needed.
             http.setRequestProperty("Cookie",
                     TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
         }
         http.setDoOutput(true);
 
         String result = "";
-        for (Map.Entry<String, String> entry : data.entrySet())
+        for (Map.Entry<String, String> entry : data.entrySet()) {
             try {
                 result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
                         + URLEncoder.encode(entry.getValue(), "UTF-8"));
@@ -80,6 +80,7 @@ public class EditUserAPI extends AsyncTask<Void, Void, Boolean> {
                 System.out.println("--- Error Here 4 ---");
                 e.printStackTrace();
             }
+        }
         result = result.substring(1);
         System.out.println("My result \n" + result);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);

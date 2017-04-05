@@ -24,20 +24,23 @@
             android:layout_centerInParent="false"
             android:orientation="horizontal" android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true">
+
         <Button
-                android:text="@string/login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:onClick="switchLogin"
-                android:layout_weight="1"/>
+            android:text="@string/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:onClick="switchLogin"
+            android:layout_weight="1" />
+
         <Button
-                android:text="@string/register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:onClick="switchRegister"
-                android:layout_weight="1"/>
+            android:text="@string/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:onClick="switchRegister"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
 

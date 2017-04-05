@@ -75,7 +75,7 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
         arguments.put("username", mUsername);
         arguments.put("password", mPassword);
         String result = "";
-        for (Map.Entry<String, String> entry : arguments.entrySet())
+        for (Map.Entry<String, String> entry : arguments.entrySet()) {
             try {
                 result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
                         + URLEncoder.encode(entry.getValue(), "UTF-8"));
@@ -83,6 +83,7 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
                 System.out.println("--- Error Here 4 ---");
                 e.printStackTrace();
             }
+        }
         result = result.substring(1);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);
         int length = out.length;
@@ -117,6 +118,7 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
                 bis = new BufferedInputStream(http.getInputStream());
                 Map<String, List<String>> headerFields = http.getHeaderFields();
                 List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
+                System.out.println("Good response code (not an error code from backend.");
 
                 if (cookiesHeader != null) {
                     for (String cookie : cookiesHeader) {
@@ -125,6 +127,7 @@ public class LoginUserAPI extends AsyncTask<Void, Void, Boolean> {
                 }
             } else {
                 bis = new BufferedInputStream(http.getErrorStream());
+                System.out.println("Bad response code (got an error code from backend.");
             }
         } catch (IOException e) {
             System.out.println("--- Error Here 7 ---");

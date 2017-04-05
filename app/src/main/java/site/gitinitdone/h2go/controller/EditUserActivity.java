@@ -54,7 +54,7 @@ public class EditUserActivity extends AppCompatActivity {
         // Validating the First Name
         EditText firstName = (EditText) findViewById(R.id.firstNameFieldEdit);
         String firstNameText = firstName.getText().toString().trim();
-        if (firstNameText.length() == 0) {
+        if (firstNameText.isEmpty()) {
             showErrorOnField(firstName, "First name is too short.");
             return;
         }
@@ -62,7 +62,7 @@ public class EditUserActivity extends AppCompatActivity {
         // Validating the Last Name
         EditText lastName = (EditText) findViewById(R.id.lastNameFieldEdit);
         String lastNameText = lastName.getText().toString().trim();
-        if (lastNameText.length() == 0) {
+        if (lastNameText.isEmpty()) {
             showErrorOnField(lastName, "Last name is too short.");
             return;
         }
@@ -86,15 +86,15 @@ public class EditUserActivity extends AppCompatActivity {
 
         // Validating the Address fields
         String addressFullText = addressText + "~" + cityText + "~" + stateZipText;
-        if (addressText.length() == 0) {
+        if (addressText.isEmpty()) {
             showErrorOnField(address,"Address is too short.");
             return;
         }
-        if (cityText.length() == 0) {
+        if (cityText.isEmpty()) {
             showErrorOnField(city, "City is too short.");
             return;
         }
-        if (stateZipText.length() == 0) {
+        if (stateZipText.isEmpty()) {
             showErrorOnField(stateZip, "State / Zip Code is too short.");
             return;
         }
@@ -126,7 +126,9 @@ public class EditUserActivity extends AppCompatActivity {
      * @return whether or not the email string has a valid format (true if the email is valid)
      */
     private boolean validateEmail(String emailText) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+"
+                + "@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\."
+                + "[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(emailText);
         return m.matches();
@@ -196,13 +198,15 @@ public class EditUserActivity extends AppCompatActivity {
         stateZip.setText(addressParts[2]);
 
         Spinner title = (Spinner) findViewById(R.id.titleSpinnerEdit);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserAccount.Title.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                UserAccount.Title.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         title.setAdapter(adapter);
         title.setSelection(accountInfo.getTitle().ordinal());
 
         Spinner userType = (Spinner) findViewById(R.id.userTypeSpinnerEdit);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserAccount.AccountType.values());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                UserAccount.AccountType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter2);
         userType.setSelection(accountInfo.getUserType().ordinal());
@@ -230,11 +234,13 @@ public class EditUserActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Edited Data TRUE");
-                Toast.makeText(getBaseContext(), "User profile has been saved.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "User profile has been saved.",
+                        Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 System.out.println("Edited Data FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during editing.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "There was an error during editing.",
+                        Toast.LENGTH_LONG).show();
 
             }
         }

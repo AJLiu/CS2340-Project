@@ -1,8 +1,8 @@
 package site.gitinitdone.h2go.controller;
 
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -14,8 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
@@ -23,12 +22,15 @@ import site.gitinitdone.h2go.model.SourceReport;
 
 import static site.gitinitdone.h2go.R.id.map;
 
-public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback,
+                                                            GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private LocalGetSourceReportsAPI getSourceReports;
-    private ArrayList<SourceReport> ListOfReports;
+    private List<SourceReport> ListOfReports;
     private SupportMapFragment mapFragment;
+    private final static int MAP_MAX_ZOOM = 14;
+    private final static int CAM_MOVE_TIME = 500;  // milliseconds
 
 
     @Override
@@ -55,30 +57,15 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap; //map instance
-        mMap.setMaxZoomPreference(14);
+        mMap.setMaxZoomPreference(MAP_MAX_ZOOM);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.setOnMarkerClickListener(this);
         System.out.println("Map Ready is Done.");
 
         getSourceReports = new LocalGetSourceReportsAPI();
-        getSourceReports.execute((Void) null); //maybe this should be getSourceReports.onPostExecute?
+        getSourceReports.execute((Void) null);
 
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng());
-//        while (getSourceReports.getStatus() != AsyncTask.Status.FINISHED) {
-//            System.out.println("Waiting 1.");
-//            try {
-//                Thread.sleep(1000);
-//                System.out.println("Waiting 2.");
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (getSourceReports.getStatus() == AsyncTask.Status.FINISHED) {
-
-//        } else {
-//
-//        }
     }
 
     @Override
@@ -89,7 +76,8 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
         final SourceReport sr = ListOfReports.get((int) marker.getTag());
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()), 500, new GoogleMap.CancelableCallback() {
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()), CAM_MOVE_TIME,
+                                new GoogleMap.CancelableCallback() {
             @Override
             public void onFinish() {
 
@@ -134,20 +122,24 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
             if (success) {
                 System.out.println("Get reports is Done.");
                 ListOfReports = sourceReportList;
-                if (ListOfReports.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
+                if (ListOfReports.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No reports are in the system.",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    //get the array list with the source reports, get the latitude and longitude to put onto the map
+                    //get the array list with the source reports, get the latitude
+                    // and longitude to put onto the map
                     for (int i = 0; i < ListOfReports.size(); i++) {
-                        LatLng currentLocation = new LatLng(ListOfReports.get(i).getLatitude(), ListOfReports.get(i).getLongitude());
-                        //MarkerOptions marker = new MarkerOptions().position(currentLocation).title("Report #" + ListOfReports.get(i).getReportNumber());
+                        LatLng currentLocation = new LatLng(ListOfReports.get(i).getLatitude(),
+                                                    ListOfReports.get(i).getLongitude());
 
-                        Marker marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Report #" + ListOfReports.get(i).getReportNumber()));
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(currentLocation)
+                                    .title("Report #" + ListOfReports.get(i).getReportNumber()));
                         marker.setTag(i);
                     }
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No reports are in the system.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No reports are in the system.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 

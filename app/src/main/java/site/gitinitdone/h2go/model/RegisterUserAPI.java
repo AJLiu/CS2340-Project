@@ -60,7 +60,7 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
 
 
         String result = "";
-        for (Map.Entry<String, String> entry : data.entrySet())
+        for (Map.Entry<String, String> entry : data.entrySet()) {
             try {
                 result += "&" + (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
                         + URLEncoder.encode(entry.getValue(), "UTF-8"));
@@ -68,6 +68,7 @@ public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
                 System.out.println("--- Error Here 4 ---");
                 e.printStackTrace();
             }
+        }
         result = result.substring(1);
         byte[] out = result.getBytes(StandardCharsets.UTF_8);
         int length = out.length;

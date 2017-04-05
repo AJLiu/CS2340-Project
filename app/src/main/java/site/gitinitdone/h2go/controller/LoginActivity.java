@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -21,8 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.net.CookieManager;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.LoginUserAPI;
@@ -59,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if ((id == (R.id.login)) || (id == (EditorInfo.IME_NULL))) {
                     attemptLogin();
                     return true;
                 }
@@ -79,17 +76,20 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-    public void nextAct(View v){
+
+    private void nextAct(View v){
         Intent i = new Intent(this, AppScreenActivity.class);
         AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.username);
         String theUsername = editText.getText().toString();
 
-        mySharedPrefEditor = getSharedPreferences(getString(R.string.sharedPrefName), MODE_PRIVATE).edit();
+        mySharedPrefEditor = getSharedPreferences(getString(R.string.sharedPrefName), MODE_PRIVATE)
+                                .edit();
         mySharedPrefEditor.putString(getString(R.string.prompt_username), theUsername);
         mySharedPrefEditor.apply();
 
         startActivity(i);
-        Toast.makeText(getApplicationContext(), "You have successfully logged in.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "You have successfully logged in.",
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -165,15 +165,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String username) {
-        //TODO: Replace this with your own logic
-        return username.length() > 0;
-        //return email.contains("@");c
+        return !username.isEmpty();
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 0;
-        //return password.length() > 4;
+        return !password.isEmpty();
     }
 
     /**
@@ -184,32 +180,26 @@ public class LoginActivity extends AppCompatActivity {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
+
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
 
@@ -218,9 +208,6 @@ public class LoginActivity extends AppCompatActivity {
      * the user.
      */
     class LocalLoginAPI extends LoginUserAPI {
-
-        private static final String COOKIES_HEADER = "Set-Cookie";
-        public CookieManager cookieManager = LoginUserAPI.cookieManager;
 
         LocalLoginAPI(String username, String password) {
             super(username, password, getApplicationContext());

@@ -109,7 +109,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Virus"
-            android:layout_below="@id/historyGraphDataType"
             android:checked="true"
             android:layout_marginTop="5dp"
             android:layout_marginStart="2dp"
@@ -121,7 +120,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contaminant"
-            android:layout_below="@id/historyGraphDataType"
             android:layout_marginTop="5dp"
             android:layout_marginStart="2dp"
             android:textSize="6pt"/>

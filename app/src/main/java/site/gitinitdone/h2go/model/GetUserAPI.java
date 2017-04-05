@@ -108,11 +108,14 @@ public class GetUserAPI extends AsyncTask<Void, Void, Boolean> {
                 String email = json.getString("email");
 
                 String titleString = json.getString("title").toUpperCase();
-                UserAccount.Title title = UserAccount.Title.valueOf(titleString.substring(0, titleString.length() - 1));
+                UserAccount.Title title = UserAccount.Title.valueOf(titleString
+                                                .substring(0, titleString.length() - 1));
 
-                UserAccount.AccountType type = UserAccount.AccountType.valueOf(json.getString("userType").toUpperCase());
+                UserAccount.AccountType type = UserAccount.AccountType
+                                                .valueOf(json.getString("userType").toUpperCase());
 
-                currentUser = new UserAccount(username, title, firstName, lastName, address, email, type);
+                currentUser = new UserAccount(username, title, firstName, lastName, address,
+                                                email, type);
                 saveAccountInfo(currentUser);
                 return true;
 

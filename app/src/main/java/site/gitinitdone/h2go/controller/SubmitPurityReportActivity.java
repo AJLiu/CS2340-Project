@@ -2,7 +2,6 @@ package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +28,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
     private LocalPurityReportAPI submitPurityReportAPI = null;
     private View submitPurityForm;
     private View mProgressView;
+    private final static int MAX_LAT = 90;
+    private final static int MAX_LONG = 180;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
         // Setup the Spinner to show the Water Conditions
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.overallConditionSpinner);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, PurityReport.OverallCondition.values());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                PurityReport.OverallCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterConditionSpinner.setAdapter(adapter2);
         waterConditionSpinner.setSelection(0);
@@ -110,7 +112,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         try {
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
-            if (latitude > 90 || latitude < -90) {
+            if ((latitude > MAX_LAT) || (latitude < (-1 * MAX_LAT))) {
                 showErrorOnField(latitudeField, "Latitude must in between -90 and 90 degrees");
                 return;
             }
@@ -124,7 +126,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         try {
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
-            if (longitude > 180 || longitude < -180) {
+            if ((longitude > MAX_LONG) || (longitude < (-1 * MAX_LONG))) {
                 showErrorOnField(longitudeField, "Longitude must in between -180 and 180 degrees");
                 return;
             }
@@ -200,32 +202,25 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            submitPurityForm.setVisibility(show ? View.GONE : View.VISIBLE);
-            submitPurityForm.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    submitPurityForm.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        submitPurityForm.setVisibility(show ? View.GONE : View.VISIBLE);
+        submitPurityForm.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                submitPurityForm.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            submitPurityForm.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
     /**
@@ -244,11 +239,13 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
             if (success) {
                 System.out.println("Submitted Purity Report TRUE");
-                Toast.makeText(getBaseContext(), "Purity Report has been successfully submitted.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Purity Report has been successfully submitted.",
+                        Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 System.out.println("Submitted Purity Report FALSE");
-                Toast.makeText(getBaseContext(), "There was an error during submission.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "There was an error during submission.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 

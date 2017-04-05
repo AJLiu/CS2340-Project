@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetUserAPI;
+import site.gitinitdone.h2go.model.UserAccount;
 
 /**
  * This Activity allows the user to select which type of report to submit and will redirect
@@ -17,7 +18,7 @@ import site.gitinitdone.h2go.model.GetUserAPI;
  */
 public class ChooseReportSubmitActivity extends AppCompatActivity {
 
-    private String userType = "";
+    private UserAccount.AccountType userType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +65,10 @@ public class ChooseReportSubmitActivity extends AppCompatActivity {
             //showProgress(false);
 
             if (success) {
-                userType = userAccount.getUserType().toString();
-                if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User")) {
-                    Toast.makeText(getBaseContext(), "General users cannot submit a purity report.", Toast.LENGTH_LONG).show();
+                userType = userAccount.getUserType();
+                if ((userType == null) || UserAccount.AccountType.USER == userType) {
+                    Toast.makeText(getBaseContext(), "General users cannot submit a purity report.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     Intent i = new Intent(getBaseContext(), SubmitPurityReportActivity.class);
                     startActivity(i);

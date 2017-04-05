@@ -17,13 +17,17 @@ import site.gitinitdone.h2go.model.GetPurityReportsAPI;
 import site.gitinitdone.h2go.model.HistoricalReportCalc;
 
 /**
- *  This class creates the screen with the filter fields location, year, and data type to plot the purity graph.
+ *  This class creates the screen with the filter fields location, year,
+ *  and data type to plot the purity graph.
 */
 
 public class HistoryGraphActivity extends AppCompatActivity {
 
     private HistoricalReportCalc reportCalc;
-    LocalGetPurityReportsAPI localPurityReportsAPI = null;
+    private LocalGetPurityReportsAPI localPurityReportsAPI = null;
+    private final static int MAX_LAT = 90;
+    private final static int MAX_LONG = 180;
+    private final static int MIN_YEAR = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +107,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
             }
             latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
             latitude = Double.parseDouble(latitudeField.getText().toString());
-            if (latitude > 90 || latitude < -90) {
+            if ((latitude > MAX_LAT) || (latitude < (MAX_LAT * -1))) {
                 showErrorOnField(latitudeField, "Latitude must in between -90 and 90 degrees");
                 return;
             }
@@ -121,7 +125,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
             }
             longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
             longitude = Double.parseDouble(longitudeField.getText().toString());
-            if (longitude > 180 || longitude < -180) {
+            if ((longitude > MAX_LONG) || (longitude < (MAX_LONG * -1))) {
                 showErrorOnField(longitudeField, "Longitude must in between -180 and 180 degrees");
                 return;
             }
@@ -141,8 +145,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
                 showErrorOnField(yearField, "Year cannot be greater than " + currYear);
                 return;
             }
-            if (year < 2000) {
-                showErrorOnField(yearField, "Year cannot be less than " + 2000);
+            if (year < MIN_YEAR) {
+                showErrorOnField(yearField, "Year cannot be less than " + MIN_YEAR);
                 return;
             }
             // if it reaches here, no errors for year
@@ -201,15 +205,18 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
 
             if (success) {
-                if (purityReportList.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                if (purityReportList.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    double[] averageMonthData = reportCalc.getAverages(reportCalc.filter(purityReportList));
+                    double[] averageMonthData = reportCalc.getAverages(reportCalc
+                                                                .filter(purityReportList));
                     startGraphActivity(averageMonthData, reportCalc.getFilters()[3]);
 
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "No purity reports are in the system.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No purity reports are in the system.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 

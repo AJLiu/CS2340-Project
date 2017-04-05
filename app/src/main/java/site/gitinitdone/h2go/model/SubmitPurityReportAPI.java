@@ -22,7 +22,8 @@ import java.util.Map;
 import site.gitinitdone.h2go.R;
 
 /**
- * Represents and asynchronous task that is used to submit a new purity report to the backend database
+ * Represents and asynchronous task that is used to submit a new purity report
+ * to the backend database
  */
 public class SubmitPurityReportAPI extends AsyncTask<Void, Void, Boolean> {
 
@@ -64,8 +65,8 @@ public class SubmitPurityReportAPI extends AsyncTask<Void, Void, Boolean> {
             e.printStackTrace();
         }
 
-        if (cookieManager.getCookieStore().getCookies().size() > 0) {
-            // While joining the Cookies, use ',' or ';' as needed. Most of the servers are using ';'
+        if (!cookieManager.getCookieStore().getCookies().isEmpty()) {
+            // While joining the Cookies, use ';' as needed.
             http.setRequestProperty("Cookie",
                     TextUtils.join(";",  cookieManager.getCookieStore().getCookies()));
         }

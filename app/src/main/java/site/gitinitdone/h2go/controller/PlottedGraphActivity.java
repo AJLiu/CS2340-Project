@@ -19,6 +19,7 @@ import site.gitinitdone.h2go.R;
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;
     private String ppmType;
+    private final static int MONTHS = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +31,9 @@ public class PlottedGraphActivity extends AppCompatActivity {
         data = getIntent().getDoubleArrayExtra("data");
         ppmType = getIntent().getStringExtra("ppm");
 
-        DataPoint[] dataPoints = new DataPoint[12];
+        DataPoint[] dataPoints = new DataPoint[MONTHS];
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < MONTHS; i++) {
             dataPoints[i] = new DataPoint((i + 1), data[i]);
         }
 
@@ -42,7 +43,7 @@ public class PlottedGraphActivity extends AppCompatActivity {
 
     /* This method labels the x and y axis, and plots the data points as a line.
     */
-    public void initGraph(GraphView graph, DataPoint[] dataPoints) {
+    private void initGraph(GraphView graph, DataPoint[] dataPoints) {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
 
         series.setColor(Color.BLUE);
@@ -64,7 +65,8 @@ public class PlottedGraphActivity extends AppCompatActivity {
 
         // use static labels for horizontal and vertical labels
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(new String[] {"J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"});
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"J", "F", "M", "A", "M", "J", "J",
+                                                                    "A", "S", "O", "N", "D"});
         gridLabel.setLabelFormatter(staticLabelsFormatter);
 
     }

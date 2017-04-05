@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +19,8 @@ import site.gitinitdone.h2go.model.GetUserAPI;
 /**
  * The main app screen after a user has logged in successfully
  */
-public class AppScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AppScreenActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private String sharedPrefName;
     private String usernameKey;
@@ -32,13 +32,13 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_app_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_app_screen_toolbar);
         setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
 
         // Get the username of whoever just logged in and show it in the corner of the screen
         sharedPrefName = getApplicationContext().getString(R.string.sharedPrefName);
         usernameKey = getString(R.string.prompt_username);
 
-        String usernameFromLogin = getSharedPreferences(sharedPrefName, MODE_PRIVATE).getString(usernameKey, null);
+        String usernameFromLogin = getSharedPreferences(sharedPrefName, MODE_PRIVATE)
+                                        .getString(usernameKey, null);
         TextView userLoggedIn = (TextView) findViewById(R.id.usernameLoggedIn);
         String loginMessage = "You are logged in as: " + usernameFromLogin;
         userLoggedIn.setText(loginMessage);
@@ -58,7 +58,7 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
      * Switched from the App Screen activity to the Edit User activity
      * so the user can edit their profile
      */
-    public void editUser () {
+    private void editUser () {
         Intent i = new Intent(this, EditUserActivity.class);
         startActivity(i);
     }
@@ -68,11 +68,12 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
      * so the user is logged out of the app. They can log in using a different account or choose
      * to register a new account from the Welcome screen.
      */
-    public void logOut () {
+    private void logOut () {
         SharedPreferences.Editor editor = getSharedPreferences(sharedPrefName, MODE_PRIVATE).edit();
         editor.clear();
         editor.apply();
-        Toast.makeText(getApplicationContext(), getString(R.string.loggingOut), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.loggingOut),
+                            Toast.LENGTH_LONG).show();
         finish();
     }
 
@@ -157,21 +158,27 @@ public class AppScreenActivity extends AppCompatActivity implements NavigationVi
             //showProgress(false);
 
             if (success) {
-                if (preferredAction.equalsIgnoreCase("purity_report")) {
+                if ("purity_report".equalsIgnoreCase(preferredAction)) {
                     String userType = userAccount.getUserType().toString();
-                    if (userType == null || userType.length() == 0 || userType.equalsIgnoreCase("User") || userType.equalsIgnoreCase("Worker")) {
-                        Toast.makeText(getBaseContext(), "General users and workers cannot view purity reports.", Toast.LENGTH_LONG).show();
+                    if ((userType == null) || userType.isEmpty()
+                            || "User".equalsIgnoreCase(userType)
+                            || "Worker".equalsIgnoreCase(userType)) {
+                        Toast.makeText(getBaseContext(),
+                                "General users and workers cannot view purity reports.",
+                                Toast.LENGTH_LONG).show();
                     } else {
-                        Intent purityList = new Intent(getBaseContext(), PurityReportListActivity.class);
+                        Intent purityList = new Intent(getBaseContext(),
+                                PurityReportListActivity.class);
                         startActivity(purityList);
                     }
-                } else if (preferredAction.equalsIgnoreCase("history_graph")) {
+                } else if ("history_graph".equalsIgnoreCase(preferredAction)) {
                     String userType = userAccount.getUserType().toString();
-                    if (userType != null && userType.equalsIgnoreCase("Manager")) {
+                    if ((userType == null) || !("Manager".equalsIgnoreCase(userType))) {
+                        Toast.makeText(getBaseContext(), "Only managers can view history graphs",
+                                Toast.LENGTH_LONG).show();
+                    } else {
                         Intent graph = new Intent(getBaseContext(), HistoryGraphActivity.class);
                         startActivity(graph);
-                    } else {
-                        Toast.makeText(getBaseContext(), "Only managers can view history graphs", Toast.LENGTH_LONG).show();
                     }
                 }
             }

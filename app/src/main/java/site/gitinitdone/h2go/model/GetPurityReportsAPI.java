@@ -17,6 +17,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 import site.gitinitdone.h2go.R;
 
@@ -26,7 +27,7 @@ import site.gitinitdone.h2go.R;
 public class GetPurityReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
     private CookieManager cookieManager;
-    protected ArrayList<PurityReport> purityReportList = null; // holds the all the reports from this GET request
+    protected List<PurityReport> purityReportList = null; // holds all reports from the GET request
 
     private final Context context;
 
@@ -125,14 +126,17 @@ public class GetPurityReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
                     String waterConditionString = jsonReport.getString("waterCondition");
                     waterConditionString = waterConditionString.toUpperCase();
-                    PurityReport.OverallCondition waterCondition = PurityReport.OverallCondition.valueOf(waterConditionString);
+                    PurityReport.OverallCondition waterCondition = PurityReport.OverallCondition
+                            .valueOf(waterConditionString);
 
                     int virusPPM = jsonReport.getInt("virusPPM");
                     int contaminantPPM = jsonReport.getInt("contaminantPPM");
 
                     // All the fields have been collected for a single water report
-                    // Now we will create a new SourceReport object and add it to the sourceReportList
-                    PurityReport report = new PurityReport(latitude, longitude, reportNum, name, timeStamp, waterCondition, virusPPM, contaminantPPM);
+                    // Now we will create a new SourceReport object
+                    // and add it to the sourceReportList
+                    PurityReport report = new PurityReport(latitude, longitude, reportNum, name,
+                                timeStamp, waterCondition, virusPPM, contaminantPPM);
                     System.out.println(report.getReportNumber());
                     addNewReport(report);
                 }
