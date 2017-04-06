@@ -67,7 +67,7 @@ public class ChooseReportSubmitActivity extends AppCompatActivity {
             if (success) {
                 userType = userAccount.getUserType();
                 if ((userType == null) || UserAccount.AccountType.USER == userType) {
-                    Toast.makeText(getBaseContext(), "General users cannot submit a purity report.",
+                    Toast.makeText(getBaseContext(), R.string.purity_submit_permission_toast,
                             Toast.LENGTH_LONG).show();
                 } else {
                     Intent i = new Intent(getBaseContext(), SubmitPurityReportActivity.class);

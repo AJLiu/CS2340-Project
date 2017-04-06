@@ -34,7 +34,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
         android:layout_marginStart="52dp"
-        android:text="Edit User Profile:"
+        android:text="@string/edit_user_profile"
         android:textSize="10pt"
         android:id="@+id/formTitleEdit"
         />
@@ -47,7 +47,7 @@
         android:layout_alignStart="@id/formTitleEdit"
         android:layout_alignEnd="@id/formTitleEdit"
         android:layout_marginTop="5dp"
-        android:text="Title:"
+        android:text="@string/title"
         android:textSize="8pt"
         android:id="@+id/labelTitleSpinnerEdit"
         />
@@ -71,7 +71,7 @@
         android:ems="10"
         android:layout_marginTop="1dp"
         android:id="@+id/firstNameFieldEdit"
-        android:hint="First Name"
+        android:hint="@string/first_name"
         android:layout_below="@id/titleSpinnerEdit"
         android:layout_alignStart="@id/titleSpinnerEdit"/>
 
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Last Name"
+        android:hint="@string/last_name"
         android:ems="10"
         android:layout_below="@id/firstNameFieldEdit"
         android:layout_alignEnd="@id/firstNameFieldEdit"
@@ -94,7 +94,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailFieldEdit"
-        android:hint="Email"
+        android:hint="@string/email"
         android:layout_below="@id/lastNameFieldEdit"
         android:layout_alignStart="@id/lastNameFieldEdit" />
 
@@ -106,7 +106,7 @@
         android:inputType="textPostalAddress"
         android:ems="10"
         android:id="@+id/addressLineFieldEdit"
-        android:hint="Address Line 1"
+        android:hint="@string/address_line_1"
         android:layout_below="@id/emailFieldEdit"
         android:layout_alignStart="@id/emailFieldEdit" />
 
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="City"
+        android:hint="@string/city"
         android:ems="10"
         android:layout_below="@id/addressLineFieldEdit"
         android:layout_alignStart="@id/addressLineFieldEdit"
@@ -126,12 +126,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="State, Zip"
+        android:hint="@string/state_zip"
         android:ems="10"
         android:layout_below="@id/cityFieldEdit"
         android:layout_alignEnd="@id/cityFieldEdit"
         android:id="@+id/stateZipFieldEdit" />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -139,6 +138,10 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/stateZipFieldEdit"
         android:layout_alignStart="@id/stateZipFieldEdit"
+        android:text="@string/user_account_type"
+        android:textSize="18sp"
+        android:id="@+id/formUserTypeFieldEdit"
+        />
         android:text="These cannot be changed by you:"
         android:textSize="8pt"
         android:id="@+id/formPermanentFields" />
@@ -157,6 +160,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_below="@id/userTypeSpinnerEdit"
+        android:layout_alignStart="@id/userTypeSpinnerEdit"
+        android:text="@string/username_cannot_be_changed"
         android:layout_below="@id/formUsernameFieldEdit"
         android:layout_alignStart="@id/formUsernameFieldEdit"
         android:text="User Account Type:"
@@ -168,7 +174,7 @@
 
     <!-- submit button -->
     <Button
-        android:text="Submit Changes"
+        android:text="@string/submit_changes"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:id="@+id/submitButtonEdit"

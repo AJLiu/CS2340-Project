@@ -40,7 +40,7 @@ public class AppScreenActivity extends AppCompatActivity
         String usernameFromLogin = getSharedPreferences(sharedPrefName, MODE_PRIVATE)
                                         .getString(usernameKey, null);
         TextView userLoggedIn = (TextView) findViewById(R.id.usernameLoggedIn);
-        String loginMessage = "You are logged in as: " + usernameFromLogin;
+        String loginMessage = getString(R.string.login_message) + usernameFromLogin;
         userLoggedIn.setText(loginMessage);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -164,7 +164,7 @@ public class AppScreenActivity extends AppCompatActivity
                             || "User".equalsIgnoreCase(userType)
                             || "Worker".equalsIgnoreCase(userType)) {
                         Toast.makeText(getBaseContext(),
-                                "General users and workers cannot view purity reports.",
+                                R.string.purity_permission_toast,
                                 Toast.LENGTH_LONG).show();
                     } else {
                         Intent purityList = new Intent(getBaseContext(),
@@ -174,7 +174,7 @@ public class AppScreenActivity extends AppCompatActivity
                 } else if ("history_graph".equalsIgnoreCase(preferredAction)) {
                     String userType = userAccount.getUserType().toString();
                     if ((userType == null) || !("Manager".equalsIgnoreCase(userType))) {
-                        Toast.makeText(getBaseContext(), "Only managers can view history graphs",
+                        Toast.makeText(getBaseContext(), R.string.graph_permission_toast,
                                 Toast.LENGTH_LONG).show();
                     } else {
                         Intent graph = new Intent(getBaseContext(), HistoryGraphActivity.class);

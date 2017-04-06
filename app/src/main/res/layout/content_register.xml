@@ -23,7 +23,7 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/usernameField"
-        android:hint="Username" />
+        android:hint="@string/username" />
 
     <!-- password -->
     <EditText
@@ -32,14 +32,14 @@
         android:inputType="textPassword"
         android:ems="8"
         android:id="@+id/passwordField"
-        android:hint="Password"
+        android:hint="@string/password"
         android:layout_below="@id/usernameField"
         android:layout_alignStart="@id/usernameField" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title:"
+        android:text="@string/title"
         android:textSize="8pt"
         android:layout_alignStart="@id/passwordField"
         android:layout_below="@id/passwordField"
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type of User:"
+        android:text="@string/type_of_user"
         android:textSize="8pt"
         android:layout_alignStart="@id/titleSpinner"
         android:layout_below="@id/titleSpinner"
@@ -83,7 +83,7 @@
         android:ems="10"
         android:layout_marginTop="1dp"
         android:id="@+id/firstNameField"
-        android:hint="First Name"
+        android:hint="@string/first_name"
         android:layout_below="@id/userTypeSpinner"
         android:layout_alignStart="@id/userTypeSpinner"/>
 
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Last Name"
+        android:hint="@string/last_name"
         android:ems="10"
         android:layout_below="@id/firstNameField"
         android:layout_alignEnd="@id/firstNameField"
@@ -106,7 +106,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailField"
-        android:hint="Email"
+        android:hint="@string/email"
         android:layout_below="@id/lastNameField"
         android:layout_alignStart="@id/lastNameField" />
 
@@ -118,7 +118,7 @@
         android:inputType="textPostalAddress"
         android:ems="10"
         android:id="@+id/addressLineField"
-        android:hint="Address Line 1"
+        android:hint="@string/address_line_1"
         android:layout_below="@id/emailField"
         android:layout_alignStart="@id/emailField" />
 
@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="City"
+        android:hint="@string/city"
         android:ems="10"
         android:layout_below="@id/addressLineField"
         android:layout_alignStart="@id/addressLineField"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="State, Zip"
+        android:hint="@string/state_zip"
         android:ems="10"
         android:layout_below="@id/cityField"
         android:layout_alignEnd="@id/cityField"
@@ -147,7 +147,7 @@
 
     <!-- submit button -->
     <Button
-        android:text="Register"
+        android:text="@string/register"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:id="@+id/submitButton"

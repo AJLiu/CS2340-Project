@@ -20,7 +20,7 @@
         android:layout_marginStart="27dp"
         android:paddingStart="60dp"
         android:paddingEnd="50dp"
-        android:text="View History Graphs" />
+        android:text="@string/view_history_graphs" />
 
 
 
@@ -32,7 +32,7 @@
         android:layout_alignEnd="@id/historyGraphViewTitle"
         android:layout_below="@id/historyGraphViewTitle"
         android:layout_marginTop="15dp"
-        android:text="Location (Positive/Negative):"
+        android:text="@string/location_positive_negative"
         android:textStyle="bold"
         android:textSize="8pt"
         android:id="@+id/locationTitle"
@@ -47,7 +47,7 @@
         android:layout_below="@id/locationTitle"
         android:layout_marginTop="15dp"
         android:layout_marginStart="25dp"
-        android:text="Latitude (North/South):"
+        android:text="@string/latitude_north_south"
         android:textSize="7pt"
         android:id="@+id/latitudeTitle"
         />
@@ -69,7 +69,7 @@
         android:layout_alignStart="@id/locationLat"
         android:layout_below="@id/locationLat"
         android:layout_marginTop="15dp"
-        android:text="Longitude (East/West):"
+        android:text="@string/longitude_east_west"
         android:textSize="7pt"
         android:id="@+id/longitudeTitle"
         />
@@ -93,7 +93,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="2dp"
         android:textSize="8pt"
-        android:text="Data Type to Plot (Select one):"
+        android:text="@string/data_type_to_plot_select_one"
         android:textStyle="bold"/>
 
     <RadioGroup
@@ -108,7 +108,7 @@
             android:id="@+id/historyGraphViewVirus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Virus"
+            android:text="@string/virus"
             android:checked="true"
             android:layout_marginTop="5dp"
             android:layout_marginStart="2dp"
@@ -119,7 +119,7 @@
             android:id="@+id/historyGraphViewContaminant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contaminant"
+            android:text="@string/contaminant"
             android:layout_marginTop="5dp"
             android:layout_marginStart="2dp"
             android:textSize="6pt"/>
@@ -130,7 +130,7 @@
         android:id="@+id/historyGraphViewYearEntered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Year"
+        android:hint="@string/year"
         android:inputType="number"
         android:ems="5"
         android:layout_below="@id/radioGroup"
@@ -146,7 +146,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
-        android:text="View graph"
+        android:text="@string/view_graph"
         android:onClick="histGraphFilter"/>
 
 
