@@ -5,26 +5,26 @@
         <item
                 android:id="@+id/nav_submit_report"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Submit A Report"/>
+                android:title="@string/submit_report"/>
         <item
                 android:id="@+id/nav_water_locations"
                 android:icon="@drawable/ic_water_map"
-                android:title="Water Locations"/>
+                android:title="@string/water_locations"/>
 
         <item
             android:id="@+id/history_graph"
             android:icon="@drawable/ic_water_history"
-            android:title="Graph" />
+            android:title="@string/purity_graph" />
 
         <item
                 android:id="@+id/nav_source_report_list"
                 android:icon="@drawable/ic_menu_list"
-                android:title="List of Source Reports" />
+                android:title="@string/list_of_source_reports" />
 
         <item
             android:id="@+id/nav_purity_report_list"
             android:icon="@drawable/ic_menu_list"
-            android:title="List of Purity Reports" />
+            android:title="@string/list_of_purity_reports" />
 
 
         </group>

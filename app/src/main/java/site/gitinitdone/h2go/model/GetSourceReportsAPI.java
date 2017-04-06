@@ -17,6 +17,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 import site.gitinitdone.h2go.R;
 
@@ -27,7 +28,7 @@ import site.gitinitdone.h2go.R;
 public class GetSourceReportsAPI extends AsyncTask<Void, Void, Boolean> {
 
         private CookieManager cookieManager;
-        protected ArrayList<SourceReport> sourceReportList = null; //holds reports from GET request
+        protected List<SourceReport> sourceReportList = null; //holds reports from GET request
 
         private final Context context;
 
