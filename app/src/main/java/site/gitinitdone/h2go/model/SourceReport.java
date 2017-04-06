@@ -124,7 +124,7 @@ public class SourceReport {
         String reportTitle = "Report #" + reportNum;
         String submitDate = "Submitted On: " + date + "\n";
         String reporter = "Submitted By: " + submitter + "\n";
-        String location = "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
+        String location = "Location:\n\tLatitude: " + latitude + "\n\tLongitude: "
                 + longitude + "\n";
         String waterTypeString = "Water Type: " + waterType + "\n";
         String waterConditionString = "Water Condition: " + waterCondition;
