@@ -201,12 +201,12 @@ public class EditUserActivity extends AppCompatActivity {
         title.setSelection(accountInfo.getTitle().ordinal());
 
         TextView username = (TextView) findViewById(R.id.formUsernameFieldEdit);
-        String usernameText = "Username: " + accountInfo.getUsername();
-        username.setText(usernameText);
+        String usernameText = accountInfo.getUsername();
+        username.setText(username.getText() + " " + usernameText);
 
         TextView userType = (TextView) findViewById(R.id.formUserTypeFieldEdit);
-        String userTypeText = "User Account Type: " + accountInfo.getUserType().toString();
-        userType.setText(userTypeText);
+        String userTypeText = accountInfo.getUserType().toString();
+        userType.setText(userType.getText() + " " + userTypeText);
     }
 
 
