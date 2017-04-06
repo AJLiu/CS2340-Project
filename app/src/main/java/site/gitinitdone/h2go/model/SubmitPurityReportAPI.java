@@ -31,7 +31,7 @@ public class SubmitPurityReportAPI extends AsyncTask<Void, Void, Boolean> {
 
     private final Context context;
 
-    private Map<String, String> data;
+    private final Map<String, String> data;
 
     public SubmitPurityReportAPI(Map<String, String> data, Context context) {
         this.data = data;

@@ -22,14 +22,14 @@ public class PurityReport {
         }
     }
 
-    private double latitude;
-    private double longitude;
-    private int reportNumber;
-    private String reporter;
-    private long timeStamp;
-    private OverallCondition waterCondition;
-    private int virusPPM;
-    private int contaminantPPM;
+    private final double latitude;
+    private final double longitude;
+    private final int reportNumber;
+    private final String reporter;
+    private final long timeStamp;
+    private final OverallCondition waterCondition;
+    private final int virusPPM;
+    private final int contaminantPPM;
 
     public PurityReport(double lat, double lon, int reportNum, String submitter,
                         long time, OverallCondition condition, int virus, int contaminant) {
