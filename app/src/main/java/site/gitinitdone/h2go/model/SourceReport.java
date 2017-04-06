@@ -130,7 +130,7 @@ public class SourceReport {
         String waterConditionString = "Water Condition: " + waterCondition;
 
         return new String[]{reportTitle, submitDate + reporter + location
-                                    + waterTypeString + waterConditionString};
+                                    + waterTypeString + waterConditionString + "\n"};
     }
 
 }
