@@ -138,11 +138,9 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/stateZipFieldEdit"
         android:layout_alignStart="@id/stateZipFieldEdit"
-        android:text="@string/fixed_user_fields"
-        android:textSize="18sp"
-        android:id="@+id/formPermanentFields"
-        />
-
+        android:text="@string/these_cannot_be_changed_by_you"
+        android:textSize="8pt"
+        android:id="@+id/formPermanentFields" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -150,7 +148,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/formPermanentFields"
         android:layout_alignStart="@id/formPermanentFields"
-        android:text="@string/username_cannot_be_changed"
+        android:text="@string/username"
         android:textSize="7pt"
         android:id="@+id/formUsernameFieldEdit" />
 
@@ -158,9 +156,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/usertype_cannot_be_changed"
         android:layout_below="@id/formUsernameFieldEdit"
         android:layout_alignStart="@id/formUsernameFieldEdit"
+        android:text="@string/user_account_type"
         android:textSize="7pt"
         android:id="@+id/formUserTypeFieldEdit" />
 
