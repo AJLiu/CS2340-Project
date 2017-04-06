@@ -104,15 +104,12 @@ public class EditUserActivity extends AppCompatActivity {
         Spinner title = (Spinner) findViewById(R.id.titleSpinnerEdit);
         String titleText = title.getSelectedItem().toString().trim();
 
-        Spinner userType = (Spinner) findViewById(R.id.userTypeSpinnerEdit);
-        String userTypeText = userType.getSelectedItem().toString().trim();
         // Puts all the new data into a Map
         arguments.put("firstName", firstNameText);
         arguments.put("lastName", lastNameText);
         arguments.put("email", emailText);
         arguments.put("address", addressFullText);
         arguments.put("title", titleText);
-        arguments.put("userType", userTypeText);
 
         // Call the API to make these edits and use this new data for the user account
         editUserInfo = new LocalEditUserAPI(arguments);
@@ -204,16 +201,13 @@ public class EditUserActivity extends AppCompatActivity {
         title.setAdapter(adapter);
         title.setSelection(accountInfo.getTitle().ordinal());
 
-        Spinner userType = (Spinner) findViewById(R.id.userTypeSpinnerEdit);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
-                UserAccount.AccountType.values());
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userType.setAdapter(adapter2);
-        userType.setSelection(accountInfo.getUserType().ordinal());
-
         TextView username = (TextView) findViewById(R.id.formUsernameFieldEdit);
-        String usernameText = "Username (Cannot be changed): " + accountInfo.getUsername();
+        String usernameText = "Username: " + accountInfo.getUsername();
         username.setText(usernameText);
+
+        TextView userType = (TextView) findViewById(R.id.formUserTypeFieldEdit);
+        String userTypeText = "User Account Type: " + accountInfo.getUserType().toString();
+        userType.setText(userTypeText);
     }
 
 

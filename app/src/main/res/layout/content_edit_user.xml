@@ -132,38 +132,38 @@
         android:layout_alignEnd="@id/cityFieldEdit"
         android:id="@+id/stateZipFieldEdit" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/stateZipFieldEdit"
         android:layout_alignStart="@id/stateZipFieldEdit"
-        android:text="User Account Type:"
-        android:textSize="18sp"
-        android:id="@+id/formUserTypeFieldEdit"
-        />
-
-    <!-- User account type -->
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/formUserTypeFieldEdit"
-        android:ems="10"
-        android:layout_alignStart="@id/formUserTypeFieldEdit"
-        android:id="@+id/userTypeSpinnerEdit"
-        android:layout_alignEnd="@id/titleSpinnerEdit" />
-
+        android:text="These cannot be changed by you:"
+        android:textSize="8pt"
+        android:id="@+id/formPermanentFields" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/userTypeSpinnerEdit"
-        android:layout_alignStart="@id/userTypeSpinnerEdit"
-        android:text="Username (Cannot be changed):"
+        android:layout_below="@id/formPermanentFields"
+        android:layout_alignStart="@id/formPermanentFields"
+        android:text="Username:"
         android:textSize="7pt"
-        android:id="@+id/formUsernameFieldEdit"
-        />
+        android:id="@+id/formUsernameFieldEdit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/formUsernameFieldEdit"
+        android:layout_alignStart="@id/formUsernameFieldEdit"
+        android:text="User Account Type:"
+        android:textSize="7pt"
+        android:id="@+id/formUserTypeFieldEdit" />
+
+
 
 
     <!-- submit button -->
