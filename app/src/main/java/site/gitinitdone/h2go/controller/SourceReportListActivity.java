@@ -121,37 +121,8 @@ public class SourceReportListActivity extends AppCompatActivity {
         String allReports = "";
 
         for (SourceReport sr : sourceReportArrayList) {
-            int reportNum = sr.getReportNumber();
-            String date = (new Date(sr.getTimeStamp())).toString();
-            String submitter = sr.getReporter();
-
-            // Handles if the direction of latitude is North or South based on negative sign
-            String latitude = "";
-            if (sr.getLatitude() < 0) {
-                latitude = (sr.getLatitude() * -1) + " South";
-            } else {
-                latitude = sr.getLatitude() + " North";
-            }
-
-            // Handles if the direction of longitude is East or West based on negative sign
-            String longitude = "";
-            if (sr.getLongitude() < 0) {
-                longitude = (sr.getLongitude() * -1) + " West";
-            } else {
-                longitude = sr.getLongitude() + " East";
-            }
-
-            SourceReport.WaterType waterType = sr.getWaterType();
-            SourceReport.WaterCondition waterCondition = sr.getWaterCondition();
-
-            // Aggregates all the relevant fields into a nicely formatted string to show on screen
-            allReports += "--- Source Report #" + reportNum + " ---\n";
-            allReports += "Submitted On: " + date + "\n";
-            allReports += "Submitted By: " + submitter + "\n";
-            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
-                    + longitude + "\n";
-            allReports += "Water Type: " + waterType + "\n";
-            allReports += "Water Condition: " + waterCondition + "\n \n";
+            String[] reportString = sr.getReportStringFormatted();
+            allReports += reportString[0] + "\n" + reportString[1];
         }
 
         return allReports;
