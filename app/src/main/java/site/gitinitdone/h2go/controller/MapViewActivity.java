@@ -27,8 +27,8 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
     private LocalGetSourceReportsAPI getSourceReports;
     private List<SourceReport> ListOfReports;
     private SupportMapFragment mapFragment;
-    private final static int MAP_MAX_ZOOM = 14;
-    private final static int CAM_MOVE_TIME = 500;  // milliseconds
+    private static final int MAP_MAX_ZOOM = 14;
+    private static final int CAM_MOVE_TIME = 500;  // milliseconds
 
 
     @Override

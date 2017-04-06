@@ -19,7 +19,7 @@ import site.gitinitdone.h2go.R;
 public class PlottedGraphActivity extends AppCompatActivity {
     private double[] data;
     private String ppmType;
-    private final static int MONTHS = 12;
+    private static final int MONTHS = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
