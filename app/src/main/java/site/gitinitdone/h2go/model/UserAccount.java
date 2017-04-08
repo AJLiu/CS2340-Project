@@ -30,15 +30,15 @@ public class UserAccount {
         }
     }
 
-    private String username;
-    private Title title;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String email;
-    private boolean locked;
-    private boolean banned;
-    private AccountType userType;
+    private final String username;
+    private final Title title;
+    private final String firstName;
+    private final String lastName;
+    private final String address;
+    private final String email;
+    private final boolean locked;
+    private final boolean banned;
+    private final AccountType userType;
 
     /**
      * Constructor for the UserAccount, where locked and banned are defaulted to false

@@ -67,39 +67,8 @@ public class PurityReportListActivity extends AppCompatActivity {
         String allReports = "";
 
         for (PurityReport pr : purityReportsList) {
-            int reportNum = pr.getReportNumber();
-            String date = (new Date(pr.getTimeStamp())).toString();
-            String submitter = pr.getReporter();
-
-            // Handles if the direction of latitude is North or South based on negative sign
-            String latitude = "";
-            if (pr.getLatitude() < 0) {
-                latitude = (pr.getLatitude() * -1) + " South";
-            } else {
-                latitude = pr.getLatitude() + " North";
-            }
-
-            // Handles if the direction of longitude is East or West based on negative sign
-            String longitude = "";
-            if (pr.getLongitude() < 0) {
-                longitude = (pr.getLongitude() * -1) + " West";
-            } else {
-                longitude = pr.getLongitude() + " East";
-            }
-
-            int virusPPM = pr.getVirusPPM();
-            int contaminantPPM = pr.getContaminantPPM();
-
-            PurityReport.OverallCondition waterCondition = pr.getWaterCondition();
-            // Aggregates all the relevant fields into a nicely formatted string to show on screen
-            allReports += "--- Purity Report #" + reportNum + " ---\n";
-            allReports += "Submitted On: " + date + "\n";
-            allReports += "Submitted By: " + submitter + "\n";
-            allReports += "Location: \n \t Latitude: " + latitude + " \n \t Longitude: "
-                            + longitude + "\n";
-            allReports += "Water Condition: " + waterCondition + "\n";
-            allReports += "Virus PPM: " + virusPPM + "\n";
-            allReports += "Contaminant PPM: " + contaminantPPM + "\n \n";
+            String[] reportString = pr.getReportStringFormatted();
+            allReports += reportString[0] + "\n" + reportString[1];
         }
 
         return allReports;

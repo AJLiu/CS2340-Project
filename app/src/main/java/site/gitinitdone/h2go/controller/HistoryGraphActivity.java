@@ -24,9 +24,9 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
     private HistoricalReportCalc reportCalc;
     private LocalGetPurityReportsAPI localPurityReportsAPI = null;
-    private final static int MAX_LAT = 90;
-    private final static int MAX_LONG = 180;
-    private final static int MIN_YEAR = 2000;
+    private static final int MAX_LAT = 90;
+    private static final int MAX_LONG = 180;
+    private static final int MIN_YEAR = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

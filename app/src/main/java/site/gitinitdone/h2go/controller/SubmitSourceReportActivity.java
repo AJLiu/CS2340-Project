@@ -27,8 +27,8 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
     private LocalSourceReportAPI submitSourceReportAPI = null; //AsyncTask to submit a source report
     private View submitSourceForm;
     private View mProgressView;
-    private final static int MAX_LAT = 90;
-    private final static int MAX_LONG = 180;
+    private static final int MAX_LAT = 90;
+    private static final int MAX_LONG = 180;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

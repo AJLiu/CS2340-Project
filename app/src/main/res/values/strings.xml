@@ -87,7 +87,9 @@
     <string name="city">City</string>
     <string name="state_zip">State, Zip</string>
     <string name="user_account_type">User Account Type:</string>
-    <string name="username_cannot_be_changed">Username (Cannot be changed):</string>
+    <string name="fixed_user_fields">These fields cannot be changed:</string>
+    <string name="username_cannot_be_changed">Username (fixed):</string>
+    <string name="usertype_cannot_be_changed">User Type (fixed):</string>
     <string name="submit_changes">Submit Changes</string>
     <string name="view_history_graphs">View History Graphs</string>
     <string name="location_positive_negative">Location (Positive/Negative):</string>

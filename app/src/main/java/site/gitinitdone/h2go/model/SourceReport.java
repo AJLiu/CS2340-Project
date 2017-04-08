@@ -41,13 +41,13 @@ public class SourceReport {
         }
     }
 
-    private double latitude;
-    private double longitude;
-    private int reportNumber;
-    private String reporter;
-    private long timeStamp;
-    private WaterType waterType;
-    private WaterCondition waterCondition;
+    private final double latitude;
+    private final double longitude;
+    private final int reportNumber;
+    private final String reporter;
+    private final long timeStamp;
+    private final WaterType waterType;
+    private final WaterCondition waterCondition;
 
     public SourceReport(double lat, double lon, int reportNum, String submitter,
                         long time, WaterType type, WaterCondition condition) {

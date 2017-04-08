@@ -27,8 +27,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
     private LocalPurityReportAPI submitPurityReportAPI = null;
     private View submitPurityForm;
     private View mProgressView;
-    private final static int MAX_LAT = 90;
-    private final static int MAX_LONG = 180;
+    private static final int MAX_LAT = 90;
+    private static final int MAX_LONG = 180;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

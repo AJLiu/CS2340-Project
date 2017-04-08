@@ -11,11 +11,11 @@ import java.util.List;
 
 public class HistoricalReportCalc {
     //figure out what reports to look
-    private double latitude;
-    private double longitude;
-    private int year;
-    private String ppm;
-    private final static int MONTHS = 12;
+    private final double latitude;
+    private final double longitude;
+    private final int year;
+    private final String ppm;
+    private static final int MONTHS = 12;
 
     /**
      * A constructor to create a historical report calculation. Takes in

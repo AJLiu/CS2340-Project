@@ -25,7 +25,7 @@ import site.gitinitdone.h2go.R;
 
 public class RegisterUserAPI extends AsyncTask<Void, Void, Boolean> {
 
-    private Map<String, String> data;
+    private final Map<String, String> data;
     private final Context context;
     protected boolean duplicateUser = false;
 
