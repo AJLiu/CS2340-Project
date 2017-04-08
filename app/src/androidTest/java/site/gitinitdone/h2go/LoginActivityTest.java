@@ -15,29 +15,19 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.Assert.assertTrue;
 
 
 /**
  * Created by Shourya on 4/2/2017.
+ * JUnit test for LoginActivity.
  */
 
 public class LoginActivityTest {
 
-//    private EditText username;
-//    private EditText password;
-//    private Button loginButton;
-
-
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
             LoginActivity.class);
-
-//    @Before
-//    public void setUp() {
-//        username = (EditText) mActivityRule.getActivity().findViewById(R.id.username);
-//        password = (EditText) mActivityRule.getActivity().findViewById(R.id.password);
-//        loginButton = (Button)mActivityRule.getActivity().findViewById(R.id.email_sign_in_button);
-//    }
 
     @Test
     public void validFieldsEntered() {
@@ -49,7 +39,7 @@ public class LoginActivityTest {
         onView(withId(R.id.password)).check(matches(withText("pass")));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
-        // HOW CAN I CHECK IF IT GOES TO THE NEXT ACTIVITY??????????????????????????????????????????????????????
+        assertTrue(mActivityRule.getActivity().isFinishing());
     }
 
     @Test
@@ -115,7 +105,6 @@ public class LoginActivityTest {
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
         onView(withId(R.id.password)).check(matches(hasErrorText("Authentication failed")));
-        System.out.println("hi!!!!!!!!!!!!!!");
     }
 }
 
