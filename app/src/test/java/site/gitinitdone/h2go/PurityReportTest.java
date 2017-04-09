@@ -21,19 +21,35 @@ public class PurityReportTest {
     private OverallCondition[] conditions = OverallCondition.values();
     private int[] reportNums = {1, 2, 3};
     private String[] reporterNames = {"JUnit Tester 1", "JUnit 2nd Test", "3rd Test in JUnit"};
-    private long[] reportTimes = {new Date().getTime(), new Date().getTime() + 12345,
-                                    new Date().getTime() - 12345};
 
-    private Random randomLatLong = new Random();
-    private double[] latitudes = {  randomLatLong.nextInt(9000) / 100.0, // north
-                                    ((randomLatLong.nextInt(8999) / 100.0) + 1) * -1, // south
-                                    randomLatLong.nextInt(9000) / 100.0}; //north
+    private final long offsetTime = Long.parseLong("50000000000");
 
-    private double[] longitudes = { randomLatLong.nextInt(18000) / 100.0, // east
-                                    randomLatLong.nextInt(18000) / 100.0, //east
-                                    ((randomLatLong.nextInt(17999) / 100.0) + 1) * -1}; //west
-    private int[] virusPPMs = {12345, 6, 927137};
-    private int[] contaminantPPMs = {67890, 198, 10842};
+    private long[] reportTimes =    {   new Date().getTime(),
+                                        new Date().getTime() + offsetTime,
+                                        new Date().getTime() - offsetTime
+                                    };
+
+    private Random rand = new Random();
+
+    private double[] latitudes =    {   rand.nextInt(9000) / 100.0, // north
+                                        ((rand.nextInt(8999) / 100.0) + 1) * -1, // south
+                                        rand.nextInt(9000) / 100.0  //north
+                                    };
+
+    private double[] longitudes =   {   rand.nextInt(18000) / 100.0, // east
+                                        rand.nextInt(18000) / 100.0, //east
+                                        ((rand.nextInt(17999) / 100.0) + 1) * -1 //west
+                                    };
+
+    private int[] virusPPMs =   {   rand.nextInt(1000000),
+                                    rand.nextInt(1000000),
+                                    rand.nextInt(1000000)
+                                };
+
+    private int[] contaminantPPMs = {   rand.nextInt(1000000),
+                                        rand.nextInt(1000000),
+                                        rand.nextInt(1000000)
+                                    };
 
 
 
