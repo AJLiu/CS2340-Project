@@ -26,7 +26,7 @@ public class HistoricalReportAverageTest {
     HistoricalReportCalc historicalReportCalc1;
     HistoricalReportCalc historicalReportCalc2;
     HistoricalReportCalc historicalReportCalc3;
-    private final long offsetTime = Long.parseLong("40150624214"); // creates offset by 1 year
+    private final long offsetTime = Long.parseLong("40150624214"); // creates an offset by 1 year
 
     @Before
     public void setup() {
