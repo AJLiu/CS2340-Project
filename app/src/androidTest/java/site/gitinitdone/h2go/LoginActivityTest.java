@@ -85,10 +85,10 @@ public class LoginActivityTest {
     public void incorrectPasswordEntered() {
         // Type text and then press the button.
         onView(withId(R.id.username)).perform(typeText("test2"), closeSoftKeyboard());
-        onView(withId(R.id.password)).perform(typeText("pa"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("incorrect"), closeSoftKeyboard());
         // Check that the text was changed.
         onView(withId(R.id.username)).check(matches(withText("test2")));
-        onView(withId(R.id.password)).check(matches(withText("pa")));
+        onView(withId(R.id.password)).check(matches(withText("incorrect")));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
         onView(withId(R.id.password)).check(matches(hasErrorText("Authentication failed")));
@@ -97,10 +97,10 @@ public class LoginActivityTest {
     @Test
     public void incorrectUsernameEntered() {
         // Type text and then press the button.
-        onView(withId(R.id.username)).perform(typeText("invalid"), closeSoftKeyboard());
+        onView(withId(R.id.username)).perform(typeText("incorrect"), closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard());
         // Check that the text was changed.
-        onView(withId(R.id.username)).check(matches(withText("invalid")));
+        onView(withId(R.id.username)).check(matches(withText("incorrect")));
         onView(withId(R.id.password)).check(matches(withText("password")));
         onView(withId(R.id.email_sign_in_button)).perform(click());
 
