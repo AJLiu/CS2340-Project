@@ -55,12 +55,16 @@ public class HistoricalReportAverageTest {
         assertEquals(12, result2.length);
         assertEquals(12, result3.length);
 
-        //checking to see if Jan entry is 0
+        //checking to see if Jan entry  in 2016 is 20
         assertEquals(result3[0], 20, 0);
 
+        // checking to see if Virus average is correct for 2017
         assertEquals(result1[3], 200, 0);
+
+        //check to see if contaminent average is correct for 2017
         assertEquals(result2[3], 50, 0);
 
+        // making sure all of the other entries are 0 for 2017
         assertEquals(result1[4], 0, 0);
         assertEquals(result2[4], 0, 0);
         assertEquals(result1[5], 0, 0);
