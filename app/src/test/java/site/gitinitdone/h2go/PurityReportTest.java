@@ -23,6 +23,9 @@ public class PurityReportTest {
     private String[] reporterNames = {"JUnit Tester 1", "JUnit 2nd Test", "3rd Test in JUnit"};
 
     private final long offsetTime = Long.parseLong("50000000000");
+    private final int maxLatitude = 90;
+    private final int maxLongitude = 180;
+    private final int maxPPM = 1000000;
 
     private long[] reportTimes =    {   new Date().getTime(),
                                         new Date().getTime() + offsetTime,
@@ -31,24 +34,24 @@ public class PurityReportTest {
 
     private Random rand = new Random();
 
-    private double[] latitudes =    {   rand.nextInt(9000) / 100.0, // north
-                                        ((rand.nextInt(8999) / 100.0) + 1) * -1, // south
-                                        rand.nextInt(9000) / 100.0  //north
-                                    };
+    private double[] latitudes =    {   rand.nextInt(maxLatitude * 100) / 100.0,
+                                        ((rand.nextInt(maxLatitude * 100 - 1) / 100.0) + 1) * -1,
+                                        rand.nextInt(maxLatitude * 100) / 100.0
+                                    }; // north, south, north
 
-    private double[] longitudes =   {   rand.nextInt(18000) / 100.0, // east
-                                        rand.nextInt(18000) / 100.0, //east
-                                        ((rand.nextInt(17999) / 100.0) + 1) * -1 //west
-                                    };
+    private double[] longitudes =   {   rand.nextInt(maxLongitude * 100) / 100.0,
+                                        rand.nextInt(maxLongitude * 100) / 100.0,
+                                        ((rand.nextInt(maxLongitude * 100 - 1) / 100.0) + 1) * -1
+                                    }; // east, east, west
 
-    private int[] virusPPMs =   {   rand.nextInt(1000000),
-                                    rand.nextInt(1000000),
-                                    rand.nextInt(1000000)
+    private int[] virusPPMs =   {   rand.nextInt(maxPPM),
+                                    rand.nextInt(maxPPM),
+                                    rand.nextInt(maxPPM)
                                 };
 
-    private int[] contaminantPPMs = {   rand.nextInt(1000000),
-                                        rand.nextInt(1000000),
-                                        rand.nextInt(1000000)
+    private int[] contaminantPPMs = {   rand.nextInt(maxPPM),
+                                        rand.nextInt(maxPPM),
+                                        rand.nextInt(maxPPM)
                                     };
 
 
@@ -56,14 +59,11 @@ public class PurityReportTest {
     @Before
     public void setup() {
 
-        reports[0] = new PurityReport(latitudes[0], longitudes[0], reportNums[0], reporterNames[0],
-                                reportTimes[0], conditions[0], virusPPMs[0], contaminantPPMs[0]);
-
-        reports[1] = new PurityReport(latitudes[1], longitudes[1], reportNums[1], reporterNames[1],
-                                reportTimes[1], conditions[1], virusPPMs[1], contaminantPPMs[1]);
-
-        reports[2] = new PurityReport(latitudes[2], longitudes[2], reportNums[2], reporterNames[2],
-                                reportTimes[2], conditions[2], virusPPMs[2], contaminantPPMs[2]);
+        for (int i = 0; i < reports.length; i++) {
+            reports[i] = new PurityReport(latitudes[i], longitudes[i], reportNums[i],
+                                            reporterNames[i], reportTimes[i], conditions[i],
+                                            virusPPMs[i], contaminantPPMs[i]);
+        }
 
     }
 
