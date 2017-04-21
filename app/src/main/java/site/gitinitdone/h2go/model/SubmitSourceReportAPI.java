@@ -32,7 +32,7 @@ public class SubmitSourceReportAPI extends AsyncTask<Void, Void, Boolean> {
 
         private final Context context;
 
-        private final Map<String, String> data;
+        protected final Map<String, String> data;
 
         public SubmitSourceReportAPI(Map<String, String> data, Context context) {
             this.data = data;

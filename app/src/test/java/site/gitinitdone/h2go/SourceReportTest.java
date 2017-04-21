@@ -31,6 +31,12 @@ public class SourceReportTest {
 
     @Test
     public void getReportStringFormatted() throws Exception {
+        getReportStringNorthEast();
+        getReportStringSouthWest();
+    }
+
+    @Test
+    public void getReportStringSouthWest() throws Exception {
         String[] strings1 = report1.getReportStringFormatted();
         assertEquals(strings1[0], "Report #0");
         String[] decomposed1 = strings1[1].split("\n");
@@ -49,7 +55,10 @@ public class SourceReportTest {
         assertEquals("Other", decomposed1[5].substring(12));
         assertEquals("Water Condition: ", decomposed1[6].substring(0, 17));
         assertEquals("Treatable Clear", decomposed1[6].substring(17));
+    }
 
+    @Test
+    public void getReportStringNorthEast() throws Exception {
         String[] strings2 = report2.getReportStringFormatted();
         assertEquals(strings2[0], "Report #1");
         String[] decomposed2 = strings2[1].split("\n");
@@ -57,21 +66,15 @@ public class SourceReportTest {
 
         assertEquals("Submitted On: ", decomposed2[0].substring(0, 14));
         assertEquals(new Date(time2).toString(), decomposed2[0].substring(14));
-
         assertEquals("Submitted By: ", decomposed2[1].substring(0, 14));
         assertEquals("otherPerson", decomposed2[1].substring(14));
-
         assertEquals("Location:", decomposed2[2]);
-
         assertEquals("\tLatitude: ", decomposed2[3].substring(0, 11));
         assertEquals("1.0 North", decomposed2[3].substring(11));
-
         assertEquals("\tLongitude: ", decomposed2[4].substring(0, 12));
         assertEquals("1.0 East", decomposed2[4].substring(12));
-
         assertEquals("Water Type: ", decomposed2[5].substring(0, 12));
         assertEquals("Spring", decomposed2[5].substring(12));
-
         assertEquals("Water Condition: ", decomposed2[6].substring(0, 17));
         assertEquals("Treatable Clear", decomposed2[6].substring(17));
     }

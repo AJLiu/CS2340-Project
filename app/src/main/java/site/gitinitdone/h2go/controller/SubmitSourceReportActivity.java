@@ -2,6 +2,7 @@ package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -55,9 +56,14 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         waterConditionSpinner.setAdapter(adapter2);
         waterConditionSpinner.setSelection(0);
 
+        // if we are getting the location from the map, then we get the data via the Intent
+        Intent i = getIntent();
+        String latitude = i.getStringExtra("latitude");
+        String longitude = i.getStringExtra("longitude");
+
         // formatting the latitude and longitude to show (max) 6 decimal places
         final EditText latitudeField = (EditText) findViewById(R.id.locationLat);
-        latitudeField.setText("0.0");
+        latitudeField.setText((latitude == null) ? "0.0" : latitude); //default 0.0
         latitudeField.setText(formatLatitude(latitudeField.getText().toString()));
 
         latitudeField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -68,7 +74,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
         });
 
         final EditText longitudeField = (EditText) findViewById(R.id.locationLong);
-        longitudeField.setText("0.0");
+        longitudeField.setText((longitude == null) ? "0.0" : longitude); //default 0.0
         longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
 
         longitudeField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -210,6 +216,11 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
                 System.out.println("Submitted Source Report TRUE");
                 Toast.makeText(getBaseContext(), R.string.soure_report_success,
                         Toast.LENGTH_LONG).show();
+                Intent done = new Intent();
+                done.putExtra("Submitted", true);
+                done.putExtra("Latitude", data.get("lat"));
+                done.putExtra("Longitude", data.get("long"));
+                setResult(RESULT_OK, done);
                 finish();
             } else {
                 System.out.println("Submitted Source Report FALSE");
