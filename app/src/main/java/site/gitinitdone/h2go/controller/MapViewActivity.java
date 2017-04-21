@@ -94,7 +94,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
+        SoundEffects.playClickSound(getApplicationContext());
         System.out.println("Reached Marker On Click method.");
 
         if ((int) marker.getTag() < 0) {
@@ -119,7 +119,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                SoundEffects.playClickSound(getCurrentFocus());
+                                SoundEffects.playClickSound(getApplicationContext());
                                 dialog.dismiss();
                             }
                         })
@@ -162,8 +162,8 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        SoundEffects.playClickSound(getApplicationContext());
                                         Intent i = new Intent(getBaseContext(), SubmitSourceReportActivity.class);
-                                        getParent().getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
                                         dialog.dismiss();
                                         i.putExtra("latitude", position.latitude + "");
                                         i.putExtra("longitude", position.longitude + "");
@@ -173,7 +173,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        getParent().getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
+                                        SoundEffects.playClickSound(getApplicationContext());
                                         dialog.dismiss();
                                     }
                                 })

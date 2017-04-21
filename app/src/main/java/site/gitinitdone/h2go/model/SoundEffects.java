@@ -1,9 +1,12 @@
 package site.gitinitdone.h2go.model;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -18,7 +21,7 @@ public class SoundEffects {
     private static MediaPlayer mp;
     private static final String RES_PREFIX = "android.resource://site.gitinitdone.h2go/";
 
-    public static void playClickSound(View view) {
+    public static void playClickSound(Context context) {
 
         System.out.println("~~~~~~~~~~~~~~~~~Sound starting~~~~~~~~~~~~~~~~");
         if(mp != null && mp.isPlaying())
@@ -28,12 +31,12 @@ public class SoundEffects {
         }
 
         if (mp == null) {
-            mp = MediaPlayer.create(view.getContext(), R.raw.water_droplet);
+            mp = MediaPlayer.create(context, R.raw.water_droplet);
             mp.start();
         } else {
             try {
                 mp.reset();
-                mp.setDataSource(view.getContext(), Uri.parse(RES_PREFIX + R.raw.water_droplet));
+                mp.setDataSource(context, Uri.parse(RES_PREFIX + R.raw.water_droplet));
                 mp.prepare();
                 mp.start();
             } catch (IllegalStateException | IOException e) { // | IOException e) {
@@ -46,6 +49,13 @@ public class SoundEffects {
 
         System.out.println("~~~~~~~~~~~~~~~~~Sound ended~~~~~~~~~~~~~~~~~~~");
 
+    }
+
+    public static void playClickSound(View view) {
+        if (view != null && view.getContext() != null)
+            playClickSound(view.getContext());
+        else
+            System.out.println("Cannot play sound. View is null or Context from view is null.");
     }
 
 }
