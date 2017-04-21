@@ -2,13 +2,19 @@ package site.gitinitdone.h2go.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.DialogPreference;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -70,9 +76,59 @@ public class LoginActivity extends AppCompatActivity {
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                SoundEffects.playClickSound(view);
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
                 attemptLogin();
+            }
+        });
+
+        Button forgotPassButton = (Button) findViewById(R.id.forgot_password_button);
+        final Context context = this;
+        forgotPassButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final EditText usernameInput = new EditText(context);
+                usernameInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                usernameInput.setHint("Username");
+
+                builder.setTitle("Recover Your Password").setMessage("Enter Your Username:");
+                builder.setView(usernameInput);
+                builder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // leave empty, this is overridden later
+                    }});
+
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SoundEffects.playClickSound(getApplicationContext());
+                        dialog.cancel();
+                    }
+                });
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+                Button submitButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                submitButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SoundEffects.playClickSound(getApplicationContext());
+                        String username = usernameInput.getText().toString().trim();
+                        if (username.isEmpty()) {
+                            usernameInput.setHint("This field is required.");
+                            usernameInput.requestFocus();
+                        } else {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
             }
         });
 
@@ -86,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         String theUsername = editText.getText().toString();
 
         mySharedPrefEditor = getSharedPreferences(getString(R.string.sharedPrefName), MODE_PRIVATE)
-                                .edit();
+                .edit();
         mySharedPrefEditor.putString(getString(R.string.prompt_username), theUsername);
         mySharedPrefEditor.apply();
 

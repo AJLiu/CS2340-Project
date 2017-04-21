@@ -114,4 +114,5 @@
     <string name="h2go_actions">H2gO Actions</string>
     <string name="what_would_you_like_to_do">What would you like to do?</string>
     <string name="these_cannot_be_changed_by_you">These cannot be changed by you:</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
