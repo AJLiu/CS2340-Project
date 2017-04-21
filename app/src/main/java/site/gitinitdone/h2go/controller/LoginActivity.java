@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.LoginUserAPI;
+import site.gitinitdone.h2go.model.SoundEffects;
 
 
 /**
@@ -69,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                SoundEffects.playClickSound(view);
                 attemptLogin();
             }
         });

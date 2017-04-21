@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.RegisterUserAPI;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.UserAccount;
 
 import java.util.HashMap;
@@ -49,6 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userType.setAdapter(adapter2);
         userType.setSelection(0);
+
+        Button b = (Button) findViewById(R.id.submitButton);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                registerNewUser(v);
+            }
+        });
 
     }
 

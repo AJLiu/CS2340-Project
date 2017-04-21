@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.view.SoundEffectConstants;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetSourceReportsAPI;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.SourceReport;
 
 import java.util.List;
@@ -92,7 +94,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
+        getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
         System.out.println("Reached Marker On Click method.");
 
         if ((int) marker.getTag() < 0) {
@@ -117,6 +119,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                SoundEffects.playClickSound(getCurrentFocus());
                                 dialog.dismiss();
                             }
                         })
@@ -160,6 +163,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent i = new Intent(getBaseContext(), SubmitSourceReportActivity.class);
+                                        getParent().getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
                                         dialog.dismiss();
                                         i.putExtra("latitude", position.latitude + "");
                                         i.putExtra("longitude", position.longitude + "");
@@ -169,6 +173,7 @@ public class MapViewActivity extends FragmentActivity implements OnMapReadyCallb
                                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        getParent().getCurrentFocus().playSoundEffect(android.view.SoundEffectConstants.CLICK);
                                         dialog.dismiss();
                                     }
                                 })

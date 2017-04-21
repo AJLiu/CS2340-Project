@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.SoundEffectConstants;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.GetUserAPI;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.UserAccount;
 
 /**
@@ -29,6 +32,23 @@ public class ChooseReportSubmitActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        Button b = (Button) findViewById(R.id.buttonSourceReport);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                chooseSourceReport(v);
+            }
+        });
+
+        b = (Button) findViewById(R.id.buttonPurityReport);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                choosePurityReport(v);
+            }
+        });
     }
 
 

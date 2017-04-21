@@ -26,20 +26,18 @@
             android:layout_centerHorizontal="true">
 
         <Button
-            android:text="@string/login"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
-            android:onClick="switchLogin"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/login" />
 
         <Button
-            android:text="@string/register"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:onClick="switchRegister"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/register" />
 
     </LinearLayout>
 

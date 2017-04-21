@@ -176,12 +176,12 @@
 
     <!-- submit button -->
     <Button
-        android:text="@string/submit"
+        android:id="@+id/submitButtonWaterPurityReport"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:id="@+id/submitButtonWaterSourceReport"
         android:layout_alignParentBottom="true"
-        android:onClick="submitPurityReport"/>
+        android:onClick="submitPurityReport"
+        android:text="@string/submit" />
 
 
 </RelativeLayout>

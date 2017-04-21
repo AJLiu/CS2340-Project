@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.SourceReport;
 import site.gitinitdone.h2go.model.SubmitSourceReportAPI;
 
@@ -81,6 +83,15 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 longitudeField.setText(formatLongitude(longitudeField.getText().toString()));
+            }
+        });
+
+        Button b = (Button) findViewById(R.id.submitButtonWaterSourceReport);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                submitSourceReport(v);
             }
         });
 

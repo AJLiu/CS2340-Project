@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.PurityReport;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.SubmitPurityReportAPI;
 
 import java.text.DecimalFormat;
@@ -91,6 +93,16 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
                 contaminantField.setText(formatPPM(contaminantField.getText().toString()));
             }
         });
+
+        Button b = (Button) findViewById(R.id.submitButtonWaterPurityReport);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                submitPurityReport(v);
+            }
+        });
+
     }
 
     public void submitPurityReport(View view) {

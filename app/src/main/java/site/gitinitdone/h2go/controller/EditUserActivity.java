@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.EditUserAPI;
 import site.gitinitdone.h2go.model.GetUserAPI;
+import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.UserAccount;
 
 import java.util.HashMap;
@@ -34,6 +37,15 @@ public class EditUserActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        Button b = (Button) findViewById(R.id.submitButtonEdit);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                submitEdits(v);
+            }
+        });
 
         // Get the current data associated with the account of whoever is logged in
         getUserInfo = new LocalGetUserAPI();
