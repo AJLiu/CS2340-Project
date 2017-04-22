@@ -56,10 +56,10 @@
     <string name="edit_profile_toast">User profile has been saved.</string>
     <string name="edit_profile_error_toast">There was an error during editing.</string>
     <string name="Latitude_validation">Latitude can\'t be empty</string>
-    <string name="Latitude_range_validation">Latitude must in between -90 and 90 degrees</string>
+    <string name="Latitude_range_validation">Latitude must be in between -90 and 90 degrees</string>
     <string name="Latitude_number_validation">Latitude is not a valid number.</string>
     <string name="Longitude_validation">Longitude can\'t be empty</string>
-    <string name="Longitude_range_validation">Longitude must in between -180 and 180 degrees
+    <string name="Longitude_range_validation">Longitude must be in between -180 and 180 degrees
     </string>
     <string name="Longitude_number_validation">Longitude is not a valid number.</string>
     <string name="year_validation">Year can\'t be empty</string>

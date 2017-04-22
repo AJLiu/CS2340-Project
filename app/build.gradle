@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 25
@@ -14,6 +15,9 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -26,6 +30,22 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile 'com.android.support.test:runner:0.5', {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:2.2.2", {
+        exclude module: 'support-annotations'
+    }
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    // Espresso-contrib for DatePicker, RecyclerView, Drawer actions, Accessibility checks, CountingIdlingResource
+//    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.2'){
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support:mediarouter-v7:25.3.0'
@@ -34,3 +54,4 @@ dependencies {
     compile 'com.jjoe64:graphview:4.2.1'
     // dependency for graph
 }
+
