@@ -115,4 +115,6 @@
     <string name="what_would_you_like_to_do">What would you like to do?</string>
     <string name="these_cannot_be_changed_by_you">These cannot be changed by you:</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="resetPasswordSuccess">Please check your email to reset your password.</string>
+    <string name="resetPasswordFailure">That username does not exist in our system</string>
 </resources>

@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.DialogPreference;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +16,6 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -27,9 +24,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.LoginUserAPI;
+import site.gitinitdone.h2go.model.ResetPasswordAPI;
 import site.gitinitdone.h2go.model.SoundEffects;
 
 
@@ -99,8 +96,19 @@ public class LoginActivity extends AppCompatActivity {
                 builder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // leave empty, this is overridden later
-                    }});
+                        SoundEffects.playClickSound(getApplicationContext());
+                        String username = usernameInput.getText().toString().trim();
+                        if (username.isEmpty()) {
+                            usernameInput.setHint("This field is required.");
+                            usernameInput.requestFocus();
+                        } else {
+                            ResetPasswordAPI resetPasswordAPI =
+                                    new LocalResetPasswordAPI(username);
+                            resetPasswordAPI.execute();
+                            dialog.dismiss();
+                        }
+                    }
+                });
 
                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
@@ -112,23 +120,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 final AlertDialog dialog = builder.create();
                 dialog.show();
-
-
-                Button submitButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                submitButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SoundEffects.playClickSound(getApplicationContext());
-                        String username = usernameInput.getText().toString().trim();
-                        if (username.isEmpty()) {
-                            usernameInput.setHint("This field is required.");
-                            usernameInput.requestFocus();
-                        } else {
-                            dialog.dismiss();
-                        }
-                    }
-                });
-
             }
         });
 
@@ -136,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void nextAct(View v){
+    private void nextAct(View v) {
         Intent i = new Intent(this, AppScreenActivity.class);
         AutoCompleteTextView editText = (AutoCompleteTextView) findViewById(R.id.username);
         String theUsername = editText.getText().toString();
@@ -218,8 +209,6 @@ public class LoginActivity extends AppCompatActivity {
             setSupportActionBar(myToolbar);
             ActionBar ab = getSupportActionBar();
             ab.hide();
-
-
         }
     }
 
@@ -294,6 +283,27 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
         }
 
+    }
+
+
+    class LocalResetPasswordAPI extends ResetPasswordAPI {
+
+        LocalResetPasswordAPI(String username) {
+            super(username, getApplicationContext());
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                Toast.makeText(getApplicationContext(),
+                        R.string.resetPasswordSuccess,
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        R.string.resetPasswordFailure,
+                        Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }
