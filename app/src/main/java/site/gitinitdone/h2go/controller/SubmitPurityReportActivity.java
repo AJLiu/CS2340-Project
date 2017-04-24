@@ -21,7 +21,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import site.gitinitdone.h2go.R;
+import site.gitinitdone.h2go.model.MyLocationListener;
 import site.gitinitdone.h2go.model.PurityReport;
 import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.SubmitPurityReportAPI;
@@ -236,7 +239,14 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
     private void useCurrentLocation() {
         System.out.println("Called UseCurrentLocation");
+        Toast.makeText(this, "Loading Location...", Toast.LENGTH_SHORT).show();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, new MyLocationListener());
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)
                 && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -251,22 +261,16 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
             System.out.println("Trying to get current location with permission.");
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = 0;
+            double latitude = 0;
             if (location != null) {
-                double longitude = location.getLongitude();
-                double latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
                 System.out.println("Got the location.");
                 updateLocationFields(latitude, longitude);
             } else {
-                System.out.println("Location is null");
+                System.out.println("Location is null" + longitude + "\t" + latitude);
             }
-//        private final LocationListener locationListener = new LocationListener() {
-//            public void onLocationChanged(Location location) {
-//                longitude = location.getLongitude();
-//                latitude = location.getLatitude();
-//            }
-//        }
-            //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-
         }
     }
 
