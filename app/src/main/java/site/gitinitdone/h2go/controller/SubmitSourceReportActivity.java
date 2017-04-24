@@ -1,9 +1,15 @@
 package site.gitinitdone.h2go.controller;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import site.gitinitdone.h2go.R;
 import site.gitinitdone.h2go.model.SoundEffects;
 import site.gitinitdone.h2go.model.SourceReport;
@@ -32,6 +39,8 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
     private View mProgressView;
     private static final int MAX_LAT = 90;
     private static final int MAX_LONG = 180;
+    private final int MY_PERMISSIONS_REQUEST_FINE_ACCESS = 1000;
+    private final int MY_PERMISSIONS_REQUEST_COARSE_ACCESS = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +53,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
         // Setup the Spinner to show the Water Types
         Spinner waterTypeSpinner = (Spinner) findViewById(R.id.waterTypeSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                 SourceReport.WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterTypeSpinner.setAdapter(adapter);
@@ -52,7 +61,7 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
 
         // Setup the Spinner to show the Water Conditions
         Spinner waterConditionSpinner = (Spinner) findViewById(R.id.waterConditionSpinner);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                 SourceReport.WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waterConditionSpinner.setAdapter(adapter2);
@@ -92,6 +101,16 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SoundEffects.playClickSound(v);
                 submitSourceReport(v);
+            }
+        });
+
+        b = (Button) findViewById(R.id.useCurrentLocationSourceReport);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundEffects.playClickSound(v);
+                System.out.println("Button for current location clicked");
+                useCurrentLocation();
             }
         });
 
@@ -178,6 +197,120 @@ public class SubmitSourceReportActivity extends AppCompatActivity {
             oldText = "0";
         }
         return formatLat.format(Double.parseDouble(oldText.trim()));
+    }
+
+    private String formatLongitude(double oldValue) {
+        return formatLongitude(oldValue + "");
+    }
+
+    private String formatLatitude(double oldValue) {
+        return formatLatitude(oldValue + "");
+    }
+
+    private void useCurrentLocation() {
+        System.out.println("Called UseCurrentLocation");
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+                && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)) {
+
+            System.out.println("Does not have permission, will ask.");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_FINE_ACCESS);
+
+        } else {
+
+            System.out.println("Trying to get current location with permission.");
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                double longitude = location.getLongitude();
+                double latitude = location.getLatitude();
+                System.out.println("Got the location.");
+                updateLocationFields(latitude, longitude);
+            } else {
+                System.out.println("Location is null");
+            }
+//        private final LocationListener locationListener = new LocationListener() {
+//            public void onLocationChanged(Location location) {
+//                longitude = location.getLongitude();
+//                latitude = location.getLatitude();
+//            }
+//        }
+            //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_FINE_ACCESS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (location != null) {
+                        double longitude = location.getLongitude();
+                        double latitude = location.getLatitude();
+                        updateLocationFields(latitude, longitude);
+                    }
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_COARSE_ACCESS);
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_COARSE_ACCESS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if (location != null) {
+                        double longitude = location.getLongitude();
+                        double latitude = location.getLatitude();
+                        updateLocationFields(latitude, longitude);
+                    }
+
+                } else {
+
+                    Toast.makeText(this, "Location Permission Denied. Cannot use current location.", Toast.LENGTH_LONG).show();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    private void updateLocationFields(double latitude, double longitude) {
+        System.out.println("Current lat long: " + latitude + "\t" + longitude);
+        EditText latitudeField = (EditText) findViewById(R.id.locationLat);
+        EditText longitudeField = (EditText) findViewById(R.id.locationLong);
+
+        latitudeField.setText(formatLatitude(latitude));
+        longitudeField.setText(formatLongitude(longitude));
     }
 
     /**
